@@ -1,32 +1,27 @@
 ---
 galaxy_info:
-  author: Thomas Maurice
-  description: Ansible Role - Gitea
+  role_name: gitea
+  author: do1jlr
+  description: Ansible role to configure and deploy gitea, a painless self-hosted Git service.
+  license: "BSD-3-Clause"
   min_ansible_version: 2.9.8
-  license: BSD-3-Clause
+  github_branch: main
+  platforms:
+    - name: Debian
+      versions: all
+    - name: Ubuntu
+      versions: all
+    - name: Fedora
+      versions: all
+    - name: EL
+      versions: all
   galaxy_tags:
-    - git
     - gitea
+    - git
     - system
     - development
     - sourcecontrol
     - selfhosted
     - gitserver
     - gogs
-  platforms:
-    - name: Debian
-      versions:
-        - stretch
-        - buster
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
-        - focal
-    - name: CentOS
-      versions:
-        - 7
-        - 8
-    - name: Fedora
-      versions:
-        - 33
+dependencies: []

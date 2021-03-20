@@ -1,13 +1,10 @@
-# Ansible role gitea - Install a gitea server
-[![Build Status](https://travis-ci.org/thomas-maurice/ansible-role-gitea.svg?branch=master)](https://travis-ci.org/thomas-maurice/ansible-role-gitea)
-![Ansible Role](https://img.shields.io/ansible/role/38779)
-![Ansible Role](https://img.shields.io/ansible/role/d/38779)
-![Ansible Quality Score](https://img.shields.io/ansible/quality/38779)
+[![Ansible Galaxy](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/galaxy.svg?sanitize=true)](https://galaxy.ansible.com/do1jlr/gitea) [![MIT License](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/license.svg?sanitize=true)](https://github.com/roles-ansible/ansible_role_gitea/blob/main/LICENSE)
 
-This role installs and manages a [gitea](https://gitea.io) server -
+ ansible role gitea
+===================
+
+This role installs and manages [gitea](https://gitea.io) - Git with a cup of tea. A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go.
 [Source code & screenshots](https://github.com/go-gitea/gitea).
-
-Gitea is a Golang Git repository webapp, having the same look and feel as GitHub.
 
 ## Sample example of use in a playbook
 
@@ -168,7 +165,7 @@ As this will only deploy config files, fail2ban already has to be installed or o
 
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on
-Twitter [@thomas_maurice](https://twitter.com/thomas_maurice).
+Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
 
 I'm happy to fix any issue that's been opened, or even better, review your pull requests :)
 
@@ -192,7 +189,8 @@ and so on. This has to be worked on.
 
 ## License
 ```
-Copyright 2019-present Thomas Maurice
+Copyright (c) 2019 - today L3D <l3d@c3woc.de>
+Copyright (c) 2019 - 2021 Thomas Maurice
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
