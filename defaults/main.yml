@@ -64,8 +64,6 @@ gitea_ssh_domain: localhost
 gitea_start_ssh: true
 gitea_ssh_port: 2222
 
-
-
 gitea_force_private: false
 
 gitea_mailer_enabled: false
