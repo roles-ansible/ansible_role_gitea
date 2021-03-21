@@ -5,36 +5,32 @@
 ; undefined variables will use the default value from gitea.
 ; Cheat Sheet: https://docs.gitea.io/en-us/config-cheat-sheet/
 ;
-; App name that shows on every page title
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default
 APP_NAME = {{ gitea_app_name }}
-; Change it if you run locally
 RUN_USER = {{ gitea_user }}
-; Either "dev", "prod" or "test", default is "dev"
-RUN_MODE = prod
-
+RUN_MODE = {{ gitea_run_mode }}
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
 [repository]
 ROOT                = {{ gitea_repository_root }}
-; Force every new repository to be private
 FORCE_PRIVATE       = {{ gitea_force_private | ternary('true', 'false') }}
-; Global limit of repositories per user, applied at creation time. -1 means no limit
 MAX_CREATION_LIMIT  = {{ gitea_user_repo_limit }}
-; Mirror sync queue length, increase if mirror syncing starts hanging
-MIRROR_QUEUE_LENGTH = 1000
-; Disable the ability to interact with repositories using the HTTP protocol
 DISABLE_HTTP_GIT    = {{ gitea_disable_http_git | ternary('true', 'false') }}
-
+DEFAULT_BRANCH      = {{ gitea_default_branch }}
+{{ gitea_repository_extra_config }}
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 [ui]
-; Whether the email of the user should be shown in the Explore Users page
 SHOW_USER_EMAIL = {{ gitea_show_user_email | ternary('true', 'false') }}
-THEMES          = {{ gitea_themes }}
 DEFAULT_THEME   = {{ gitea_theme_default }}
-
+THEMES          = {{ gitea_themes }}
+{{ gitea_ui_extra_config }}
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
 [server]
-; The protocol the server listens on. One of 'http', 'https', 'unix' or 'fcgi'.
 PROTOCOL         = {{ gitea_protocol }}
 DOMAIN           = {{ gitea_http_domain }}
 ROOT_URL         = {{ gitea_root_url }}
-; The address to listen on. Either a IPv4/IPv6 address or the path to a unix socket.
 HTTP_ADDR             = {{ gitea_http_listen }}
 HTTP_PORT             = {{ gitea_http_port }}
 {% if gitea_http_port == 443 %}
@@ -45,10 +41,10 @@ ENABLE_LETSENCRYPT    = true
 LETSENCRYPT_ACCEPTTOS = true
 LETSENCRYPT_EMAIL     = {{ gitea_http_letsencrypt_mail }}
 {% endif %}
-; Disable SSH feature when not available
-DISABLE_SSH      = false
-; Whether to use the builtin SSH server or not.
 START_SSH_SERVER = {{ gitea_start_ssh | ternary('true', 'false') }}
+
+
+
 ; Domain name to be exposed in clone URL
 SSH_DOMAIN       = {{ gitea_ssh_domain }}
 ; The network interface the builtin SSH server should listen on

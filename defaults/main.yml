@@ -1,21 +1,53 @@
 ---
 # gitea version
-gitea_version: "1.13.4"
+gitea_version: '1.13.4'
 gitea_version_check: true
 gitea_dl_url: "https://github.com/go-gitea/gitea/releases/download/v{{ gitea_version }}/gitea-{{ gitea_version }}-linux-{{ gitea_arch }}"
-gitea_gpg_key: "7C9E68152594688862D62AF62D9AE806EC1592E2"
-gitea_gpg_server: "hkp://keyserver.ubuntu.com:80"
+gitea_gpg_key: '7C9E68152594688862D62AF62D9AE806EC1592E2'
+gitea_gpg_server: 'hkp://keyserver.ubuntu.com:80'
 
 # gitea in the linux world
-gitea_user: "gitea"
-gitea_group: "gitea"
-gitea_home: "/var/lib/gitea"
-gitea_shell: "/bin/false"
+gitea_group: 'gitea'
+gitea_home: '/var/lib/gitea'
+gitea_shell: '/bin/false'
+
+# Overall (DEFAULT)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default
+gitea_app_name: 'Gitea'
+gitea_user: 'gitea'
+gitea_run_mode: 'prod'
+
+# Repository (repository)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
+gitea_repository_root: "{{ gitea_home }}/repos"
+gitea_force_private: false
+gitea_user_repo_limit: '-1'
+gitea_disable_http_git: false
+gitea_default_branch: 'main'
+gitea_repository_extra_config: ''
+
+# UI (ui)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
+gitea_show_user_email: false
+gitea_theme_default: 'gitea'
+gitea_themes: 'gitea,arc-green'
+gitea_ui_extra_config: ''
+
+# Server (server)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
+gitea_protocol: 'http'
+gitea_http_domain: 'localhost'
+gitea_root_url: 'http://localhost:3000'
+gitea_http_listen: '127.0.0.1'
+gitea_http_port: '3000'
+# gitea_http_letsencrypt_mail: 'mail@example.com'
+gitea_start_ssh: true
+gitea_ssh_domain: "{{ gitea_http_domain }}"
+gitea_ssh_port: 2222
+gitea_ssh_listen: 0.0.0.0
+
 
 # look and feel
-gitea_app_name: "Gitea"
-gitea_repository_root: "{{ gitea_home }}/repos"
-gitea_show_user_email: false
 gitea_disable_gravatar: true
 gitea_disable_registration: false
 gitea_register_email_confirm: false
@@ -26,25 +58,15 @@ gitea_require_signin: true
 gitea_enable_captcha: true
 gitea_enable_notify_mail: false
 gitea_auto_watch_new_repos: true
-gitea_themes: gitea,arc-green
-gitea_theme_default: gitea
 
 # security
 gitea_secret_key: ''
 gitea_internal_token: ''
 gitea_disable_git_hooks: true
-gitea_user_repo_limit: -1
 gitea_lfs_jwt_secret: ''
 gitea_oauth2_jwt_secret: ''
 
-gitea_http_domain: localhost
 
-gitea_root_url: http://localhost:3000
-gitea_protocol: http
-gitea_http_listen: 127.0.0.1
-gitea_http_port: 3000
-# gitea_http_letsencrypt_mail:  - required
-gitea_disable_http_git: false
 
 
 gitea_lfs_server_enabled: false
@@ -59,12 +81,7 @@ gitea_db_password: lel
 gitea_db_ssl: disable
 gitea_db_path: "{{ gitea_home }}/data/gitea.db"
 
-gitea_ssh_listen: 0.0.0.0
-gitea_ssh_domain: localhost
-gitea_start_ssh: true
-gitea_ssh_port: 2222
 
-gitea_force_private: false
 
 gitea_mailer_enabled: false
 gitea_mailer_skip_verify: false
