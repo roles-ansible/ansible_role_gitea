@@ -124,10 +124,17 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_db_password` | `lel` | Database password. **PLEASE CHANGE** |
 | `gitea_db_ssl` | `disable` | Configure SSL only if your database type supports it. Have a look into the [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database) for more detailed information |
 | `gitea_db_path` | `{{ gitea_home }}/data/gitea.db` | DB path, if you use `sqlite3`. |
-| `gitea_database_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
+| `gitea_database_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[database]` section of the config. |
 
-
-
+### Indexer ([indexer](https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_repo_indexer_enabled` | `false` | Enables code search *(uses a lot of disk space, about 6 times more than the repository size).* |
+| `gitea_repo_indexer_include` | `''` |Glob patterns to include in the index *(comma-separated list)*. An empty list means include all files. |
+| `gitea_repo_indexer_exclude` | `''` | Glob patterns to exclude from the index (comma-separated list). |
+| `gitea_repo_exclude_vendored` | `true` | Exclude vendored files from index. |
+| `gitea_repo_indexer_max_file_size` | `1048576` | Maximum size in bytes of files to be indexed. |
+| `gitea_indexer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
 
 
 ### Look and feel
@@ -204,11 +211,6 @@ As this will only deploy config files, fail2ban already has to be installed or o
 
 ### Repository Indexer configuration
 
-* `gitea_repo_indexer_enabled`: Whether to enable the repository indexer (code search). Default: `false`
-* `gitea_repo_indexer_include`: Glob patterns to include in the index (comma-separated list). Default: `""` (all files)
-* `gitea_repo_indexer_exclude`: Glob patterns to exclude from the index (comma-separated list). Default: `""` (no files)
-* `gitea_repo_exclude_vendored`: Exclude vendored files from the index. Default: `true`
-* `gitea_repo_indexer_max_file_size`: Maximum size of files to be indexed (in bytes). Default: `1048576` (1 MB)
 
 ### backup on upgrade
 * `gitea_backup_on_upgrade`: Optionally a backup can be created with every update of gitea. Default: `false`

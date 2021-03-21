@@ -60,6 +60,14 @@ gitea_db_password: 'lel'
 gitea_db_ssl: 'disable'
 gitea_db_path: "{{ gitea_home }}/data/gitea.db"
 
+# Indexer (indexer)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer
+gitea_repo_indexer_enabled: false
+gitea_repo_indexer_include: ''
+gitea_repo_indexer_exclude: ''
+gitea_repo_exclude_vendored: true
+gitea_repo_indexer_max_file_size: '1048576'
+gitea_indexer_extra_config: ''
 
 # look and feel
 gitea_disable_gravatar: true
@@ -111,11 +119,6 @@ gitea_metrics_enabled: false
 gitea_metrics_token: ~
 
 
-gitea_repo_indexer_enabled: false
-gitea_repo_indexer_include: ""
-gitea_repo_indexer_exclude: ""
-gitea_repo_exclude_vendored: true
-gitea_repo_indexer_max_file_size: 1048576
 
 gitea_log_level: Info
 
