@@ -240,5 +240,5 @@ Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
 I'm happy to fix any issue that's been opened, or even better, review your pull requests :)
 
 ## Testing
-There is a test that is using [molecule](https://molecule.readthedocs.io/en/stable-1.22/usage.html). And som linting tests with github actions.
+There is a test that is using [molecule](https://molecule.readthedocs.io/en/stable-1.22/usage.html). And some linting tests with github actions.
 *For locale molecule testing docker is required.*
