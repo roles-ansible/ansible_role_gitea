@@ -96,26 +96,21 @@ PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
 {{ gitea_security_extra_config }}
 ;
 ;
-;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#service-service
 [service]
-; Disallow registration, only allow admins to create accounts.
-DISABLE_REGISTRATION    = {{ gitea_disable_registration }}
-REGISTER_EMAIL_CONFIRM  = {{ gitea_register_email_confirm }}
-; User must sign in to view anything.
+DISABLE_REGISTRATION    = {{ gitea_disable_registration | ternary('true', 'false') }}
+REGISTER_EMAIL_CONFIRM  = {{ gitea_register_email_confirm | ternary('true', 'false') }}
 REQUIRE_SIGNIN_VIEW              = {{ gitea_require_signin | ternary('true', 'false') }}
-; Enable captcha validation for registration
 ENABLE_CAPTCHA                   = {{ gitea_enable_captcha | ternary('true', 'false') }}
-; Type of captcha you want to use. Options: image, recaptcha
-CAPTCHA_TYPE                     = image
-; Enable recaptcha to use Google's recaptcha service
-; Go to https://www.google.com/recaptcha/admin to sign up for a key
-RECAPTCHA_SECRET                 =
-RECAPTCHA_SITEKEY                =
-; Show Registration button
 SHOW_REGISTRATION_BUTTON         = {{ gitea_show_registration_button | ternary('true', 'false') }}
 ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
 ENABLE_NOTIFY_MAIL               = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
 AUTO_WATCH_NEW_REPOS             = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
+{{ gitea_service_extra_config }}
+;
+;
+;
+
 [mailer]
 ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
 ; Mail server

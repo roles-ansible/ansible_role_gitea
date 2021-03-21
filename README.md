@@ -145,6 +145,17 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_password_check_pwn` | `false` | Check [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if a password has been exposed. |
 | `gitea_security_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[security]` section of the config. |
 
+### Service ([service](https://docs.gitea.io/en-us/config-cheat-sheet/#service-service))
+| `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
+| `gitea_register_email_confirm` | `false` | Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled. |
+| `gitea_require_signin` | `true` | Do you require a signin to see repo's (even public ones)? (true/false)|
+| `gitea_enable_captcha` | `true` | Do you want to enable captcha's ? (true/false)|
+| `gitea_show_registration_button` | `true` | Here you can hide the registration button. This will not disable registration! (true/false)|
+| `gitea_only_allow_external_registration` | `false` | Set to true to force registration only using third-party services (true/false) |
+| `gitea_enable_notify_mail` | `false` | Enable this to send e-mail to watchers of a repository when something happens, like creating issues (true/false) |
+| `gitea_auto_watch_new_repos` | `true` | Enable this to let all organisation users watch new repos when they are created (true/false) |
+| `gitea_service_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[service]` section of the config. |
+
 
 
 
@@ -153,14 +164,6 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
-| `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
-| `gitea_register_email_confirm` | `false` | Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled. |
-| `gitea_only_allow_external_registration` | `false` | Set to true to force registration only using third-party services (true/false) |
-| `gitea_show_registration_button` | `true` | Here you can hide the registration button. This will not disable registration! (true/false)|
-| `gitea_require_signin` | `true` | Do you require a signin to see repo's (even public ones)? (true/false)|
-| `gitea_enable_captcha` | `true` | Do you want to enable captcha's ? (true/false)|
-| `gitea_enable_notify_mail` | `false` | Enable this to send e-mail to watchers of a repository when something happens, like creating issues (true/false) |
-| `gitea_auto_watch_new_repos` | `true` | Enable this to let all organisation users watch new repos when they are created (true/false) |
 
 
 ### Security
