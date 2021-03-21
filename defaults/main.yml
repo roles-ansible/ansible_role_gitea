@@ -122,9 +122,19 @@ gitea_log_systemd: false
 gitea_log_level: 'Warn'
 gitea_log_extra_config: ''
 
+# Metrics (metrics)
+gitea_metrics_enabled: false
+gitea_metrics_token: ''
+
+# OAuth2 (oauth2)
+gitea_oauth2_enabled: true
+gitea_oauth2_jwt_secret: ''
+gitea_oauth2_extra_config: ''
+
+
+
 # security
 gitea_lfs_jwt_secret: ''
-gitea_oauth2_jwt_secret: ''
 
 gitea_systemd_cap_net_bind_service: false
 
@@ -135,10 +145,7 @@ gitea_fail2ban_jail_findtime: 3600
 gitea_fail2ban_jail_bantime: 900
 gitea_fail2ban_jail_action: iptables-allports
 
-gitea_oauth2_enabled: true
 
-gitea_metrics_enabled: false
-gitea_metrics_token: ~
 
 gitea_extra_config: ""
 
