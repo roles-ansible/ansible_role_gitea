@@ -112,6 +112,10 @@ gitea_session_extra_config: ''
 gitea_disable_gravatar: true
 gitea_picture_extra_config: ''
 
+# Issue and pull request attachments (attachment)
+gitea_attachment_enabled: true
+gitea_picture_extra_config: ''
+
 # security
 gitea_lfs_jwt_secret: ''
 gitea_oauth2_jwt_secret: ''

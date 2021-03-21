@@ -184,6 +184,12 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
 | `gitea_picture_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[picture]` section of the config. |
 
+### Issue and pull request attachments ([attachment](https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
+| `gitea_attachment_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
+
 
 
 

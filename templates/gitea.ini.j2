@@ -137,14 +137,14 @@ DISABLE_GRAVATAR   = {{ gitea_disable_gravatar | ternary('true', 'false') }}
 {{ gitea_picture_extra_config }}
 ;
 ;
-;
-
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 [attachment]
-; Whether attachments are enabled. Defaults to `true`
-ENABLED = true
-; Path for attachments. Defaults to `data/attachments`
+ENABLED = {{ gitea_attachment_enabled | ternary('true', 'false') }}
 PATH    = {{ gitea_home }}/data/attachments
-
+{{ gitea_attachment_extra_config }}
+;
+;
+;
 [log]
 ROOT_PATH            = {{ gitea_home }}/log
 ; Either "console", "file", "conn", "smtp" or "database", default is "console"
