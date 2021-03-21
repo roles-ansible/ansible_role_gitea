@@ -146,6 +146,8 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_security_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[security]` section of the config. |
 
 ### Service ([service](https://docs.gitea.io/en-us/config-cheat-sheet/#service-service))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
 | `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
 | `gitea_register_email_confirm` | `false` | Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled. |
 | `gitea_require_signin` | `true` | Do you require a signin to see repo's (even public ones)? (true/false)|
@@ -156,7 +158,24 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_auto_watch_new_repos` | `true` | Enable this to let all organisation users watch new repos when they are created (true/false) |
 | `gitea_service_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[service]` section of the config. |
 
+### Mailer ([mailer](https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_mailer_enabled` | `false` | Whether to enable the mailer. |
+| `gitea_mailer_host` | `localhost:25` | SMTP server hostname and port |
+| `gitea_mailer_skip_verify` | `false` | Skip SMTP TLS certificate verification (true/false) |
+| `gitea_mailer_tls_enabled` | `true` | Forcibly use TLS to connect even if not on a default SMTPS port.  |
+| `gitea_mailer_from` | `noreply@{{ gitea_http_domain }}` | Mail from address, RFC 5322. This can be just an email address, or the “Name” <email@example.com> format. |
+| `gitea_mailer_user` | `''` | Username of mailing user *(usually the sender’s e-mail address)*. |
+| `gitea_mailer_password` | `''` | SMTP server password |
+| `gitea_subject_prefix` | `''` | Prefix to be placed before e-mail subject lines |
+| `gitea_mailer_type` | `smtp` |  `[smtp, sendmail, dummy]` |
+| `gitea_mailer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[mailer]` section of the config. |
 
+
+| `gitea_enable_notify_mail`:  Whether e-mail should be send to watchers of a repository when something happens. Default: `false`
+
+### LFS configuration
 
 
 
@@ -182,17 +201,6 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 
 ### Mailer configuration
 
-* `gitea_mailer_enabled`: Whether to enable the mailer. Default: `false`
-* `gitea_mailer_skip_verify`: Skip SMTP TLS certificate verification (true/false)
-* `gitea_mailer_tls_enabled`: Enable TLS for SMTP connections (true/false)
-* `gitea_mailer_host`: SMTP server hostname and port
-* `gitea_mailer_user`: SMTP server username
-* `gitea_mailer_password`: SMTP server password
-* `gitea_mailer_from`: Sender mail address
-* `gitea_subject_prefix`: Prefix to be placed before e-mail subject lines (Default: ``)
-* `gitea_enable_notify_mail`:  Whether e-mail should be send to watchers of a repository when something happens. Default: `false`
-
-### LFS configuration
 
 
 ### Log configuration

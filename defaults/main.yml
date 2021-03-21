@@ -90,6 +90,19 @@ gitea_enable_notify_mail: false
 gitea_auto_watch_new_repos: true
 gitea_service_extra_config: ''
 
+# Mailer [mailer]
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
+gitea_mailer_enabled: false
+gitea_mailer_host: 'localhost:25'
+gitea_mailer_skip_verify: false
+gitea_mailer_tls_enabled: true
+gitea_mailer_from: "noreply@{{ gitea_http_domain }}"
+gitea_mailer_user: ''
+gitea_mailer_password: ''
+gitea_subject_prefix: ''
+gitea_mailer_type: smtp
+gitea_mailer_extra_config: ''
+
 # look and feel
 gitea_disable_gravatar: true
 
@@ -99,15 +112,6 @@ gitea_oauth2_jwt_secret: ''
 
 gitea_systemd_cap_net_bind_service: false
 
-gitea_mailer_enabled: false
-gitea_mailer_skip_verify: false
-gitea_mailer_tls_enabled: true
-gitea_mailer_host: localhost:25
-gitea_mailer_from: noreply@your.domain
-gitea_mailer_user: ""
-gitea_mailer_password: ""
-gitea_subject_prefix: ""
-gitea_mailer_type: smtp
 
 gitea_log_systemd: false
 gitea_log_only_warning: true

@@ -98,48 +98,32 @@ PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#service-service
 [service]
-DISABLE_REGISTRATION    = {{ gitea_disable_registration | ternary('true', 'false') }}
-REGISTER_EMAIL_CONFIRM  = {{ gitea_register_email_confirm | ternary('true', 'false') }}
-REQUIRE_SIGNIN_VIEW              = {{ gitea_require_signin | ternary('true', 'false') }}
-ENABLE_CAPTCHA                   = {{ gitea_enable_captcha | ternary('true', 'false') }}
-SHOW_REGISTRATION_BUTTON         = {{ gitea_show_registration_button | ternary('true', 'false') }}
-ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
-ENABLE_NOTIFY_MAIL               = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
-AUTO_WATCH_NEW_REPOS             = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
+DISABLE_REGISTRATION              = {{ gitea_disable_registration | ternary('true', 'false') }}
+REGISTER_EMAIL_CONFIRM            = {{ gitea_register_email_confirm | ternary('true', 'false') }}
+REQUIRE_SIGNIN_VIEW               = {{ gitea_require_signin | ternary('true', 'false') }}
+ENABLE_CAPTCHA                    = {{ gitea_enable_captcha | ternary('true', 'false') }}
+SHOW_REGISTRATION_BUTTON          = {{ gitea_show_registration_button | ternary('true', 'false') }}
+ALLOW_ONLY_EXTERNAL_REGISTRATION  = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
+ENABLE_NOTIFY_MAIL                = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
+AUTO_WATCH_NEW_REPOS              = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
 {{ gitea_service_extra_config }}
 ;
 ;
-;
-
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
 [mailer]
 ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
-; Mail server
-; Gmail: smtp.gmail.com:587
-; QQ: smtp.qq.com:465
-; Note, if the port ends with "465", SMTPS will be used. Using STARTTLS on port 587 is recommended per RFC 6409. If the server supports STARTTLS it will always be used.
 HOST               = {{ gitea_mailer_host }}
-; Do not verify the certificate of the server. Only use this for self-signed certificates
 SKIP_VERIFY        = {{ gitea_mailer_skip_verify }}
-; Use client certificate
-USE_CERTIFICATE    = false
-CERT_FILE          = {{ gitea_home }}/custom/mailer/cert.pem
-KEY_FILE           = {{ gitea_home }}/custom/mailer/key.pem
-; Should SMTP connection use TLS
 IS_TLS_ENABLED     = {{ gitea_mailer_tls_enabled | ternary('true', 'false') }}
-; Mail from address, RFC 5322. This can be just an email address, or the `"Name" <email@example.com>` format
 FROM               = {{ gitea_mailer_from }}
-; Mailer user name and password
 USER               = {{ gitea_mailer_user }}
-; Use PASSWD = `your password` for quoting if you use special characters in the password.
 PASSWD             = {{ gitea_mailer_password }}
-; Send mails as plain text
-SEND_AS_PLAIN_TEXT = false
-SUBJECT_PREFIX = {{ gitea_subject_prefix }}
-; Set Mailer Type (either SMTP, sendmail or dummy to just send to the log)
+SUBJECT_PREFIX     = {{ gitea_subject_prefix }}
 MAILER_TYPE        = {{ gitea_mailer_type }}
-; Specify an alternative sendmail binary
-SENDMAIL_PATH      = sendmail
-
+{{ gitea_mailer_extra_config }}
+;
+;
+;
 [session]
 ; Either "memory", "file", or "redis", default is "memory"
 PROVIDER        = file
