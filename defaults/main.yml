@@ -43,15 +43,20 @@ gitea_http_port: '3000'
 # gitea_http_letsencrypt_mail: 'mail@example.com'
 gitea_start_ssh: true
 gitea_ssh_domain: "{{ gitea_http_domain }}"
-gitea_ssh_port: 2222
-gitea_ssh_listen: 0.0.0.0
+gitea_ssh_port: '2222'
+gitea_ssh_listen: '0.0.0.0'
+gitea_offline_mode: true
+gitea_lfs_server_enabled: false
+gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
+gitea_server_extra_config: ''
 
+# Database (database)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#database-database
 
 # look and feel
 gitea_disable_gravatar: true
 gitea_disable_registration: false
 gitea_register_email_confirm: false
-gitea_offline_mode: true
 gitea_only_allow_external_registration: false
 gitea_show_registration_button: true
 gitea_require_signin: true
@@ -69,8 +74,6 @@ gitea_oauth2_jwt_secret: ''
 
 
 
-gitea_lfs_server_enabled: false
-gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
 
 gitea_systemd_cap_net_bind_service: false
 gitea_db_type: sqlite3

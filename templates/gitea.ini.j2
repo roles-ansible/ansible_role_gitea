@@ -10,6 +10,7 @@ APP_NAME = {{ gitea_app_name }}
 RUN_USER = {{ gitea_user }}
 RUN_MODE = {{ gitea_run_mode }}
 ;
+;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
 [repository]
 ROOT                = {{ gitea_repository_root }}
@@ -19,6 +20,7 @@ DISABLE_HTTP_GIT    = {{ gitea_disable_http_git | ternary('true', 'false') }}
 DEFAULT_BRANCH      = {{ gitea_default_branch }}
 {{ gitea_repository_extra_config }}
 ;
+;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 [ui]
 SHOW_USER_EMAIL = {{ gitea_show_user_email | ternary('true', 'false') }}
@@ -26,11 +28,12 @@ DEFAULT_THEME   = {{ gitea_theme_default }}
 THEMES          = {{ gitea_themes }}
 {{ gitea_ui_extra_config }}
 ;
+;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
 [server]
-PROTOCOL         = {{ gitea_protocol }}
-DOMAIN           = {{ gitea_http_domain }}
-ROOT_URL         = {{ gitea_root_url }}
+PROTOCOL              = {{ gitea_protocol }}
+DOMAIN                = {{ gitea_http_domain }}
+ROOT_URL              = {{ gitea_root_url }}
 HTTP_ADDR             = {{ gitea_http_listen }}
 HTTP_PORT             = {{ gitea_http_port }}
 {% if gitea_http_port == 443 %}
@@ -41,31 +44,21 @@ ENABLE_LETSENCRYPT    = true
 LETSENCRYPT_ACCEPTTOS = true
 LETSENCRYPT_EMAIL     = {{ gitea_http_letsencrypt_mail }}
 {% endif %}
-START_SSH_SERVER = {{ gitea_start_ssh | ternary('true', 'false') }}
-
-
-
-; Domain name to be exposed in clone URL
-SSH_DOMAIN       = {{ gitea_ssh_domain }}
-; The network interface the builtin SSH server should listen on
-SSH_LISTEN_HOST  = {{ gitea_ssh_listen }}
-; Port number to be exposed in clone URL
-SSH_PORT         = {{ gitea_ssh_port }}
-; The port number the builtin SSH server should listen on
-SSH_LISTEN_PORT  = %(SSH_PORT)s
-; Disable CDN even in "prod" mode
-OFFLINE_MODE     = {{ gitea_offline_mode | ternary('true', 'false') }}
-; Default path for App data
-APP_DATA_PATH    = {{ gitea_home }}/data
+START_SSH_SERVER      = {{ gitea_start_ssh | ternary('true', 'false') }}
+SSH_DOMAIN            = {{ gitea_ssh_domain }}
+SSH_PORT              = {{ gitea_ssh_port }}
+SSH_LISTEN_HOST       = {{ gitea_ssh_listen }}
+OFFLINE_MODE          = {{ gitea_offline_mode | ternary('true', 'false') }}
+APP_DATA_PATH         = {{ gitea_home }}/data
 {% if gitea_lfs_server_enabled | bool -%}
-;Enables git-lfs support.
-LFS_START_SERVER = true
-; Where to store LFS files.
-LFS_CONTENT_PATH = {{ gitea_lfs_content_path }}
-; LFS authentication secret
-LFS_JWT_SECRET   = {{ gitea_lfs_jwt_secret }}
+LFS_START_SERVER      = true
+LFS_CONTENT_PATH      = {{ gitea_lfs_content_path }}
+LFS_JWT_SECRET        = {{ gitea_lfs_jwt_secret }}
 {% endif %}
-
+{{ gitea_server_extra_config }}
+;
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#database-database
 [database]
 ; Either "mysql", "postgres", "mssql" or "sqlite3", it's your choice
 DB_TYPE  = {{ gitea_db_type }}
