@@ -131,7 +131,7 @@ RECAPTCHA_SITEKEY                =
 SHOW_REGISTRATION_BUTTON         = {{ gitea_show_registration_button | ternary('true', 'false') }}
 ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
 ENABLE_NOTIFY_MAIL               = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
-
+AUTO_WATCH_NEW_REPOS             = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
 [mailer]
 ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
 ; Mail server

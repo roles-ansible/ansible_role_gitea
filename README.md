@@ -50,40 +50,57 @@ The following code has been tested with Debian 8, it should work on Ubuntu as we
     - gitea
 ```
 
-## More detailed options
-### General
+ Variables
+-----------
+Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at the config cheat sheet.  For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
 
-* `gitea_version_check`: Check if installed version != `gitea_version` before initiating binary download
-* `gitea_user`: UNIX user used by Gitea
-* `gitea_group`: UNIX group used by Gitea
-* `gitea_home`: Base directory to work
-* `gitea_dl_url`: The URL, the compiled gitea-binary will be downloaded from
-* `gitea_systemd_cap_net_bind_service`: Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file
-* `gitea_extra_config`: Additional configuration
+### gitea version
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_version` | *(see [defaults/main.yml](defaults/main.yml#L3))* | The gitea version this role shoud install |
+| `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
+| `gitea_dl_url` | *(see [defaults/main.yml](defaults/main.yml#L5))* | The path from where this role downloads the gitea binary |
+| `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
+| `gitea_gpg_server` | `hkp://keyserver.ubuntu.com:80` | A gpg key server where this role can download the gpg key |
+
+### gitea in the linux world
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_user` | `gitea ` | UNIX user used by Gitea |
+| `gitea_group` | `gitea` | UNIX group used by Gitea |
+| `gitea_home` | `/var/lib/gitea` | Base directory to work |
+| `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 
 ### Look and feel
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_app_name` | `Gitea` | Displayed application name |
+| `gitea_repository_root` | `{{ gitea_home }}/repos` | The path where all gitea repositorys are stored |
+| `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
+| `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
+| `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
+| `gitea_register_email_confirm` | `false` | Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled. |
+| `gitea_offline_mode` | `true` | Disables use of CDN for static files and Gravatar for profile pictures. (true/false) |
+| `gitea_only_allow_external_registration` | `false` | Set to true to force registration only using third-party services (true/false) |
+| `gitea_show_registration_button` | `true` | Here you can hide the registration button. This will not disable registration! (true/false)|
+| `gitea_require_signin` | `true` | Do you require a signin to see repo's (even public ones)? (true/false)|
+| `gitea_enable_captcha` | `true` | Do you want to enable captcha's ? (true/false)|
+| `gitea_enable_notify_mail` | `false` | Enable this to send e-mail to watchers of a repository when something happens, like creating issues (true/false) |
+| `gitea_auto_watch_new_repos` | `true` | Enable this to let all organisation users watch new repos when they are created (true/false) |
+| `gitea_themes` | `gitea,arc-green` | List of enabled themes |
+| `gitea_theme_default` | `gitea` | Default theme |
 
-* `gitea_app_name`: Displayed application name
-* `gitea_show_user_email`: Do you want to display email addresses ? (true/false)
-* `gitea_disable_gravatar`: Do you want to disable Gravatar ? (privacy and so on) (true/false)
-* `gitea_offline_mode`: Same but for disabling CDNs for frontend assets (true/false)
-* `gitea_disable_registration`: Do you want to disable user registration ? (true/false)
-* `gitea_register_email_confirm`: Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled (Default: `false`)
-* `gitea_only_allow_external_registration`: Do you want to force registration only using third-party services ? (true/false)
-* `gitea_show_registration_button`: Do you want to show the registration button? (true/false)
-* `gitea_require_signin`: Do you require a signin to see repo's (even public ones) ? (true/false)
-* `gitea_enable_captcha`: Do you want to enable captcha's ? (true/false)
-* `gitea_themes`: List of enabled themes
-* `gitea_theme_default`: Default theme
 
 ### Security
-* `gitea_secret_key`: Cookie secret key
-* `gitea_internal_token`: Internal API token
-* `gitea_disable_git_hooks`: Do you want to disable the interface to add git hooks? If enabled it could be a security bug as it can be used for RCE. Defaults to true (true/false)
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_secret_key` | `''` | Global secret key. Will be autogenerated if not defined. Should be unique. |
+| `gitea_internal_token` | `''` | Internal API token. Will be autogenerated if not defined. Should be unique. |
+| `gitea_disable_git_hooks` | `true` | Set to false to enable users with git hook privilege to create custom git hooks. Can be dangerous. |
+| `gitea_user_repo_limit` | `-1` | Limit how many repos a user can have *(`-1` for unlimited)* |
+| `gitea_lfs_secret` | `''` | < JWT secret for remote LFS usage. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined |
+| `gitea_oauth2_jwt_secret` | `''` | Oauth2 JWT secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined. |
 
-### Limits
-
-* `gitea_user_repo_limit`: Limit how many repos a user can have (-1 for unlimited)
 
 ### HTTP configuration
 
@@ -128,7 +145,6 @@ The following code has been tested with Debian 8, it should work on Ubuntu as we
 
 * `gitea_lfs_enabled`: Enable GIT LFS *(git large file storeage: [git-lfs](https://git-lfs.github.com/))*. Default: `false`
 * `gitea_lfs_content_path`: path where the lfs files are stored
-* `gitea_lfs_secret`: JWT secret for remote LFS usage. Can be generated with ``gitea generate secret JWT_SECRET``
 
 ### Log configuration
 * `gitea_log_systemd` Disable logging into `file`, use systemd-journald
@@ -149,7 +165,6 @@ As this will only deploy config files, fail2ban already has to be installed or o
 ### Oauth2 provider configuration
 
 * `gitea_oauth2_enabled`: Enable the Oauth2 provider (true/false)
-* `gitea_oauth2_jwt_secret`: Oauth2 JWT secret. Can be generated with ``gitea generate secret JWT_SECRET``
 
 
 ### Metrics endpoint configuration
@@ -169,6 +184,8 @@ As this will only deploy config files, fail2ban already has to be installed or o
 * `gitea_backup_on_upgrade`: Optionally a backup can be created with every update of gitea. Default: `false`
 * `gitea_backup_location`: Where to store the gitea backup if one is created with this role. Default: `{{ gitea_home }}/backups/`
 
+* `gitea_systemd_cap_net_bind_service`: Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file
+* `gitea_extra_config`: Additional configuration
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on
 Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
