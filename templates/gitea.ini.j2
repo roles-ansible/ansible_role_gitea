@@ -113,7 +113,7 @@ AUTO_WATCH_NEW_REPOS              = {{ gitea_auto_watch_new_repos | ternary('tru
 [mailer]
 ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
 HOST               = {{ gitea_mailer_host }}
-SKIP_VERIFY        = {{ gitea_mailer_skip_verify }}
+SKIP_VERIFY        = {{ gitea_mailer_skip_verify | ternary('true', 'false') }}
 IS_TLS_ENABLED     = {{ gitea_mailer_tls_enabled | ternary('true', 'false') }}
 FROM               = {{ gitea_mailer_from }}
 USER               = {{ gitea_mailer_user }}
@@ -123,17 +123,14 @@ MAILER_TYPE        = {{ gitea_mailer_type }}
 {{ gitea_mailer_extra_config }}
 ;
 ;
-;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#session-session
 [session]
-; Either "memory", "file", or "redis", default is "memory"
-PROVIDER        = file
-; Provider config options
-; memory: doesn't have any config yet
-; file: session file path, e.g. `data/sessions`
-; redis: network=tcp,addr=:6379,password=macaron,db=0,pool_size=100,idle_timeout=180
-; mysql: go-sql-driver/mysql dsn config string, e.g. `root:password@/session_table`
+PROVIDER        = {{ gitea_session_provider }}
 PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
-
+{{ gitea_session_extra_config }}
+;
+;
+;
 [picture]
 AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
 ; This value will always be true in offline mode.

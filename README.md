@@ -172,6 +172,15 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_mailer_type` | `smtp` |  `[smtp, sendmail, dummy]` |
 | `gitea_mailer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[mailer]` section of the config. |
 
+### Session ([session](https://docs.gitea.io/en-us/config-cheat-sheet/#session-session))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_session_provider` | `file` | Session engine provider |
+| `gitea_session_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[session]` section of the config. |
+
+
+
+
 
 | `gitea_enable_notify_mail`:  Whether e-mail should be send to watchers of a repository when something happens. Default: `false`
 

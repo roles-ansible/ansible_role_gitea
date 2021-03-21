@@ -103,6 +103,12 @@ gitea_subject_prefix: ''
 gitea_mailer_type: smtp
 gitea_mailer_extra_config: ''
 
+# Session (session)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#session-session
+gitea_session_provider: 'file'
+gitea_session_extra_config: ''
+
+#
 # look and feel
 gitea_disable_gravatar: true
 
