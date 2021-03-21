@@ -130,11 +130,14 @@ PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
 {{ gitea_session_extra_config }}
 ;
 ;
-;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture
 [picture]
 AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
-; This value will always be true in offline mode.
 DISABLE_GRAVATAR   = {{ gitea_disable_gravatar | ternary('true', 'false') }}
+{{ gitea_picture_extra_config }}
+;
+;
+;
 
 [attachment]
 ; Whether attachments are enabled. Defaults to `true`

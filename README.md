@@ -178,6 +178,11 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_session_provider` | `file` | Session engine provider |
 | `gitea_session_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[session]` section of the config. |
 
+### Picture ([picture](https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
+| `gitea_picture_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[picture]` section of the config. |
 
 
 
@@ -191,7 +196,6 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 ### Look and feel
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
 
 
 ### Security

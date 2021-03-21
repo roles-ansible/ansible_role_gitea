@@ -108,9 +108,9 @@ gitea_mailer_extra_config: ''
 gitea_session_provider: 'file'
 gitea_session_extra_config: ''
 
-#
-# look and feel
+# Picture (picture)
 gitea_disable_gravatar: true
+gitea_picture_extra_config: ''
 
 # security
 gitea_lfs_jwt_secret: ''
