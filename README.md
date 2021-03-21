@@ -137,6 +137,11 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_indexer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
 
 
+
+
+
+
+
 ### Look and feel
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
