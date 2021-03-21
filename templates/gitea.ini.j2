@@ -86,19 +86,17 @@ MAX_FILE_SIZE                 = {{ gitea_repo_indexer_max_file_size }}
 {{ gitea_indexer_extra_config }}
 ;
 ;
-;
-
-
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
 [security]
-; Whether the installer is disabled
 INSTALL_LOCK        = true
-; !!CHANGE THIS TO KEEP YOUR USER DATA SAFE!!
 SECRET_KEY          = {{ gitea_secret_key }}
 INTERNAL_TOKEN      = {{ gitea_internal_token }}
-; How long to remember that an user is logged in before requiring relogin (in days)
-LOGIN_REMEMBER_DAYS = 7
 DISABLE_GIT_HOOKS   = {{ gitea_disable_git_hooks | ternary('true', 'false') }}
-
+PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
+{{ gitea_security_extra_config }}
+;
+;
+;
 [service]
 ; Disallow registration, only allow admins to create accounts.
 DISABLE_REGISTRATION    = {{ gitea_disable_registration }}

@@ -70,6 +70,14 @@ gitea_repo_exclude_vendored: true
 gitea_repo_indexer_max_file_size: '1048576'
 gitea_indexer_extra_config: ''
 
+# Security (security)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
+gitea_secret_key: ''
+gitea_internal_token: ''
+gitea_disable_git_hooks: true
+gitea_password_check_pwn: false
+gitea_security_extra_config: ''
+
 # look and feel
 gitea_disable_gravatar: true
 gitea_disable_registration: false
@@ -82,9 +90,6 @@ gitea_enable_notify_mail: false
 gitea_auto_watch_new_repos: true
 
 # security
-gitea_secret_key: ''
-gitea_internal_token: ''
-gitea_disable_git_hooks: true
 gitea_lfs_jwt_secret: ''
 gitea_oauth2_jwt_secret: ''
 
