@@ -124,6 +124,7 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_db_password` | `lel` | Database password. **PLEASE CHANGE** |
 | `gitea_db_ssl` | `disable` | Configure SSL only if your database type supports it. Have a look into the [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database) for more detailed information |
 | `gitea_db_path` | `{{ gitea_home }}/data/gitea.db` | DB path, if you use `sqlite3`. |
+| `gitea_db_log_sql` | `false` | Log the executed SQL. |
 | `gitea_database_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[database]` section of the config. |
 
 ### Indexer ([indexer](https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer))
@@ -190,6 +191,12 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
 | `gitea_attachment_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
 
+### Log ([log](https://docs.gitea.io/en-us/config-cheat-sheet/#log-log))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_log_systemd` | `false` | Disable logging into `file`, use systemd-journald |
+| `gitea_log_level` | `Warn` | General log level. `[Trace, Debug, Info, Warn, Error, Critical, Fatal, None]` |
+| `gitea_log_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[log]` section of the config. |
 
 
 
@@ -223,8 +230,6 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 
 
 ### Log configuration
-* `gitea_log_systemd` Disable logging into `file`, use systemd-journald
-* `gitea_log_only_warning` Log only warnings or above, no http access or sql logging (Default: `true`)
 
 ### Fail2Ban configuration
 

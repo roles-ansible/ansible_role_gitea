@@ -59,6 +59,7 @@ gitea_db_user: 'gitea'
 gitea_db_password: 'lel'
 gitea_db_ssl: 'disable'
 gitea_db_path: "{{ gitea_home }}/data/gitea.db"
+gitea_db_log_sql: false
 gitea_database_extra_config: ''
 
 # Indexer (indexer)
@@ -114,7 +115,12 @@ gitea_picture_extra_config: ''
 
 # Issue and pull request attachments (attachment)
 gitea_attachment_enabled: true
-gitea_picture_extra_config: ''
+gitea_attachment_extra_config: ''
+
+# Log (log)
+gitea_log_systemd: false
+gitea_log_level: 'Warn'
+gitea_log_extra_config: ''
 
 # security
 gitea_lfs_jwt_secret: ''
@@ -122,9 +128,6 @@ gitea_oauth2_jwt_secret: ''
 
 gitea_systemd_cap_net_bind_service: false
 
-
-gitea_log_systemd: false
-gitea_log_only_warning: true
 
 gitea_fail2ban_enabled: false
 gitea_fail2ban_jail_maxretry: 10
@@ -136,8 +139,6 @@ gitea_oauth2_enabled: true
 
 gitea_metrics_enabled: false
 gitea_metrics_token: ~
-
-gitea_log_level: Info
 
 gitea_extra_config: ""
 

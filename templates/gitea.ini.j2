@@ -67,9 +67,7 @@ USER     = {{ gitea_db_user }}
 PASSWD   = {{ gitea_db_password }}
 SSL_MODE = {{ gitea_db_ssl }}
 PATH     = {{ gitea_db_path }}
-{% if gitea_log_only_warning %}
-LOG_SQL  = false
-{% endif %}
+LOG_SQL  = {{ gitea_db_log_sql | ternary('true', 'false') }}
 {{ gitea_database_extra_config }}
 ;
 ;
@@ -144,28 +142,19 @@ PATH    = {{ gitea_home }}/data/attachments
 {{ gitea_attachment_extra_config }}
 ;
 ;
-;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#log-log
 [log]
 ROOT_PATH            = {{ gitea_home }}/log
-; Either "console", "file", "conn", "smtp" or "database", default is "console"
-; Use comma to separate multiple modes, e.g. "console, file"
 {% if gitea_log_systemd %}
 MODE       = console
-MACARON    = console
 {% else %}
 MODE       = file
 {% endif %}
-; Buffer length of the channel, keep it as it is if you don't know what it is.
-BUFFER_LEN           = 10000
-; Either "Trace", "Debug", "Info", "Warn", "Error", "Critical", default is "Trace"
-{% if gitea_log_only_warning %}
-LEVEL      = Warn
-REDIRECT_MACARON_LOG = true
-{% else %}
-LEVEL      = Info
-REDIRECT_MACARON_LOG = false
-{% endif %}
-
+LEVEL      = {{ gitea_log_level }}
+{{ gitea_log_extra_config }}
+;
+;
+;
 [oauth2]
 ENABLE     = {{ gitea_oauth2_enabled }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
