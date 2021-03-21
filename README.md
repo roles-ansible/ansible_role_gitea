@@ -117,6 +117,15 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 ### Database ([database](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
+| `gitea_db_type` | `sqlite3` | The database type in use `[mysql, postgres, mssql, sqlite3]`. |
+| `gitea_db_host` | `127.0.0.0:3306` | Database host address and port or absolute path for unix socket [mysql, postgres] (ex: `/var/run/mysqld/mysqld.sock`). |
+| `gitea_db_name` | `root` | Database name |
+| `gitea_db_user` | `gitea` | Database username |
+| `gitea_db_password` | `lel` | Database password. **PLEASE CHANGE** |
+| `gitea_db_ssl` | `disable` | Configure SSL only if your database type supports it. Have a look into the [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database) for more detailed information |
+| `gitea_db_path` | `{{ gitea_home }}/data/gitea.db` | DB path, if you use `sqlite3`. |
+| `gitea_database_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
+
 
 
 
@@ -151,14 +160,6 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 
 
 ### Database configuration
-
-* `gitea_db_type`: Database type, can be `mysql`, `postgres` or `sqlite3`
-* `gitea_db_host`: Database host string `host:port` or `/run/postgresql/` when connectiong to postgres via local unix socket (peer authentication)
-* `gitea_db_name`: Database name
-* `gitea_db_user`: Database username
-* `gitea_db_password`: Database password
-* `gitea_db_ssl`: Use SSL ? (postgres only!). Can be `require`, `disable`, `verify-ca` or `verify-full`
-* `gitea_db_path`: DB path, if you use `sqlite3`. The default is good enough to work though.
 
 ### Mailer configuration
 
