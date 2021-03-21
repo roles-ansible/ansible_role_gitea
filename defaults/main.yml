@@ -5,11 +5,14 @@ gitea_version_check: true
 gitea_dl_url: "https://github.com/go-gitea/gitea/releases/download/v{{ gitea_version }}/gitea-{{ gitea_version }}-linux-{{ gitea_arch }}"
 gitea_gpg_key: '7C9E68152594688862D62AF62D9AE806EC1592E2'
 gitea_gpg_server: 'hkp://keyserver.ubuntu.com:80'
+gitea_backup_on_upgrade: false
+gitea_backup_location: "{{ gitea_home }}/backups/"
 
 # gitea in the linux world
 gitea_group: 'gitea'
 gitea_home: '/var/lib/gitea'
 gitea_shell: '/bin/false'
+gitea_systemd_cap_net_bind_service: false
 
 # Overall (DEFAULT)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default
@@ -48,6 +51,7 @@ gitea_ssh_listen: '0.0.0.0'
 gitea_offline_mode: true
 gitea_lfs_server_enabled: false
 gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
+gitea_lfs_jwt_secret: ''
 gitea_server_extra_config: ''
 
 # Database (database)
@@ -131,23 +135,12 @@ gitea_oauth2_enabled: true
 gitea_oauth2_jwt_secret: ''
 gitea_oauth2_extra_config: ''
 
-
-
-# security
-gitea_lfs_jwt_secret: ''
-
-gitea_systemd_cap_net_bind_service: false
-
-
-gitea_fail2ban_enabled: false
-gitea_fail2ban_jail_maxretry: 10
-gitea_fail2ban_jail_findtime: 3600
-gitea_fail2ban_jail_bantime: 900
-gitea_fail2ban_jail_action: iptables-allports
-
-
-
+# additional gitea config
 gitea_extra_config: ""
 
-gitea_backup_on_upgrade: false
-gitea_backup_location: "{{ gitea_home }}/backups/"
+# fail2ban
+gitea_fail2ban_enabled: false
+gitea_fail2ban_jail_maxretry: '10'
+gitea_fail2ban_jail_findtime: '3600'
+gitea_fail2ban_jail_bantime: '900'
+gitea_fail2ban_jail_action: 'iptables-allports'
