@@ -30,9 +30,12 @@ gitea_themes: gitea,arc-green
 gitea_theme_default: gitea
 
 # security
-gitea_secret_key: T0pS3cr31
-gitea_internal_token: SomethingVeryLong
+gitea_secret_key: ''
+gitea_internal_token: ''
 gitea_disable_git_hooks: true
+gitea_user_repo_limit: -1
+gitea_lfs_jwt_secret: ''
+gitea_oauth2_jwt_secret: ''
 
 gitea_http_domain: localhost
 
@@ -44,10 +47,8 @@ gitea_http_port: 3000
 gitea_disable_http_git: false
 
 
-gitea_user_repo_limit: -1
 gitea_lfs_server_enabled: false
 gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
-gitea_lfs_jwt_secret: ''
 
 gitea_systemd_cap_net_bind_service: false
 gitea_db_type: sqlite3
@@ -87,7 +88,6 @@ gitea_fail2ban_jail_bantime: 900
 gitea_fail2ban_jail_action: iptables-allports
 
 gitea_oauth2_enabled: true
-gitea_oauth2_jwt_secret: ''
 
 gitea_metrics_enabled: false
 gitea_metrics_token: ~

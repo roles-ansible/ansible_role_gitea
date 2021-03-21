@@ -59,6 +59,8 @@
 
 - include_tasks: jwt_secrets.yml
 
+- include_tasks: gitea_secrets.yml
+
 - name: "Configure gitea"
   template:
     src: gitea.ini.j2
