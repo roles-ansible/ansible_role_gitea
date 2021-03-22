@@ -155,6 +155,7 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
 | `gitea_register_email_confirm` | `false` | Enable this to ask for mail confirmation of registration. Requires `gitea_mailer_enabled` to be enabled. |
 | `gitea_require_signin` | `true` | Do you require a signin to see repo's (even public ones)? (true/false)|
+| `gitea_default_keep_mail_private` | `true` | By default set users to keep their email address privat |
 | `gitea_enable_captcha` | `true` | Do you want to enable captcha's ? (true/false)|
 | `gitea_show_registration_button` | `true` | Here you can hide the registration button. This will not disable registration! (true/false)|
 | `gitea_only_allow_external_registration` | `false` | Set to true to force registration only using third-party services (true/false) |
