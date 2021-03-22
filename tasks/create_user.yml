@@ -1,11 +1,13 @@
 ---
 - name: "Create Gitea Group"
+  become: true
   group:
     name: "{{ gitea_group }}"
     system: true
     state: "present"
 
 - name: "Create Gitea user"
+  become: true
   user:
     name: "{{ gitea_user }}"
     comment: "Gitea user"

@@ -28,28 +28,19 @@
 - name: Create directorys
   ansible.builtin.include_tasks: directory.yml
 
-- include: install_systemd.yml
+- name: setup gitea systemd service
+  ansible.builtin.include_tasks: install_systemd.yml
   when: ansible_service_mgr == "systemd"
 
-- include_tasks: jwt_secrets.yml
+- name: generate JWT Secrets if undefined
+  ansible.builtin.include_tasks: jwt_secrets.yml
 
-- include_tasks: gitea_secrets.yml
+- name: generate gitea secrets if undefined
+  ansible.builtin.include_tasks: gitea_secrets.yml
 
-- name: "Configure gitea"
-  template:
-    src: gitea.ini.j2
-    dest: /etc/gitea/gitea.ini
-    owner: "{{ gitea_user }}"
-    group: "{{ gitea_group }}"
-    mode: 0600
-  notify: "Restart gitea"
+- name: configure gitea
+  ansible.builtin.include_tasks: configure.yml
 
-- name: "Service gitea"
-  service:
-    name: gitea
-    state: started
-    enabled: true
-  when: ansible_service_mgr == "systemd"
-
-- include: fail2ban.yml
+- name: deploy optional fail2ban rules
+  ansible.builtin.include_tasks: fail2ban.yml
   when: gitea_fail2ban_enabled|bool
