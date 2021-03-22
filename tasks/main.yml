@@ -1,4 +1,8 @@
 ---
+- name: perform optional versionscheck
+  ansible.builtin.include_tasks: versioncheck.yml
+  when: submodules_versioncheck|bool
+
 - name: Gather variables for each operating system
   include_vars: "{{ item }}"
   with_first_found:
