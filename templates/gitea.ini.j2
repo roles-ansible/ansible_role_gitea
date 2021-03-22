@@ -99,6 +99,7 @@ PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
 DISABLE_REGISTRATION              = {{ gitea_disable_registration | ternary('true', 'false') }}
 REGISTER_EMAIL_CONFIRM            = {{ gitea_register_email_confirm | ternary('true', 'false') }}
 REQUIRE_SIGNIN_VIEW               = {{ gitea_require_signin | ternary('true', 'false') }}
+DEFAULT_KEEP_EMAIL_PRIVATE        = {{ gitea_default_keep_mail_private | ternary('true', 'false') }}
 ENABLE_CAPTCHA                    = {{ gitea_enable_captcha | ternary('true', 'false') }}
 SHOW_REGISTRATION_BUTTON          = {{ gitea_show_registration_button | ternary('true', 'false') }}
 ALLOW_ONLY_EXTERNAL_REGISTRATION  = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
