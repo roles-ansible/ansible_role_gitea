@@ -9,5 +9,5 @@ gitea_go_arch_map:
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 
-playbook_version_number: 5  # should be int
+playbook_version_number: 6  # should be int
 playbook_version_path: 'do1jlr.gitea.version'
