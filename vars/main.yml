@@ -8,6 +8,7 @@ gitea_go_arch_map:
   armv5l: 'arm-5'
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+gitea_filename: "gitea-{{ gitea_version }}.linux-{{ gitea_arch }}"
 
 gitea_variables:
   files:
