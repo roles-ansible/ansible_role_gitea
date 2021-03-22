@@ -1,15 +1,18 @@
 ---
 - name: Get service facts
-  service_facts:
+  ansible.builtin.service_facts:
 
 - block:
     - name: Stopping gitea before upgrade
-      service:
+      become: true
+      ansible.builtin.systemd:
         name: gitea
         state: stopped
+      when: ansible_service_mgr == "systemd"
 
     - name: "Create backup directory"
-      file:
+      become: true
+      ansible.builtin.file:
         path: "{{ item }}"
         state: directory
         owner: "{{ gitea_user }}"
@@ -19,13 +22,11 @@
         - "{{ gitea_backup_location }}"
 
     - name: Backing up gitea before upgrade
-      command:
+      ansible.builtin.command:
         cmd: "gitea dump -c /etc/gitea/gitea.ini"
         chdir: "{{ gitea_backup_location }}"
       become: true
-      become_method: su
       become_user: "{{ gitea_user }}"
-      become_flags: "-s /bin/sh"
   when:
     - ansible_facts.services["gitea.service"] is defined
     - ansible_facts.services["gitea.service"].state == "running"

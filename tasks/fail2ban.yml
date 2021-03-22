@@ -1,18 +1,20 @@
 ---
 - name: Install fail2ban filter
-  template:
+  become: true
+  ansible.builtin.template:
     src: fail2ban/filter.conf.j2
     dest: /etc/fail2ban/filter.d/gitea.conf
     owner: root
     group: root
     mode: 0444
-  notify: Restart fail2ban
+  notify: systemctl restart fail2ban
 
 - name: Install fail2ban jail
-  template:
+  become: true
+  ansible.builtin.template:
     src: fail2ban/jail.conf.j2
     dest: /etc/fail2ban/jail.d/gitea.conf
     owner: root
     group: root
     mode: 0444
-  notify: Restart fail2ban
+  notify: systemctl restart fail2ban

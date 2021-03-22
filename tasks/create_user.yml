@@ -1,12 +1,14 @@
 ---
 - name: "Create Gitea Group"
-  group:
+  become: true
+  ansible.builtin.group:
     name: "{{ gitea_group }}"
     system: true
     state: "present"
 
 - name: "Create Gitea user"
-  user:
+  become: true
+  ansible.builtin.user:
     name: "{{ gitea_user }}"
     comment: "Gitea user"
     home: "{{ gitea_home }}"
