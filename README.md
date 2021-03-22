@@ -11,43 +11,21 @@ This role installs and manages [gitea](https://gitea.io) - Git with a cup of tea
 The following code has been tested with Debian 8, it should work on Ubuntu as well.
 
 ```yaml
+# ansible-galaxy install do1jlr.gitea
+
 - name: "Install gitea"
-  hosts: all
+  hosts: git.example.com
+  roles:
+    - {role: do1jlr.gitea, tags: gitea}
   vars:
-    gitea_user: "gitea"
-    gitea_home: "/var/lib/gitea"
-    # To limit your users to 30 repos
-    gitea_user_repo_limit: 30
-    # Don't use a public CDN for frontend assets
-    gitea_offline_mode: true
-
-    # Some 'rendering' options for your URLs
-    gitea_http_domain: git.yourdomain.fr
-    gitea_root_url: https://git.yourdomain.fr
-
     # Here we assume we are behind a reverse proxy that will
     # handle https for us, so we bind on localhost:3000 using HTTP
+    gitea_http_domain: 'git.example.com'
+    gitea_root_url: 'https://git.example.com'
     gitea_protocol: http
-    gitea_http_listen: 127.0.0.1
-    gitea_http_port: 3000
 
-    # SSH server configuration
-    gitea_ssh_listen: 0.0.0.0
-    gitea_ssh_port: 2222
-    # For URLs rendering again
-    gitea_ssh_domain: git.yourdomain.fr
+    gitea_ssh_domain: git.example.com
     gitea_start_ssh: true
-
-    gitea_secret_key: 3sp00ky5me
-    gitea_disable_gravatar: true
-    # To make at least your first user register
-    gitea_disable_registration: false
-    gitea_require_signin: true
-    gitea_enable_captcha: true
-
-    gitea_show_user_email: false
-  roles:
-    - gitea
 ```
 
  Variables
