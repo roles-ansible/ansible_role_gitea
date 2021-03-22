@@ -9,5 +9,15 @@ gitea_go_arch_map:
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 
+gitea_variables:
+  files:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  paths:
+    - 'vars'
+
 playbook_version_number: 6  # should be int
 playbook_version_path: 'do1jlr.gitea.version'

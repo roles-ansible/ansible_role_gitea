@@ -4,16 +4,10 @@
   when: submodules_versioncheck|bool
 
 - name: Gather variables for each operating system
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "{{ ansible_distribution | lower }}.yml"
-    - "{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ lookup('first_found', gitea_variables) }}"
 
 - name: "Check gitea version"
-  shell: "set -eo pipefail; /usr/local/bin/gitea -v | cut -d' ' -f 3"
+  ansible.builtin.shell: "set -eo pipefail; /usr/local/bin/gitea -v | cut -d' ' -f 3"
   args:
     executable: /bin/bash
   register: gitea_active_version
@@ -22,41 +16,17 @@
   when: gitea_version_check|bool
 
 - name: backup gitea before update
-  include_tasks: backup.yml
+  ansible.builtin.include_tasks: backup.yml
   when: gitea_backup_on_upgrade|bool
 
+- name: create gitea user and role
+  ansible.builtin.include_tasks: create_user.yml
+
 - name: install or update gitea
-  include_tasks: install.yml
+  ansible.builtin.include_tasks: install.yml
 
-- include: create_user.yml
-
-- name: "Create config directory"
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ gitea_user }}"
-    group: "{{ gitea_group }}"
-    mode: '0755'
-  with_items:
-    - "/etc/gitea"
-
-- name: "Create data directory"
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ gitea_user }}"
-    group: "{{ gitea_group }}"
-    mode: 'u=rwX,g=rX,o='
-    recurse: true
-  with_items:
-    - "{{ gitea_home }}"
-    - "{{ gitea_home }}/data"
-    - "{{ gitea_home }}/custom"
-    - "{{ gitea_home }}/custom/https"
-    - "{{ gitea_home }}/custom/mailer"
-    - "{{ gitea_home }}/indexers"
-    - "{{ gitea_home }}/log"
-    - "{{ gitea_repository_root }}"
+- name: Create directorys
+  ansible.builtin.include_tasks: directory.yml
 
 - include: install_systemd.yml
   when: ansible_service_mgr == "systemd"
