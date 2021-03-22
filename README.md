@@ -242,5 +242,11 @@ Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
 I'm happy to fix any issue that's been opened, or even better, review your pull requests :)
 
 ## Testing
-There is a test that is using [molecule](https://molecule.readthedocs.io/en/stable-1.22/usage.html). And some linting tests with github actions.
-*For locale molecule testing docker is required.*
+There are some tests that will validate linting. A good testing CI Pipeline that will work withe the used systemd commands is still needed.
+
+| test status | Github Marketplace |
+| :---------  | :----------------  |
+| [![Galaxy release](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/galaxy.yml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/galaxy.yml) | [publish-ansible-role-to-galaxy](https://github.com/marketplace/actions/publish-ansible-role-to-galaxy) |
+| [![Yamllint GitHub Actions](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/yamllint.yaml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/yamllint.yaml) | [yamllint-github-action](https://github.com/marketplace/actions/yamllint-github-action) |
+| [![Ansible Lint check](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml) | [ansible-lint action](https://github.com/marketplace/actions/ansible-lint)
+
