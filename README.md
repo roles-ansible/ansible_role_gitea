@@ -64,6 +64,7 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_gpg_server` | `hkp://keyserver.ubuntu.com:80` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
+| `submodules_versioncheck` | `false` | a simple version check that can prevent you from accidentally running an older version of this role. *(recomended)* |
 
 ### gitea in the linux world
 | variable name | default value | description |

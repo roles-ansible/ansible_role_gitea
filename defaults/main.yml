@@ -7,6 +7,7 @@ gitea_gpg_key: '7C9E68152594688862D62AF62D9AE806EC1592E2'
 gitea_gpg_server: 'hkp://keyserver.ubuntu.com:80'
 gitea_backup_on_upgrade: false
 gitea_backup_location: "{{ gitea_home }}/backups/"
+submodules_versioncheck: false
 
 # gitea in the linux world
 gitea_group: 'gitea'
