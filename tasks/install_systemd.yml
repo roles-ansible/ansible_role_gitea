@@ -1,7 +1,7 @@
 ---
 - name: "Setup systemd service"
   become: true
-  template:
+  ansible.builtin.template:
     src: gitea.service.j2
     dest: /lib/systemd/system/gitea.service
     owner: root
@@ -13,5 +13,5 @@
 
 - name: "Reload systemd"
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true

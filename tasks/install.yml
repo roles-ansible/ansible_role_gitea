@@ -1,7 +1,8 @@
 ---
 - block:
     - name: Update apt cache
-      apt:
+      become: true
+      ansible.builtin.apt:
         cache_valid_time: 3600
         update_cache: true
       register: _pre_update_apt_cache
@@ -10,7 +11,8 @@
         - ansible_pkg_mgr == "apt"
 
     - name: Install dependencies
-      package:
+      become: true
+      ansible.builtin.package:
         name: "{{ gitea_dependencies }}"
         state: present
       register: _install_dep_packages
@@ -20,7 +22,7 @@
 
 - block:
     - name: Download gitea archive
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ gitea_dl_url }}.xz"
         dest: "/tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz"
         checksum: "sha256:{{ gitea_dl_url }}.xz.sha256"
@@ -30,7 +32,7 @@
       delay: 2
 
     - name: Download gitea asc file
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ gitea_dl_url }}.xz.asc"
         dest: "/tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz.asc"
       register: _download_asc
@@ -39,28 +41,30 @@
       delay: 2
 
     - name: Check gitea gpg key
-      command: "gpg --list-keys 0x{{ gitea_gpg_key }}"
+      ansible.builtin.command: "gpg --list-keys 0x{{ gitea_gpg_key }}"
       register: _gitea_gpg_key_status
       changed_when: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
     - name: Import gitea gpg key
-      command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
+      become: true
+      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
       register: _gitea_import_key
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
       when: _gitea_gpg_key_status.rc != 0
 
     - name: Check archive signature
-      command: "gpg --verify /tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz.asc /tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz"
+      ansible.builtin.command: "gpg --verify /tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz.asc /tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz"
       changed_when: false
 
     - name: Unpack gitea binary
-      command:
+      ansible.builtin.command:
         cmd: "xz -k -d /tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}.xz"
         creates: "/tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}"
 
     - name: Propagate gitea binary
-      copy:
+      become: true
+      ansible.builtin.copy:
         src: "/tmp/gitea-{{ gitea_version }}.linux-{{ gitea_arch }}"
         remote_src: true
         dest: "/usr/local/bin/gitea"

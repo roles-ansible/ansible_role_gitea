@@ -1,5 +1,6 @@
 ---
 - name: "Create config and data directory"
+  become: true
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
