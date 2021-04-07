@@ -39,7 +39,7 @@ Here is a deeper insight into the variables of this gitea role. For the exact fu
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_dl_url` | *(see [defaults/main.yml](defaults/main.yml#L5))* | The path from where this role downloads the gitea binary |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
-| `gitea_gpg_server` | `hkp://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
+| `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
 | `submodules_versioncheck` | `false` | a simple version check that can prevent you from accidentally running an older version of this role. *(recomended)* |
