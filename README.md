@@ -228,3 +228,5 @@ There are some tests that will validate linting. A good testing CI Pipeline that
 | [![Yamllint GitHub Actions](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/yamllint.yaml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/yamllint.yaml) | [yamllint-github-action](https://github.com/marketplace/actions/yamllint-github-action) |
 | [![Ansible Lint check](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml) | [ansible-lint action](https://github.com/marketplace/actions/ansible-lint)
 
+## History of this role
+this ansible role was originally developed on [github.com/thomas-maurice/ansible-role-gitea](https://github.com/thomas-maurice/ansible-role-gitea.git). Since the role there has some problems like default values for the location of the gitea repositories and the merging of pull requests usually takes several months, a fork of the role was created that offers the same. Only tidier and with the claim to react faster to issues and pull requests.
