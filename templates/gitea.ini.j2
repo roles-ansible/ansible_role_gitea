@@ -157,13 +157,13 @@ LEVEL      = {{ gitea_log_level }}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 [metrics]
-ENABLED = {{ gitea_metrics_enabled }}
+ENABLED = {{ gitea_metrics_enabled | ternary('true', 'false') }}
 TOKEN   = {{ gitea_metrics_token }}
 ;
 ;
 ; https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
-ENABLE     = {{ gitea_oauth2_enabled }}
+ENABLE     = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
 {{ gitea_oauth2_extra_config }}
 ;
