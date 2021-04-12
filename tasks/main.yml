@@ -3,6 +3,10 @@
   ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck|bool
 
+- name: Gather installed packages for checks later on
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ lookup('first_found', gitea_variables) }}"
 
