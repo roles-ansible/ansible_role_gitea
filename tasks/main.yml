@@ -2,7 +2,7 @@
 - name: perform optional versionscheck
   ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck|bool
-  
+
 - name: Gather installed packages for checks later on
   ansible.builtin.package_facts:
     manager: auto
