@@ -8,6 +8,7 @@
     group: root
     mode: 0444
   notify: systemctl restart fail2ban
+  when: 'fail2ban' in ansible_facts.packages
 
 - name: Install fail2ban jail
   become: true
@@ -18,3 +19,4 @@
     group: root
     mode: 0444
   notify: systemctl restart fail2ban
+  when: 'fail2ban' in ansible_facts.packages  
