@@ -47,7 +47,6 @@
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
     - name: Import gitea gpg key
-      become: true
       ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
       register: _gitea_import_key
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
