@@ -20,5 +20,5 @@ gitea_variables:
   paths:
     - 'vars'
 
-playbook_version_number: 12  # should be int
+playbook_version_number: 13  # should be int
 playbook_version_path: 'do1jlr.gitea.version'
