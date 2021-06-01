@@ -116,7 +116,7 @@ SKIP_VERIFY        = {{ gitea_mailer_skip_verify | ternary('true', 'false') }}
 IS_TLS_ENABLED     = {{ gitea_mailer_tls_enabled | ternary('true', 'false') }}
 FROM               = {{ gitea_mailer_from }}
 USER               = {{ gitea_mailer_user }}
-PASSWD             = {{ gitea_mailer_password }}
+PASSWD             = `{{ gitea_mailer_password }}`
 SUBJECT_PREFIX     = {{ gitea_subject_prefix }}
 MAILER_TYPE        = {{ gitea_mailer_type }}
 {{ gitea_mailer_extra_config }}
