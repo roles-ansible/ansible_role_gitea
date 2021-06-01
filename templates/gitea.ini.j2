@@ -18,6 +18,8 @@ FORCE_PRIVATE       = {{ gitea_force_private | ternary('true', 'false') }}
 MAX_CREATION_LIMIT  = {{ gitea_user_repo_limit }}
 DISABLE_HTTP_GIT    = {{ gitea_disable_http_git | ternary('true', 'false') }}
 DEFAULT_BRANCH      = {{ gitea_default_branch }}
+[repository.upload]
+TEMP_PATH           = {{ gitea_home }}/data/tmp/uploads
 {{ gitea_repository_extra_config }}
 ;
 ;
