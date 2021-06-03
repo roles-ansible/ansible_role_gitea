@@ -151,3 +151,4 @@ gitea_fail2ban_jail_action: 'iptables-allports'
 gitea_custom_search: "files/host_files/{{ inventory_hostname }}/gitea"
 gitea_customize_logo: false
 gitea_custom: "{{ gitea_home }}/custom"
+gitea_customize_footer: false

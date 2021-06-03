@@ -48,5 +48,14 @@ transfer_custom_logo_appletouchiconpng:
     - "files/{{ gitea_http_domain }}/gitea_logo/apple-touch-icon.png"
     - 'files/gitea_logo/apple-touch-icon.png'
 
-playbook_version_number: 16  # should be int
+transfer_custom_footer:
+  files:
+    - "{{ gitea_custom_search }}/gitea_footer/extra_links_footer.tmpl"
+    - "files/{{ inventory_hostname }}/gitea_footer/extra_links_footer.tmpl"
+    - "files/{{ gitea_http_domain }}/gitea_footer/extra_links_footer.tmpl"
+    - 'files/gitea_footer/extra_links_footer.tmpl'
+    - 'files/extra_links_footer.tmpl'
+
+
+playbook_version_number: 17  # should be int
 playbook_version_path: 'do1jlr.gitea.version'
