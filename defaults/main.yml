@@ -20,6 +20,7 @@ gitea_systemd_cap_net_bind_service: false
 gitea_app_name: 'Gitea'
 gitea_user: 'gitea'
 gitea_run_mode: 'prod'
+gitea_fqdn: 'localhost'
 
 # Repository (repository)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
@@ -40,13 +41,13 @@ gitea_ui_extra_config: ''
 # Server (server)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
 gitea_protocol: 'http'
-gitea_http_domain: 'localhost'
-gitea_root_url: 'http://localhost:3000'
+gitea_http_domain: "{{ gitea_fqdn }}"
+gitea_root_url: "http://{{ gitea_fqdn }}:3000"
 gitea_http_listen: '127.0.0.1'
 gitea_http_port: '3000'
 # gitea_http_letsencrypt_mail: 'mail@example.com'
 gitea_start_ssh: true
-gitea_ssh_domain: "{{ gitea_http_domain }}"
+gitea_ssh_domain: "{{ gitea_fqdn }}"
 gitea_ssh_port: '2222'
 gitea_ssh_listen: '0.0.0.0'
 gitea_offline_mode: true
