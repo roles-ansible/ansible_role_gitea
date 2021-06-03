@@ -56,3 +56,7 @@
 - name: optionally customize footer
   ansible.builtin.include_tasks: customize_footer.yml
   when: gitea_customize_footer|bool
+
+- name: optionally deploy public files
+  ansible.builtin.include_tasks: customize_public_files.yml
+  when: gitea_customize_files|bool

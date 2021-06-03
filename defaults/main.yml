@@ -153,3 +153,5 @@ gitea_custom_search: "files/host_files/{{ inventory_hostname }}/gitea"
 gitea_customize_logo: false
 gitea_custom: "{{ gitea_home }}/custom"
 gitea_customize_footer: false
+gitea_customize_files: false
+gitea_customize_files_path: "{{ gitea_custom_search }}/gitea_files"
