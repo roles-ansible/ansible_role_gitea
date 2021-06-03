@@ -215,9 +215,9 @@ As this will only deploy config files, fail2ban already has to be installed or o
 
 ### optional customisation
 You can optionally customize your gitea using this ansible role. We got our information about customisation from [docs.gitea.io/en-us/customizing-gitea](https://docs.gitea.io/en-us/customizing-gitea/).
-To deploy multiple files we created the ``gitea_custom_search`` variable, that can point to the path where you put the custom gitea files *( default ``"files/host_files/{{ inventory_hostname }}/gitea"``.
+To deploy multiple files we created the ``gitea_custom_search`` variable, that can point to the path where you put the custom gitea files *( default ``"files/host_files/{{ inventory_hostname }}/gitea"``)*.
 
-+ LOGO
++ **LOGO**:
   - Set ``gitea_customize_logo`` to ``true``
   - We search for:
     * ``logo.svg`` - Used for favicon, site icon, app icon
@@ -229,6 +229,15 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
     * ``files/{{ inventory_hostname }}/gitea_logo/``
     * ``files/{{ gitea_http_domain }}/gitea_logo/``
     * ``files/gitea_logo/``
++ **FOOTER**:
+  - Set ``gitea_customize_footer`` to ``true``
+  - We Search using first_found in:
+    * "{{ gitea_custom_search }}/gitea_footer/extra_links_footer.tmpl"
+    * "files/{{ inventory_hostname }}/gitea_footer/extra_links_footer.tmpl"
+    * "files/{{ gitea_http_domain }}/gitea_footer/extra_links_footer.tmpl"
+    * 'files/gitea_footer/extra_links_footer.tmpl'
+    * 'files/extra_links_footer.tmpl'
+
 
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on

@@ -52,3 +52,7 @@
 - name: optionally customize gitea
   ansible.builtin.include_tasks: customize_logo.yml
   when: gitea_customize_logo|bool
+
+- name: optionally customize footer
+  ansible.builtin.include_tasks: customize_footer.yml
+  when: gitea_customize_footer|bool
