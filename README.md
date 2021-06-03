@@ -20,11 +20,10 @@ The following code has been tested with Debian 8, it should work on Ubuntu as we
   vars:
     # Here we assume we are behind a reverse proxy that will
     # handle https for us, so we bind on localhost:3000 using HTTP
-    gitea_http_domain: 'git.example.com'
+    gitea_fqdn: 'git.example.com'
     gitea_root_url: 'https://git.example.com'
     gitea_protocol: http
 
-    gitea_ssh_domain: git.example.com
     gitea_start_ssh: true
 ```
 
