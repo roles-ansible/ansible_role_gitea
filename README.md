@@ -236,7 +236,10 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
     * "files/{{ gitea_http_domain }}/gitea_footer/extra_links_footer.tmpl"
     * 'files/gitea_footer/extra_links_footer.tmpl'
     * 'files/extra_links_footer.tmpl'
-
++ **CUSTOM FILES**:
+  - Set ``gitea_customize_files`` to ``true``
+  - Create a directory with the files you want to deploy.
+  - Point ``gitea_customize_files_path`` to this directory. *(Default ``{{ gitea_custom_search }}/gitea_files/``)*
 
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on
