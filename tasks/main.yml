@@ -48,3 +48,7 @@
 - name: deploy optional fail2ban rules
   ansible.builtin.include_tasks: fail2ban.yml
   when: gitea_fail2ban_enabled|bool
+
+- name: optionally customize gitea
+  ansible.builtin.include_tasks: customize_logo.yml
+  when: gitea_customize_logo|bool

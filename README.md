@@ -213,6 +213,23 @@ As this will only deploy config files, fail2ban already has to be installed or o
 | `gitea_fail2ban_jail_bantime` | `900` | fail2ban jail `bantime` setting. |
 | `gitea_fail2ban_jail_action` | `iptables-allports` | fail2ban jail `action` setting. |
 
+### optional customisation
+You can optionally customize your gitea using this ansible role. We got our information about customisation from [docs.gitea.io/en-us/customizing-gitea](https://docs.gitea.io/en-us/customizing-gitea/).
+To deploy multiple files we created the ``gitea_custom_search`` variable, that can point to the path where you put the custom gitea files *( default ``"files/host_files/{{ inventory_hostname }}/gitea"``.
+
++ LOGO
+  - Set ``gitea_customize_logo`` to ``true``
+  - We search for:
+    * ``logo.svg`` - Used for favicon, site icon, app icon
+    * ``logo.png`` - Used for Open Graph
+    * ``favicon.png`` - Used as fallback for browsers that don’t support SVG favicons
+    * ``apple-touch-icon.png`` - Used on iOS devices for bookmarks
+  - We search in *(using [first_found](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/first_found_lookup.html))*:
+    * ``{{ gitea_custom_search }}/gitea_logo/``
+    * ``files/{{ inventory_hostname }}/gitea_logo/``
+    * ``files/{{ gitea_http_domain }}/gitea_logo/``
+    * ``files/gitea_logo/``
+
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on
 Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
