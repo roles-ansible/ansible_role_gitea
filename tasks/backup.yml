@@ -30,4 +30,4 @@
   when:
     - ansible_facts.services["gitea.service"] is defined
     - ansible_facts.services["gitea.service"].state == "running"
-    - gitea_active_version.stdout != gitea_version
+    - gitea_active_version.stdout != gitea_version_target
