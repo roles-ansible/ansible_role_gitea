@@ -31,10 +31,14 @@ The following code has been tested with Debian 8, it should work on Ubuntu as we
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at the config cheat sheet.  For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
 
-### gitea version
+### gitea update
+To determine which gitea version to install, you can choose between two variants.
+Either you define exactly which release you install. Or you use the option ``latest`` to always install the latest release from the [gitea releases](https://github.com/go-gitea/gitea/releases/latest).
+
+### gitea update
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_version` | *(see [defaults/main.yml](defaults/main.yml#L3))* | The gitea version this role shoud install |
+| `gitea_version` | **WILL CHANGE SOON** | Define either the exact release to install or use ``latest`` to install the latest release. |
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
