@@ -8,7 +8,7 @@ This role installs and manages [gitea](https://gitea.io) - Git with a cup of tea
 
 ## Sample example of use in a playbook
 
-The following code has been tested with Debian 8, it should work on Ubuntu as well.
+The following code has been tested with the latest Debian Stable, it should work on Ubuntu and RedHat as well.
 
 ```yaml
 # ansible-galaxy install do1jlr.gitea
@@ -29,9 +29,9 @@ The following code has been tested with Debian 8, it should work on Ubuntu as we
 
  Variables
 -----------
-Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at the config cheat sheet.  For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
+Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
 
-### gitea update
+### gitea update mechanism
 To determine which gitea version to install, you can choose between two variants.
 Either you define exactly which release you install. Or you use the option ``latest`` to always install the latest release from the [gitea releases](https://github.com/go-gitea/gitea/releases/latest).
 
