@@ -30,7 +30,7 @@ gitea_user_repo_limit: '-1'
 gitea_disable_http_git: false
 gitea_default_branch: 'main'
 gitea_repository_extra_config: ''
-gitea_repository_upload_extra_config : ''
+gitea_repository_upload_extra_config: ''
 
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
