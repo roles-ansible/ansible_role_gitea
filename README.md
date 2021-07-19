@@ -70,6 +70,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_disable_http_git` | `false` | Disable the ability to interact with repositories over the HTTP protocol. (true/false) |
 | `gitea_default_branch` | `main` | Default branch name of all repositories. |
 | `gitea_repository_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
+| `gitea_repository_upload_extra_config` | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
 
 ### UI ([ui](https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui))
 | variable name | default value | description |
