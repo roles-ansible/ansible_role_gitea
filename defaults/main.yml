@@ -1,7 +1,7 @@
 ---
 # gitea version
 # Use 'latest' to auto-update; upgrading past role version may lead to errors.
-gitea_version: '1.15.3'
+gitea_version: '1.15.4'
 gitea_version_check: true
 gitea_gpg_key: '7C9E68152594688862D62AF62D9AE806EC1592E2'
 gitea_gpg_server: 'hkps://keys.openpgp.org'
