@@ -16,6 +16,7 @@
   ansible.builtin.user:
     name: "{{ gitea_user }}"
     comment: "Gitea user"
+    groups: "{{ gitea_group }}"
     home: "{{ gitea_home }}"
     shell: "{{ gitea_shell }}"
     system: true
