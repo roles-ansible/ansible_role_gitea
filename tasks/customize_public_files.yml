@@ -20,4 +20,5 @@
     directory_mode: true
     mode: 'u=rwX,g=rX,o='
   ignore_errors: true
+  tags: skip_ansible_lint
   notify: "Restart gitea"
