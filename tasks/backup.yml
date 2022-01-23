@@ -22,11 +22,11 @@
         - "{{ gitea_backup_location }}"
 
     - name: Backing up gitea before upgrade
-      ansible.builtin.command:
-        cmd: "gitea dump -c /etc/gitea/gitea.ini"
-        chdir: "{{ gitea_backup_location }}"
       become: true
-      become_user: "{{ gitea_user }}"
+      ansible.builtin.command:
+        cmd: "sudo -u gitea gitea dump -c /etc/gitea/gitea.ini"
+        chdir: "{{ gitea_backup_location }}"
+      
   when:
     - ansible_facts.services["gitea.service"] is defined
     - ansible_facts.services["gitea.service"].state == "running"
