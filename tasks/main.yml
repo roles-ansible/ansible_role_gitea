@@ -23,7 +23,7 @@
 - name: install or update gitea
   ansible.builtin.include_tasks: install.yml
 
-- name: Create directorys
+- name: Create directories
   ansible.builtin.include_tasks: directory.yml
 
 - name: setup gitea systemd service
