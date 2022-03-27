@@ -7,7 +7,7 @@
     state: "present"
 
 - name: Switch shell when not using the builtin ssh server
-  set_fact:
+  ansible.builtin.set_fact:
     gitea_shell: "/bin/bash"
   when: "not gitea_start_ssh and gitea_shell == '/bin/false'"
 

@@ -26,6 +26,7 @@
       ansible.builtin.command:
         cmd: "sudo -u {{ gitea_user }} gitea dump -c /etc/gitea/gitea.ini"
         chdir: "{{ gitea_backup_location }}"
+      changed_when: true
   when:
     - ansible_facts.services["gitea.service"] is defined
     - ansible_facts.services["gitea.service"].state == "running"
