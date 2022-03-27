@@ -38,7 +38,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 ### gitea update
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_version` | **WILL CHANGE SOON** | Define either the exact release to install or use ``latest`` to install the latest release. |
+| `gitea_version` | `latest` | Define either the exact release to install *(eg. `1.16.0`)* or use ``latest`` *(default)* to install the latest release. |
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |

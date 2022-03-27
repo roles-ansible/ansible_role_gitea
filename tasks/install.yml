@@ -26,6 +26,7 @@
         url: "{{ gitea_dl_url }}.xz"
         dest: "/tmp/{{ gitea_filename }}.xz"
         checksum: "sha256:{{ gitea_dl_url }}.xz.sha256"
+        mode: 0640
       register: _download_archive
       until: _download_archive is succeeded
       retries: 5
@@ -35,6 +36,7 @@
       ansible.builtin.get_url:
         url: "{{ gitea_dl_url }}.xz.asc"
         dest: "/tmp/{{ gitea_filename }}.xz.asc"
+        mode: 0640
       register: _download_asc
       until: _download_asc is succeeded
       retries: 5
