@@ -13,10 +13,11 @@ jobs:
     name: 'Yamllint'
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@master
+      - name: 'checkout git repo'
+        uses: actions/checkout@v3
+
       - name: 'Yamllint'
-        uses: karancode/yamllint-github-action@master
+        uses: karancode/yamllint-github-action@v2.0.0
         with:
           yamllint_file_or_dir: '.'
           yamllint_config_filepath: './.yamllint'
