@@ -27,6 +27,17 @@
         cmd: "sudo -u {{ gitea_user }} /usr/local/bin/gitea dump -c /etc/gitea/gitea.ini"
         chdir: "{{ gitea_backup_location }}"
       changed_when: true
+  rescue:
+    - name: Starting gitea because backup failed
+      become: true
+      ansible.builtin.systemd:
+        name: gitea
+        state: stopped
+      when: ansible_service_mgr == "systemd"
+
+    - name: print updateing error
+      ansible.builtin.debug:
+        msg: "failed to backup gitea"
   when:
     - ansible_facts.services["gitea.service"] is defined
     - ansible_facts.services["gitea.service"].state == "running"
