@@ -11,6 +11,7 @@ submodules_versioncheck: false
 
 # gitea in the linux world
 gitea_group: 'gitea'
+# gitea_groups: []  # Optional a list of groups user gitea will be added to
 gitea_home: '/var/lib/gitea'
 gitea_shell: '/bin/false'
 gitea_systemd_cap_net_bind_service: false
