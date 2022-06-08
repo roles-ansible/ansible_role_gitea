@@ -2,7 +2,8 @@
 - name: Get service facts
   ansible.builtin.service_facts:
 
-- block:
+- name: Backup block
+  block:
     - name: Stopping gitea before upgrade
       become: true
       ansible.builtin.systemd:
