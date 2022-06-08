@@ -1,5 +1,6 @@
 ---
-- block:
+- name: Dependency block
+  block:
     - name: Update apt cache
       become: true
       ansible.builtin.apt:
@@ -20,7 +21,8 @@
       retries: 5
       delay: 2
 
-- block:
+- name: Install block
+  block:
     - name: Download gitea archive
       ansible.builtin.get_url:
         url: "{{ gitea_dl_url }}.xz"
