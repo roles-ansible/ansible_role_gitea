@@ -17,8 +17,10 @@
       when: not ansible_check_mode
 
     - name: "Fail if running in check mode without versions set."
-      fail:
-        msg: "You are running this playbook in check mode : please set the gitea version with gitea_version, the URI module cannot load the latest version while in this mode."
+      ansible.builtin.fail:
+        msg: |
+          "You are running this playbook in check mode:
+          Please set the Gitea version with the variable 'gitea_version', because the URI module cannot detect the latest version in this mode."
       when: ansible_check_mode and  ( gitea_version not defined )
 
     - name: "Set fact latest gitea release"
@@ -29,8 +31,8 @@
     - name: "Set gitea version target (latest)"
       ansible.builtin.set_fact:
         gitea_version_target: "{{ gitea_remote_version }}"
-      when: not ansible_check_mode      
-  when: gitea_version == "latest" 
+      when: not ansible_check_mode
+  when: gitea_version == "latest"
 
 - name: "Set gitea version target ({{ gitea_version }})"
   ansible.builtin.set_fact:
