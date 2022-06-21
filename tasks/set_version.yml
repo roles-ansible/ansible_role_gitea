@@ -21,7 +21,7 @@
         msg: |
           "You are running this playbook in check mode:
           Please set the Gitea version with the variable 'gitea_version', because the URI module cannot detect the latest version in this mode."
-      when: ansible_check_mode and  ( gitea_version not defined )
+      when: ansible_check_mode and ( gitea_version == 'latest' or gitea_version == 'present' )
 
     - name: "Set fact latest gitea release"
       ansible.builtin.set_fact:
