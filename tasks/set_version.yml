@@ -14,15 +14,23 @@
         url: https://api.github.com/repos/go-gitea/gitea/releases/latest
         return_content: true
       register: gitea_remote_metadata
+      when: not ansible_check_mode
+
+    - name: "Fail if running in check mode without versions set."
+      fail:
+        msg: "You are running this playbook in check mode : please set the gitea version with gitea_version, the URI module cannot load the latest version while in this mode."
+      when: ansible_check_mode and  ( gitea_version not defined )
 
     - name: "Set fact latest gitea release"
       ansible.builtin.set_fact:
         gitea_remote_version: "{{ gitea_remote_metadata.json.tag_name[1:] }}"
+      when: not ansible_check_mode
 
     - name: "Set gitea version target (latest)"
       ansible.builtin.set_fact:
         gitea_version_target: "{{ gitea_remote_version }}"
-  when: gitea_version == "latest"
+      when: not ansible_check_mode      
+  when: gitea_version == "latest" 
 
 - name: "Set gitea version target ({{ gitea_version }})"
   ansible.builtin.set_fact:
