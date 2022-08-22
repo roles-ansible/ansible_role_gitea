@@ -8,7 +8,8 @@
     group: "{{ gitea_group }}"
     mode: 'u=rwX,g=rX,o='
   with_items:
-    - "/etc/gitea"
+    - "{{ gitea_configuraion_path }}"
+    - "{{ gitea_user_home }}"
     - "{{ gitea_home }}"
     - "{{ gitea_home }}/data"
     - "{{ gitea_custom }}"

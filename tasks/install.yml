@@ -70,7 +70,7 @@
       ansible.builtin.copy:
         src: "/tmp/{{ gitea_filename }}"
         remote_src: true
-        dest: "/usr/local/bin/gitea"
+        dest: "{{ gitea_executable_path }}"
         mode: 0755
         owner: root
         group: root
