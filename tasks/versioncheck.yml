@@ -26,7 +26,7 @@
 
 - name: Print locale role version
   ansible.builtin.debug:
-    msg: "Local role version: '{{ playbook_version_number|string }}'."
+    msg: "Local role version: '{{ playbook_version_number | string }}'."
   when: submodules_versioncheck|bool
 
 - name: Check if your version is outdated
