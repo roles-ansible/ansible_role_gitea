@@ -52,6 +52,9 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_group` | `gitea` | Primary UNIX group used by Gitea |
 | `gitea_groups` | null | Optionally a list of secondary UNIX groups used by Gitea |
 | `gitea_home` | `/var/lib/gitea` | Base directory to work |
+| `gitea_user_home` | `{{ gitea_home }}` | home of gitea user |
+| `gitea_executable_path` | `/usr/local/bin/gitea` | Path for gitea executable |
+| `gitea_configuraion_path` | `/etc/gitea` | Where to put the gitea.ini config |
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
 
