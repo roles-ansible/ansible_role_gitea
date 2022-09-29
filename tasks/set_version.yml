@@ -8,6 +8,7 @@
   failed_when: false
 
 - name: "Determine 'latest' version release"
+  when: gitea_version == "latest"
   block:
     - name: "Get latest gitea release metadata"
       ansible.builtin.uri:
@@ -21,7 +22,7 @@
         msg: |
           "You are running this playbook in check mode:
           Please set the Gitea version with the variable 'gitea_version', because the URI module cannot detect the latest version in this mode."
-      when: ansible_check_mode and ( gitea_version == 'latest' or gitea_version == 'present' )
+      when: ansible_check_mode and (gitea_version == 'latest' or gitea_version == 'present')
 
     - name: "Set fact latest gitea release"
       ansible.builtin.set_fact:
@@ -32,9 +33,8 @@
       ansible.builtin.set_fact:
         gitea_version_target: "{{ gitea_remote_version }}"
       when: not ansible_check_mode
-  when: gitea_version == "latest"
 
-- name: "Set gitea version target ({{ gitea_version }})"
+- name: "Set gitea version target {{ gitea_version }}"
   ansible.builtin.set_fact:
     gitea_version_target: "{{ gitea_version }}"
   when: gitea_version != "latest"

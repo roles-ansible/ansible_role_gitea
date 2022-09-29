@@ -1,5 +1,5 @@
 ---
-- name: create public directory for custom public web files
+- name: Create public directory for custom public web files
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -10,7 +10,7 @@
   with_items:
     - "{{ gitea_custom }}/public"
 
-- name: transfer custom public web data
+- name: Transfer custom public web data
   become: true
   ansible.builtin.copy:
     src: "{{ gitea_customize_files_path }}"

@@ -1,5 +1,5 @@
 ---
-- name: create directory for custom logos
+- name: Create directory for custom logos
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -11,7 +11,7 @@
     - "{{ gitea_custom }}/public"
     - "{{ gitea_custom }}/public/img"
 
-- name: transfer custom logo.svg
+- name: Transfer custom logo.svg
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_logosvg) }}"
@@ -22,7 +22,7 @@
   tags: skip_ansible_lint
   ignore_errors: true
 
-- name: transfer custom logo.png
+- name: Transfer custom logo.png
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_logopng) }}"
@@ -33,7 +33,7 @@
   tags: skip_ansible_lint
   ignore_errors: true
 
-- name: transfer custom favicon.png
+- name: Transfer custom favicon.png
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_faviconpng) }}"
@@ -44,7 +44,7 @@
   tags: skip_ansible_lint
   ignore_errors: true
 
-- name: transfer custom apple-touch-icon.png
+- name: Transfer custom apple-touch-icon.png
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_appletouchiconpng) }}"

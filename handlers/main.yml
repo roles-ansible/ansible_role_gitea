@@ -12,7 +12,7 @@
     daemon_reload: true
   when: ansible_service_mgr == "systemd"
 
-- name: "systemctl restart fail2ban"
+- name: "Systemctl restart fail2ban"
   become: true
   ansible.builtin.systemd:
     name: fail2ban
