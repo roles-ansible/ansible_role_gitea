@@ -22,6 +22,7 @@
       delay: 2
 
 - name: Install block
+  when: (not gitea_version_check | bool) or (not ansible_check_mode and (gitea_active_version.stdout != gitea_version_target))
   block:
     - name: Download gitea archive
       ansible.builtin.get_url:
@@ -75,4 +76,3 @@
         owner: root
         group: root
       notify: "Restart gitea"
-  when: (not gitea_version_check|bool) or (not ansible_check_mode and (gitea_active_version.stdout != gitea_version_target))
