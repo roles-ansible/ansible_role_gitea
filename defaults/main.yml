@@ -28,14 +28,32 @@ gitea_fqdn: 'localhost'
 
 # Repository (repository)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
-gitea_repository_root: "{{ gitea_home }}/repos"
-gitea_force_private: false
-gitea_user_repo_limit: '-1'
-gitea_disable_http_git: false
 gitea_default_branch: 'main'
 gitea_default_private: 'last'
+gitea_default_repo_units: 'repo.code,repo.releases,repo.issues,repo.pulls,repo.wiki,repo.projects'
+gitea_disabled_repo_units: ''
+gitea_disable_http_git: false
+gitea_disable_stars: false
+gitea_enable_push_create_org: false
+gitea_enable_push_create_user: false
+gitea_force_private: false
+gitea_user_repo_limit: '-1'
+gitea_repository_root: "{{ gitea_home }}/repos"
 gitea_repository_extra_config: ''
 gitea_repository_upload_extra_config: ''
+
+# Repository - Signing (repository.signing)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning
+gitea_enable_repo_signing_options: false
+gitea_repo_signing_key: 'default'
+gitea_repo_signing_name: ''
+gitea_repo_signing_email: ''
+gitea_repo_initial_commit: 'always'
+gitea_repo_default_trust_model: 'collaborator'
+gitea_repo_wiki: 'never'
+gitea_repo_crud_actions: 'pubkey, twofa, parentsigned'
+gitea_repo_merges: ' pubkey, twofa, basesigned, commitssigned'
+gitea_enable_repo_signing_extra: ''
 
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui

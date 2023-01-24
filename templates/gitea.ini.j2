@@ -13,17 +13,36 @@ RUN_MODE = {{ gitea_run_mode }}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
 [repository]
-ROOT                = {{ gitea_repository_root }}
-FORCE_PRIVATE       = {{ gitea_force_private | ternary('true', 'false') }}
-MAX_CREATION_LIMIT  = {{ gitea_user_repo_limit }}
-DISABLE_HTTP_GIT    = {{ gitea_disable_http_git | ternary('true', 'false') }}
-DEFAULT_BRANCH      = {{ gitea_default_branch }}
-DEFAULT_PRIVATE     = {{ gitea_default_private }}
-{{ gitea_repository_extra_config }}
+DEFAULT_BRANCH          = {{ gitea_default_branch }}
+DEFAULT_PRIVATE         = {{ gitea_default_private }}
+DEFAULT_REPO_UNITS      = {{ gitea_default_repo_units }}
+DISABLED_REPO_UNITS     = {{ gitea_disabled_repo_units }}
+DISABLE_HTTP_GIT        = {{ gitea_disable_http_git | ternary('true', 'false') }}
+DISABLE_STARS           = {{ gitea_disable_stars | ternary('true', 'false') }}
+ENABLE_PUSH_CREATE_ORG  = {{ gitea_enable_push_create_org | ternary('true', 'false') }}
+ENABLE_PUSH_CREATE_USER = {{ gitea_enable_push_create_user | ternary('true', 'false') }}
+FORCE_PRIVATE           = {{ gitea_force_private | ternary('true', 'false') }}
+MAX_CREATION_LIMIT      = {{ gitea_user_repo_limit }}
+ROOT                    = {{ gitea_repository_root }}
+{% if gitea_repository_extra_config != '' %}{{ gitea_repository_extra_config }}{% else %};{% endif %}
 ;
 [repository.upload]
 TEMP_PATH           = {{ gitea_home }}/data/tmp/uploads
-{{ gitea_repository_upload_extra_config }}
+{% if gitea_repository_upload_extra_config != '' %}{{ gitea_repository_upload_extra_config }}{% else %};{% endif %}
+;
+;{% if gitea_enable_repo_signing_options | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning
+[repository.signing]
+SIGNING_KEY = {{ gitea_repo_signing_key }}
+SIGNING_NAME = {{ gitea_repo_signing_name }}
+SIGNING_EMAIL = {{ gitea_repo_signing_email }}
+INITIAL_COMMIT = {{ gitea_repo_initial_commit }}
+DEFAULT_TRUST_MODEL = {{ gitea_repo_default_trust_model }}
+WIKI = {{ gitea_repo_wiki }}
+CRUD_ACTIONS = {{ gitea_repo_crud_actions }}
+MERGES = {{ gitea_repo_merges }}
+{% if gitea_enable_repo_signing_extra != '' %}{{ gitea_enable_repo_signing_extra }}{% else %};{% endif %}
+;{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
