@@ -33,24 +33,45 @@ TEMP_PATH           = {{ gitea_home }}/data/tmp/uploads
 ;{% if gitea_enable_repo_signing_options | bool %}
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning
 [repository.signing]
-SIGNING_KEY = {{ gitea_repo_signing_key }}
-SIGNING_NAME = {{ gitea_repo_signing_name }}
-SIGNING_EMAIL = {{ gitea_repo_signing_email }}
-INITIAL_COMMIT = {{ gitea_repo_initial_commit }}
+SIGNING_KEY         = {{ gitea_repo_signing_key }}
+SIGNING_NAME        = {{ gitea_repo_signing_name }}
+SIGNING_EMAIL       = {{ gitea_repo_signing_email }}
+INITIAL_COMMIT      = {{ gitea_repo_initial_commit }}
 DEFAULT_TRUST_MODEL = {{ gitea_repo_default_trust_model }}
-WIKI = {{ gitea_repo_wiki }}
-CRUD_ACTIONS = {{ gitea_repo_crud_actions }}
-MERGES = {{ gitea_repo_merges }}
+WIKI                = {{ gitea_repo_wiki }}
+CRUD_ACTIONS        = {{ gitea_repo_crud_actions }}
+MERGES              = {{ gitea_repo_merges }}
 {% if gitea_enable_repo_signing_extra != '' %}{{ gitea_enable_repo_signing_extra }}{% else %};{% endif %}
 ;{% endif %}
 ;
+;{% if gitea_enable_cors | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors
+[cors]
+ENABLED = {{ gitea_enable_cors | ternary('true', 'false') }}
+SCHEME  = {{ gitea_cors_scheme }}
+ALLOW_DOMAIN = {{ gitea_cors_allow_domain }}
+ALLOW_SUBDOMAIN   = {{ gitea_cors_allow_subdomain | ternary('true', 'false') }}
+METHODS           = {{ gitea_cors_methods }}
+MAX_AGE           = {{ gitea_cors_max_age }}
+ALLOW_CREDENTIALS = {{ gitea_cors_allow_credentials | ternary('true', 'false') }}
+HEADERS           = {{ gitea_cors_headers }}
+X_FRAME_OPTIONS   = {{ gitea_cors_x_frame_options }}
+{% if gitea_cors_extra != '' %}{{ gitea_cors_extra }}{% else %};{% endif %}
+;{% endif %}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 [ui]
 SHOW_USER_EMAIL = {{ gitea_show_user_email | ternary('true', 'false') }}
 DEFAULT_THEME   = {{ gitea_theme_default }}
 THEMES          = {{ gitea_themes }}
-{{ gitea_ui_extra_config }}
+{% if gitea_ui_extra_config != '' %}{{ gitea_ui_extra_config }}{% else %};{% endif %}
+;
+;
+[ui.meta]
+AUTHOR      = {{ gitea_ui_author }}
+DESCRIPTION = {{ gitea_ui_description }}
+KEYWORDS    = {{ gitea_ui_keywords }}
+{% if gitea_ui_meta_extra_config != '' %}{{ gitea_ui_meta_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server

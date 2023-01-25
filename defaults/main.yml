@@ -55,12 +55,32 @@ gitea_repo_crud_actions: 'pubkey, twofa, parentsigned'
 gitea_repo_merges: ' pubkey, twofa, basesigned, commitssigned'
 gitea_enable_repo_signing_extra: ''
 
+# CORS (cors)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors
+gitea_enable_cors: false
+gitea_cors_scheme: 'http'
+gitea_cors_allow_domain: '*'
+gitea_cors_allow_subdomain: false
+gitea_cors_methods: 'GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS'
+gitea_cors_max_age: '10m'
+gitea_cors_allow_credentials: false
+gitea_cors_headers: 'Content-Type,User-Agent'
+gitea_cors_x_frame_options: 'SAMEORIGIN'
+gitea_cors_extra: ''
+
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 gitea_show_user_email: false
-gitea_theme_default: 'gitea'
-gitea_themes: 'gitea,arc-green'
+gitea_theme_default: 'auto'
+gitea_themes: 'auto,gitea,arc-green'
 gitea_ui_extra_config: ''
+
+# UI - Metadata (ui.meta)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta
+gitea_ui_author: 'Gitea - Git with a cup of tea'
+gitea_ui_description: 'Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go:'
+gitea_ui_keywords: 'go,git,self-hosted,gitea,forgejo'
+gitea_ui_meta_extra_config: ''
 
 # Server (server)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server

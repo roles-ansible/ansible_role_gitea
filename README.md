@@ -96,13 +96,34 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_repo_merges` | *(see defaults)* | Sign merges. |
 | `gitea_enable_repo_signing_extra` | | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
 
+### CORS ([cors](https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors))
+| ------------- | ------------- | ----------- |
+| `gitea_enable_cors` | `false` | enable cors headers (disabled by default) |
+| `gitea_cors_scheme` | `http` | scheme of allowed requests |
+| `gitea_cors_allow_domain` | `*` | list of requesting domains that are allowed |
+| `gitea_cors_allow_subdomain` | `false` |allow subdomains of headers listed above to request |
+| `gitea_cors_methods` | *(see defaults)* | list of methods allowed to request |
+| `gitea_cors_max_age` | `10m` | max time to cache response |
+| `gitea_cors_allow_credentials` | `false` | allow request with credentials |
+| `gitea_cors_headers` | `Content-Type,User-Agent` | additional headers that are permitted in requests |
+| `gitea_cors_x_frame_options` | `SAMEORIGIN` |  Set the `X-Frame-Options` header value. |
+| `gitea_cors_extra` | | you can use this variable to pass additional config parameters in the `[cors]` section of the config. |
+
 ### UI ([ui](https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
-| `gitea_theme_default` | `gitea` | Default theme |
-| `gitea_themes` | `gitea,arc-green` | List of enabled themes |
+| `gitea_theme_default` | `auto` | Default theme |
+| `gitea_themes` | `auto,gitea,arc-green` | List of enabled themes |
 | `gitea_ui_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
+
+### UI - Meta ([ui.meta](https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_ui_author` | *(see defaults)* | Author meta tag of the homepage. |
+| `gitea_ui_description` | *(see defaults)* | Description meta tag of the homepage. |
+| `gitea_ui_keywords` | *(see defaults)* | Keywords meta tag of the homepage |
+| `gitea_ui_meta_extra_config` | | you can use this variable to pass additional config parameters in the `[ui.meta]` section of the config. |
 
 ### Server ([server](https://docs.gitea.io/en-us/config-cheat-sheet/#server-server))
 | variable name | default value | description |
