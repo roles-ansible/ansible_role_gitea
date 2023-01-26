@@ -20,10 +20,10 @@ The following code has been tested with the latest Debian Stable, it should work
   vars:
     # Here we assume we are behind a reverse proxy that will
     # handle https for us, so we bind on localhost:3000 using HTTP
+    # see https://docs.gitea.io/en-us/reverse-proxies/#nginx
     gitea_fqdn: 'git.example.com'
     gitea_root_url: 'https://git.example.com'
     gitea_protocol: http
-
     gitea_start_ssh: true
 ```
 
