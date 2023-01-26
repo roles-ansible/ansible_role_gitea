@@ -28,21 +28,59 @@ gitea_fqdn: 'localhost'
 
 # Repository (repository)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
-gitea_repository_root: "{{ gitea_home }}/repos"
-gitea_force_private: false
-gitea_user_repo_limit: '-1'
-gitea_disable_http_git: false
 gitea_default_branch: 'main'
 gitea_default_private: 'last'
+gitea_default_repo_units: 'repo.code,repo.releases,repo.issues,repo.pulls,repo.wiki,repo.projects'
+gitea_disabled_repo_units: ''
+gitea_disable_http_git: false
+gitea_disable_stars: false
+gitea_enable_push_create_org: false
+gitea_enable_push_create_user: false
+gitea_force_private: false
+gitea_user_repo_limit: '-1'
+gitea_repository_root: "{{ gitea_home }}/repos"
 gitea_repository_extra_config: ''
 gitea_repository_upload_extra_config: ''
+
+# Repository - Signing (repository.signing)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning
+gitea_enable_repo_signing_options: false
+gitea_repo_signing_key: 'default'
+gitea_repo_signing_name: ''
+gitea_repo_signing_email: ''
+gitea_repo_initial_commit: 'always'
+gitea_repo_default_trust_model: 'collaborator'
+gitea_repo_wiki: 'never'
+gitea_repo_crud_actions: 'pubkey, twofa, parentsigned'
+gitea_repo_merges: ' pubkey, twofa, basesigned, commitssigned'
+gitea_enable_repo_signing_extra: ''
+
+# CORS (cors)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors
+gitea_enable_cors: false
+gitea_cors_scheme: 'http'
+gitea_cors_allow_domain: '*'
+gitea_cors_allow_subdomain: false
+gitea_cors_methods: 'GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS'
+gitea_cors_max_age: '10m'
+gitea_cors_allow_credentials: false
+gitea_cors_headers: 'Content-Type,User-Agent'
+gitea_cors_x_frame_options: 'SAMEORIGIN'
+gitea_cors_extra: ''
 
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 gitea_show_user_email: false
-gitea_theme_default: 'gitea'
-gitea_themes: 'gitea,arc-green'
+gitea_theme_default: 'auto'
+gitea_themes: 'auto,gitea,arc-green'
 gitea_ui_extra_config: ''
+
+# UI - Metadata (ui.meta)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta
+gitea_ui_author: 'Gitea - Git with a cup of tea'
+gitea_ui_description: 'Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go:'
+gitea_ui_keywords: 'go,git,self-hosted,gitea,forgejo'
+gitea_ui_meta_extra_config: ''
 
 # Server (server)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
@@ -51,15 +89,25 @@ gitea_http_domain: "{{ gitea_fqdn }}"
 gitea_root_url: "http://{{ gitea_fqdn }}:3000"
 gitea_http_listen: '127.0.0.1'
 gitea_http_port: '3000'
-# gitea_http_letsencrypt_mail: 'mail@example.com'
 gitea_start_ssh: true
 gitea_ssh_domain: "{{ gitea_fqdn }}"
 gitea_ssh_port: '2222'
 gitea_ssh_listen: '0.0.0.0'
 gitea_offline_mode: true
+gitea_landing_page: 'home'
 gitea_lfs_server_enabled: false
-gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
 gitea_lfs_jwt_secret: ''
+gitea_redirect_other_port: false
+gitea_port_to_redirect: '80'
+gitea_enable_tls_certs: false
+gitea_tls_cert_file: 'https/cert.pem'
+gitea_tls_key_file: 'https/key.pem'
+gitea_enable_acme: false
+gitea_acme_url: ''
+gitea_acme_accepttos: false
+gitea_acme_directory: 'https'
+gitea_acme_email: ''
+gitea_acme_ca_root: ''
 gitea_server_extra_config: ''
 
 # Database (database)
@@ -82,12 +130,14 @@ gitea_repo_indexer_exclude: ''
 gitea_repo_exclude_vendored: true
 gitea_repo_indexer_max_file_size: '1048576'
 gitea_indexer_extra_config: ''
+gitea_queue_issue_indexer_extra_config: ''
 
 # Security (security)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
 gitea_secret_key: ''
-gitea_internal_token: ''
 gitea_disable_git_hooks: true
+gitea_disable_webhooks: false
+gitea_internal_token: ''
 gitea_password_check_pwn: false
 gitea_security_extra_config: ''
 
@@ -107,14 +157,19 @@ gitea_service_extra_config: ''
 # Mailer [mailer]
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
 gitea_mailer_enabled: false
-gitea_mailer_host: 'localhost:25'
-gitea_mailer_skip_verify: false
-gitea_mailer_tls_enabled: true
-gitea_mailer_from: "noreply@{{ gitea_http_domain }}"
+gitea_mailer_protocol: 'dummy'
+gitea_mailer_smtp_addr: ''
+gitea_mailer_smtp_port: ''
+gitea_mailer_use_client_cert: false
+gitea_mailer_client_cert_file: ''
+gitea_mailer_client_key_file: ''
+gitea_mailer_force_trust_server_cert: false
 gitea_mailer_user: ''
 gitea_mailer_password: ''
+gitea_mailer_enable_helo: true
+gitea_mailer_from: "noreply@{{ gitea_http_domain }}"
 gitea_subject_prefix: ''
-gitea_mailer_type: smtp
+gitea_mailer_send_as_plaintext: false
 gitea_mailer_extra_config: ''
 
 # Session (session)
@@ -123,26 +178,57 @@ gitea_session_provider: 'file'
 gitea_session_extra_config: ''
 
 # Picture (picture)
-gitea_disable_gravatar: true
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture
 gitea_picture_extra_config: ''
 
 # Issue and pull request attachments (attachment)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 gitea_attachment_enabled: true
 gitea_attachment_extra_config: ''
 
 # Log (log)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#log-log
 gitea_log_systemd: false
 gitea_log_level: 'Warn'
 gitea_log_extra_config: ''
 
 # Metrics (metrics)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 gitea_metrics_enabled: false
 gitea_metrics_token: ''
+gitea_metrics_extra: ''
 
 # OAuth2 (oauth2)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 gitea_oauth2_enabled: true
 gitea_oauth2_jwt_secret: ''
 gitea_oauth2_extra_config: ''
+
+# Federation (federation)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation
+gitea_federation_enabled: false
+gitea_federation_share_user_stats: false
+gitea_federation_extra: ''
+
+# Packages (packages)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages
+gitea_packages_enabled: true
+gitea_packages_extra: ''
+
+# LFS (lfs)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs
+gitea_lfs_storage_type: 'local'
+gitea_lfs_serve_direct: false
+gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
+gitea_lfs_extra: ''
+
+# Other (other)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
+gitea_other_show_footer_branding: false
+gitea_other_show_footer_version: true
+gitea_other_show_footer_template_load_time: true
+gitea_other_enable_sitemap: true
+gitea_other_enable_feed: true
 
 # additional gitea config
 gitea_extra_config: ""

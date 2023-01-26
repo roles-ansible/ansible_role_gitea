@@ -13,18 +13,56 @@ RUN_MODE = {{ gitea_run_mode }}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository
 [repository]
-ROOT                = {{ gitea_repository_root }}
-FORCE_PRIVATE       = {{ gitea_force_private | ternary('true', 'false') }}
-MAX_CREATION_LIMIT  = {{ gitea_user_repo_limit }}
-DISABLE_HTTP_GIT    = {{ gitea_disable_http_git | ternary('true', 'false') }}
-DEFAULT_BRANCH      = {{ gitea_default_branch }}
-DEFAULT_PRIVATE     = {{ gitea_default_private }}
+DEFAULT_BRANCH          = {{ gitea_default_branch }}
+DEFAULT_PRIVATE         = {{ gitea_default_private }}
+DEFAULT_REPO_UNITS      = {{ gitea_default_repo_units }}
+DISABLED_REPO_UNITS     = {{ gitea_disabled_repo_units }}
+DISABLE_HTTP_GIT        = {{ gitea_disable_http_git | ternary('true', 'false') }}
+DISABLE_STARS           = {{ gitea_disable_stars | ternary('true', 'false') }}
+ENABLE_PUSH_CREATE_ORG  = {{ gitea_enable_push_create_org | ternary('true', 'false') }}
+ENABLE_PUSH_CREATE_USER = {{ gitea_enable_push_create_user | ternary('true', 'false') }}
+FORCE_PRIVATE           = {{ gitea_force_private | ternary('true', 'false') }}
+MAX_CREATION_LIMIT      = {{ gitea_user_repo_limit }}
+ROOT                    = {{ gitea_repository_root }}
 {{ gitea_repository_extra_config }}
+;
 ;
 [repository.upload]
 TEMP_PATH           = {{ gitea_home }}/data/tmp/uploads
 {{ gitea_repository_upload_extra_config }}
 ;
+;
+{% if gitea_enable_repo_signing_options | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning
+[repository.signing]
+SIGNING_KEY         = {{ gitea_repo_signing_key }}
+SIGNING_NAME        = {{ gitea_repo_signing_name }}
+SIGNING_EMAIL       = {{ gitea_repo_signing_email }}
+INITIAL_COMMIT      = {{ gitea_repo_initial_commit }}
+DEFAULT_TRUST_MODEL = {{ gitea_repo_default_trust_model }}
+WIKI                = {{ gitea_repo_wiki }}
+CRUD_ACTIONS        = {{ gitea_repo_crud_actions }}
+MERGES              = {{ gitea_repo_merges }}
+{{ gitea_enable_repo_signing_extra }}
+;
+{% endif %}
+;
+{% if gitea_enable_cors | bool %}
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors
+[cors]
+ENABLED = {{ gitea_enable_cors | ternary('true', 'false') }}
+SCHEME  = {{ gitea_cors_scheme }}
+ALLOW_DOMAIN = {{ gitea_cors_allow_domain }}
+ALLOW_SUBDOMAIN   = {{ gitea_cors_allow_subdomain | ternary('true', 'false') }}
+METHODS           = {{ gitea_cors_methods }}
+MAX_AGE           = {{ gitea_cors_max_age }}
+ALLOW_CREDENTIALS = {{ gitea_cors_allow_credentials | ternary('true', 'false') }}
+HEADERS           = {{ gitea_cors_headers }}
+X_FRAME_OPTIONS   = {{ gitea_cors_x_frame_options }}
+{{ gitea_cors_extra }}
+;
+{% endif %}
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 [ui]
@@ -34,6 +72,14 @@ THEMES          = {{ gitea_themes }}
 {{ gitea_ui_extra_config }}
 ;
 ;
+;
+[ui.meta]
+AUTHOR      = {{ gitea_ui_author }}
+DESCRIPTION = {{ gitea_ui_description }}
+KEYWORDS    = {{ gitea_ui_keywords }}
+{{ gitea_ui_meta_extra_config }}
+;
+;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#server-server
 [server]
 PROTOCOL              = {{ gitea_protocol }}
@@ -41,24 +87,32 @@ DOMAIN                = {{ gitea_http_domain }}
 ROOT_URL              = {{ gitea_root_url }}
 HTTP_ADDR             = {{ gitea_http_listen }}
 HTTP_PORT             = {{ gitea_http_port }}
-{% if gitea_http_port == 443 %}
-PORT_TO_REDIRECT      = 80
-{% endif %}
-{% if gitea_http_letsencrypt_mail is defined %}
-ENABLE_LETSENCRYPT    = true
-LETSENCRYPT_ACCEPTTOS = true
-LETSENCRYPT_EMAIL     = {{ gitea_http_letsencrypt_mail }}
-{% endif %}
 START_SSH_SERVER      = {{ gitea_start_ssh | ternary('true', 'false') }}
 SSH_DOMAIN            = {{ gitea_ssh_domain }}
 SSH_PORT              = {{ gitea_ssh_port }}
 SSH_LISTEN_HOST       = {{ gitea_ssh_listen }}
 OFFLINE_MODE          = {{ gitea_offline_mode | ternary('true', 'false') }}
 APP_DATA_PATH         = {{ gitea_home }}/data
+LANDING_PAGE          = {{ gitea_landing_page }}
 {% if gitea_lfs_server_enabled | bool -%}
 LFS_START_SERVER      = true
-LFS_CONTENT_PATH      = {{ gitea_lfs_content_path }}
 LFS_JWT_SECRET        = {{ gitea_lfs_jwt_secret }}
+{% endif %}
+REDIRECT_OTHER_PORT   = {{ gitea_redirect_other_port | ternary('true', 'false') }}
+PORT_TO_REDIRECT      = {{ gitea_port_to_redirect }}
+{% if gitea_enable_tls_certs | bool %}
+CERT_FILE             = {{ gitea_tls_cert_file }}
+KEY_FILE              = {{ gitea_tls_key_file }}
+{% endif %}
+ENABLE_ACME           = {{ gitea_enable_acme | ternary('true', 'false') }}
+{% if gitea_enable_acme | bool %}
+{% if gitea_acme_url != '' %}
+ACME_URL              = {{ gitea_acme_url }}
+{% endif %}
+ACME_ACCEPTTOS        = {{ gitea_acme_accepttos | ternary('true', 'false') }}
+ACME_DIRECTORY        = {{ gitea_acme_directory }}
+ACME_EMAIL            = {{ gitea_acme_email }}
+ACME_CA_ROOT          = {{ gitea_acme_ca_root }}
 {% endif %}
 {{ gitea_server_extra_config }}
 ;
@@ -79,7 +133,6 @@ LOG_SQL  = {{ gitea_db_log_sql | ternary('true', 'false') }}
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer
 [indexer]
 ISSUE_INDEXER_PATH            = {{ gitea_home }}/indexers/issues.bleve
-ISSUE_INDEXER_QUEUE_DIR       = {{ gitea_home }}/indexers/issues.queue
 REPO_INDEXER_ENABLED          = {{ gitea_repo_indexer_enabled | ternary('true', 'false') }}
 REPO_INDEXER_PATH             = {{ gitea_home }}/indexers/repos.bleve
 REPO_INDEXER_INCLUDE          = {{ gitea_repo_indexer_include }}
@@ -89,12 +142,20 @@ MAX_FILE_SIZE                 = {{ gitea_repo_indexer_max_file_size }}
 {{ gitea_indexer_extra_config }}
 ;
 ;
+; Queue (queue and queue.*)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#queue-queue-and-queue
+[queue.issue_indexer]
+DATADIR = {{ gitea_home }}/indexers/issues.queue
+{{ gitea_queue_issue_indexer_extra_config }}
+;
+;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
 [security]
 INSTALL_LOCK        = true
 SECRET_KEY          = {{ gitea_secret_key }}
-INTERNAL_TOKEN      = {{ gitea_internal_token }}
 DISABLE_GIT_HOOKS   = {{ gitea_disable_git_hooks | ternary('true', 'false') }}
+DISABLE_WEBHOOKS    = { gitea_disable_webhooks | ternary('true', 'false') }
+INTERNAL_TOKEN      = {{ gitea_internal_token }}
 PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
 {{ gitea_security_extra_config }}
 ;
@@ -115,16 +176,26 @@ AUTO_WATCH_NEW_REPOS              = {{ gitea_auto_watch_new_repos | ternary('tru
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
 [mailer]
-ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
-HOST               = {{ gitea_mailer_host }}
-SKIP_VERIFY        = {{ gitea_mailer_skip_verify | ternary('true', 'false') }}
-IS_TLS_ENABLED     = {{ gitea_mailer_tls_enabled | ternary('true', 'false') }}
-FROM               = {{ gitea_mailer_from }}
-USER               = {{ gitea_mailer_user }}
-PASSWD             = `{{ gitea_mailer_password }}`
-SUBJECT_PREFIX     = {{ gitea_subject_prefix }}
-MAILER_TYPE        = {{ gitea_mailer_type }}
+ENABLED                 = {{ gitea_mailer_enabled | ternary('true', 'false') }}
+{% if gitea_mailer_enabled | bool %}
+PROTOCOL                = {{ gitea_mailer_protocol }}
+SMTP_ADDR               = {{ gitea_mailer_smtp_addr }}
+SMTP_PORT               = {{ gitea_mailer_smtp_port }}
+USE_CLIENT_CERT         = {{ gitea_mailer_use_client_cert | ternary('true', 'false') }}
+{% if gitea_mailer_use_client_cert | bool %}
+CLIENT_CERT_FILE        = {{ gitea_mailer_client_cert_file }}
+CLIENT_KEY_FILE         = {{ gitea_mailer_client_key_file }}
+{% endif %}
+FORCE_TRUST_SERVER_CERT = {{ gitea_mailer_force_trust_server_cert | ternary('true', 'false') }}
+USER                    = {{ gitea_mailer_user }}
+PASSWD                  = `{{ gitea_mailer_password }}`
+ENABLE_HELO             = {{ gitea_mailer_enable_helo | ternary('true', 'false') }}
+FROM                    = {{ gitea_mailer_from }}
+SUBJECT_PREFIX          = {{ gitea_subject_prefix }}
+SEND_AS_PLAIN_TEXT      = {{ gitea_mailer_send_as_plaintext | ternary('true', 'false') }}
 {{ gitea_mailer_extra_config }}
+;
+{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#session-session
@@ -137,7 +208,6 @@ PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture
 [picture]
 AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
-DISABLE_GRAVATAR   = {{ gitea_disable_gravatar | ternary('true', 'false') }}
 {{ gitea_picture_extra_config }}
 ;
 ;
@@ -164,13 +234,52 @@ LEVEL      = {{ gitea_log_level }}
 [metrics]
 ENABLED = {{ gitea_metrics_enabled | ternary('true', 'false') }}
 TOKEN   = {{ gitea_metrics_token }}
+{{ gitea_metrics_extra }}
 ;
 ;
-; https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
 ENABLE     = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
 {{ gitea_oauth2_extra_config }}
+;
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation
+[federation]
+ENABLED               = {{ gitea_federation_enabled | ternary('true', 'false') }}
+SHARE_USER_STATISTICS = {{ gitea_federation_share_user_stats | ternary('true', 'false') }}
+{{ gitea_federation_extra }}
+;
+;
+; Packages (packages)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages
+[packages]
+ENABLED             = {{ gitea_packages_enabled | ternary('true', 'false') }}
+{% if gitea_packages_enabled | bool %}
+CHUNKED_UPLOAD_PATH = {{ gitea_home }}/data/tmp/package-upload
+{{ gitea_packages_extra }}
+{% endif %}
+;
+;
+{% if gitea_lfs_server_enabled | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs
+[lfs]
+STORAGE_TYPE  = {{ gitea_lfs_storage_type }}
+SERVE_DIRECT  = {{ gitea_lfs_serve_direct | ternary('true', 'false') }}
+PATH          = {{ gitea_lfs_content_path }}
+{{ gitea_lfs_extra }}
+{% endif %}
+;
+;
+; Other (other)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
+[other]
+SHOW_FOOTER_BRANDING           = {{ gitea_other_show_footer_branding | ternary('true', 'false') }}
+SHOW_FOOTER_VERSION            = {{ gitea_other_show_footer_version | ternary('true', 'false') }}
+SHOW_FOOTER_TEMPLATE_LOAD_TIME = {{ gitea_other_show_footer_template_load_time | ternary('true', 'false') }}
+ENABLE_SITEMAP                 = {{ gitea_other_enable_sitemap | ternary('true', 'false') }}
+ENABLE_FEED                    = {{ gitea_other_enable_feed | ternary('true', 'false') }}
+;
 ;
 ;
 ; Optional additional config

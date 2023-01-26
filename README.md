@@ -68,22 +68,62 @@ Either you define exactly which release you install. Or you use the option ``lat
 ### Repository ([repository](https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_repository_root` | `{{ gitea_home }}/repos` |  Root path for storing all repository data. It must be an absolute path. |
-| `gitea_force_private` | `false` | Force every new repository to be private. |
-| `gitea_user_repo_limit` | `-1` | Limit how many repos a user can have *(`-1` for unlimited)* |
-| `gitea_disable_http_git` | `false` | Disable the ability to interact with repositories over the HTTP protocol. (true/false) |
 | `gitea_default_branch` | `main` | Default branch name of all repositories. |
 | `gitea_default_private` | `last` | Default private when creating a new repository. [`last`, `private`, `public`] |
-| `gitea_repository_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
-| `gitea_repository_upload_extra_config` | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
+| `gitea_default_repo_units` | *(see defaults)* | Comma separated list of default repo units. See official docs for more |
+| `gitea_disabled_repo_units` | | Comma separated list of globally disabled repo units. |
+| `gitea_disable_http_git` | `false` | Disable the ability to interact with repositories over the HTTP protocol. (true/false) |
+| `gitea_disable_stars` | `false` | Disable stars feature. |
+| `gitea_enable_push_create_org` | `false` | Allow users to push local repositories to Gitea and have them automatically created for an org. |
+| `gitea_enable_push_create_user` | `false` | Allow users to push local repositories to Gitea and have them automatically created for an user. |
+| `gitea_force_private` | `false` | Force every new repository to be private. |
+| `gitea_user_repo_limit` | `-1` | Limit how many repos a user can have *(`-1` for unlimited)* |
+| `gitea_repository_root` | `{{ gitea_home }}/repos` |  Root path for storing all repository data. It must be an absolute path. |
+| `gitea_repository_extra_config` | | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
+| `gitea_repository_upload_extra_config` | | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
+
+### Repository - Signing ([repository.signing](https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_enable_repo_signing_options` | `false` | Allow to configure repo signing options |
+| `gitea_repo_signing_key` | `default` | Key to sign with. |
+| `gitea_repo_signing_name` | | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer. |
+| `gitea_repo_signing_email` | | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer. |
+| `gitea_repo_initial_commit` | `always` | Sign initial commit. |
+| `gitea_repo_default_trust_model` | `collaborator` | The default trust model used for verifying commits. |
+| `gitea_repo_wiki` | `never` |  Sign commits to wiki. |
+| `gitea_repo_crud_actions` | *(see defaults)* | Sign CRUD actions. |
+| `gitea_repo_merges` | *(see defaults)* | Sign merges. |
+| `gitea_enable_repo_signing_extra` | | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
+
+### CORS ([cors](https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors))
+| ------------- | ------------- | ----------- |
+| `gitea_enable_cors` | `false` | enable cors headers (disabled by default) |
+| `gitea_cors_scheme` | `http` | scheme of allowed requests |
+| `gitea_cors_allow_domain` | `*` | list of requesting domains that are allowed |
+| `gitea_cors_allow_subdomain` | `false` |allow subdomains of headers listed above to request |
+| `gitea_cors_methods` | *(see defaults)* | list of methods allowed to request |
+| `gitea_cors_max_age` | `10m` | max time to cache response |
+| `gitea_cors_allow_credentials` | `false` | allow request with credentials |
+| `gitea_cors_headers` | `Content-Type,User-Agent` | additional headers that are permitted in requests |
+| `gitea_cors_x_frame_options` | `SAMEORIGIN` |  Set the `X-Frame-Options` header value. |
+| `gitea_cors_extra` | | you can use this variable to pass additional config parameters in the `[cors]` section of the config. |
 
 ### UI ([ui](https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
-| `gitea_theme_default` | `gitea` | Default theme |
-| `gitea_themes` | `gitea,arc-green` | List of enabled themes |
+| `gitea_theme_default` | `auto` | Default theme |
+| `gitea_themes` | `auto,gitea,arc-green` | List of enabled themes |
 | `gitea_ui_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
+
+### UI - Meta ([ui.meta](https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_ui_author` | *(see defaults)* | Author meta tag of the homepage. |
+| `gitea_ui_description` | *(see defaults)* | Description meta tag of the homepage. |
+| `gitea_ui_keywords` | *(see defaults)* | Keywords meta tag of the homepage |
+| `gitea_ui_meta_extra_config` | | you can use this variable to pass additional config parameters in the `[ui.meta]` section of the config. |
 
 ### Server ([server](https://docs.gitea.io/en-us/config-cheat-sheet/#server-server))
 | variable name | default value | description |
@@ -93,16 +133,27 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_root_url` | `http://localhost:3000` | Root URL used to access your web app (full URL) |
 | `gitea_http_listen` | `127.0.0.1` | HTTP listen address |
 | `gitea_http_port` | `3000` | Bind port *(redirect from `80` will be activated if value is `443`)* |
-| `gitea_http_letsencrypt_mail` | `undefined` | Enable Let`s Encrypt if a email address is given |
+
 | `gitea_start_ssh` | `true` | When enabled, use the built-in SSH server. |
 | `gitea_ssh_domain` | `{{ gitea_http_domain ` |  Domain name of this server, used for displayed clone URL |
 | `gitea_ssh_port` | `2222` | SSH port displayed in clone URL. |
 | `gitea_ssh_listen` | `0.0.0.0` | Listen address for the built-in SSH server. |
 | `gitea_offline_mode` | `true` | Disables use of CDN for static files and Gravatar for profile pictures. (true/false) |
+| `gitea_landing_page` | `home` | Landing page for unauthenticated users |
 | `gitea_lfs_server_enabled` | `false` | Enable GIT-LFS Support *(git large file storage: [git-lfs](https://git-lfs.github.com/))*. |
-| `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` |  LFS content path. *(if it is on local storage.)* |
-| `gitea_lfs_jwt_secret` | `''` | LFS authentication secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined |
-| `gitea_server_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[server]` section of the config. |
+| `gitea_lfs_jwt_secret` |  | LFS authentication secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined |
+| `gitea_redirect_other_port` | `false` | If true and `gitea_protocol` is https, allows redirecting http requests on `gitea_port_to_redirect` to the https port Gitea listens on. |
+| `gitea_port_to_redirect` | `80` | Port for the http redirection service to listen on, if enabled |
+| `gitea_enable_tls_certs` | `false` | Write TLS Cert and Key Path to config file |
+| `gitea_tls_cert_file` | `https/cert.pem` |  Cert file path used for HTTPS. |
+| `gitea_tls_key_file` | `https/key.pem` | Key file path used for HTTPS. |
+| `gitea_enable_acme` | `false` | Flag to enable automatic certificate management via an ACME capable CA Server. *(default is letsencrypt)* |
+| `gitea_acme_url` | | The CA’s ACME directory URL |
+| `gitea_acme_accepttos` | `false` | This is an explicit check that you accept the terms of service of the ACME provider. |
+| `gitea_acme_directory` | `https` | Directory that the certificate manager will use to cache information such as certs and private keys. |
+| `gitea_acme_email` | | Email used for the ACME registration |
+| `gitea_acme_ca_root` | | The CA’s root certificate. If left empty, it defaults to using the system’s trust chain. |
+| `gitea_server_extra_config` |  | you can use this variable to pass additional config parameters in the `[server]` section of the config. |
 
 ### Database ([database](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database))
 | variable name | default value | description |
@@ -121,18 +172,20 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_repo_indexer_enabled` | `false` | Enables code search *(uses a lot of disk space, about 6 times more than the repository size).* |
-| `gitea_repo_indexer_include` | `''` |Glob patterns to include in the index *(comma-separated list)*. An empty list means include all files. |
-| `gitea_repo_indexer_exclude` | `''` | Glob patterns to exclude from the index (comma-separated list). |
+| `gitea_repo_indexer_include` |  |Glob patterns to include in the index *(comma-separated list)*. An empty list means include all files. |
+| `gitea_repo_indexer_exclude` |  | Glob patterns to exclude from the index (comma-separated list). |
 | `gitea_repo_exclude_vendored` | `true` | Exclude vendored files from index. |
 | `gitea_repo_indexer_max_file_size` | `1048576` | Maximum size in bytes of files to be indexed. |
-| `gitea_indexer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
+| `gitea_indexer_extra_config` |  | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
+| `gitea_queue_issue_indexer_extra_config` | | | you can use this variable to pass additional config parameters in the `[queue.issue_indexer]` section of the config. |
 
 ### Security ([security](https://docs.gitea.io/en-us/config-cheat-sheet/#security-security))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_secret_key` | `''` | Global secret key. Will be autogenerated if not defined. Should be unique. |
-| `gitea_internal_token` | `''` | Internal API token. Will be autogenerated if not defined. Should be unique. |
 | `gitea_disable_git_hooks` | `true` | Set to false to enable users with git hook privilege to create custom git hooks. Can be dangerous. |
+| `gitea_disable_webhooks`  | `false` | Set to true to disable webhooks feature. |
+| `gitea_internal_token` | `''` | Internal API token. Will be autogenerated if not defined. Should be unique. |
 | `gitea_password_check_pwn` | `false` | Check [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if a password has been exposed. |
 | `gitea_security_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[security]` section of the config. |
 
@@ -154,15 +207,20 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_mailer_enabled` | `false` | Whether to enable the mailer. |
-| `gitea_mailer_host` | `localhost:25` | SMTP server hostname and port |
-| `gitea_mailer_skip_verify` | `false` | Skip SMTP TLS certificate verification (true/false) |
-| `gitea_mailer_tls_enabled` | `true` | Forcibly use TLS to connect even if not on a default SMTPS port.  |
-| `gitea_mailer_from` | `noreply@{{ gitea_http_domain }}` | Mail from address, RFC 5322. This can be just an email address, or the “Name” <email@example.com> format. |
-| `gitea_mailer_user` | `''` | Username of mailing user *(usually the sender’s e-mail address)*. |
-| `gitea_mailer_password` | `''` | SMTP server password |
-| `gitea_subject_prefix` | `''` | Prefix to be placed before e-mail subject lines |
-| `gitea_mailer_type` | `smtp` |  `[smtp, sendmail, dummy]` |
-| `gitea_mailer_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[mailer]` section of the config. |
+| `gitea_mailer_protocol` | `dummy` |Mail server protocol. One of “smtp”, “smtps”, “smtp+starttls”, “smtp+unix”, “sendmail”, “dummy”.|
+| `gitea_mailer_smtp_addr` | | Mail server address. e.g. smtp.gmail.com. For smtp+unix, this should be a path to a unix socket instead. |
+| `gitea_mailer_smtp_port` | | Mail server port |
+| `gitea_mailer_use_client_cert` | `false` | Use client certificate for TLS/SSL. |
+| `gitea_mailer_client_cert_file` | | Client certificate file. |
+| `gitea_mailer_client_key_file` | | Client key file. |
+| `gitea_mailer_force_trust_server_cert` | `false` | completely ignores server certificate validation errors. This option is unsafe. Consider adding the certificate to the system trust store instead. |
+| `gitea_mailer_user` | | Username of mailing user (usually the sender’s e-mail address). |
+| `gitea_mailer_password ` | |Password of mailing user. Use `your password` for quoting if you use special characters in the password. |
+| `gitea_mailer_enable_helo` | `true` |Enable HELO operation. |
+| `gitea_mailer_from` | `noreply@{{ gitea_http_domain }}` | Mail from address, RFC 5322. |
+| `gitea_subject_prefix` | |Prefix to be placed before e-mail subject lines. |
+| `gitea_mailer_send_as_plaintext` | `false` | Send mails only in plain text, without HTML alternative. |
+| `gitea_mailer_extra_config` | | you can use this variable to pass additional config parameters in the `[mailer]` section of the config. |
 
 ### Session ([session](https://docs.gitea.io/en-us/config-cheat-sheet/#session-session))
 | variable name | default value | description |
@@ -173,7 +231,6 @@ Either you define exactly which release you install. Or you use the option ``lat
 ### Picture ([picture](https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_disable_gravatar` | `true` | Do you want to disable Gravatar ? (privacy and so on) (true/false) |
 | `gitea_picture_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[picture]` section of the config. |
 
 ### Issue and pull request attachments ([attachment](https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment))
@@ -187,20 +244,51 @@ Either you define exactly which release you install. Or you use the option ``lat
 | ------------- | ------------- | ----------- |
 | `gitea_log_systemd` | `false` | Disable logging into `file`, use systemd-journald |
 | `gitea_log_level` | `Warn` | General log level. `[Trace, Debug, Info, Warn, Error, Critical, Fatal, None]` |
-| `gitea_log_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[log]` section of the config. |
+| `gitea_log_extra_config` | | you can use this variable to pass additional config parameters in the `[log]` section of the config. |
 
 ### Metrics ([metrics](https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_metrics_enabled`| `false` | Enable the metrics endpoint |
-| `gitea_metrics_token`| `''` | Bearer token for the Prometheus scrape job |
+| `gitea_metrics_token`| | Bearer token for the Prometheus scrape job |
+| `gitea_metrics_extra` | | you can use this variable to pass additional config parameters in the `[metrics]` section of the config. |
 
 ### OAuth2 ([oauth2](https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_oauth2_enabled` | `true` | Enable the Oauth2 provider (true/false) |
-| `gitea_oauth2_jwt_secret` | `''` | Oauth2 JWT secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined. |
-| `gitea_oauth2_extra_config` | `''` | you can use this variable to pass additional config parameters in the `[oauth2]` section of the config. |
+| `gitea_oauth2_jwt_secret` |  | Oauth2 JWT secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined. |
+| `gitea_oauth2_extra_config` |  | you can use this variable to pass additional config parameters in the `[oauth2]` section of the config. |
+
+### Federation ([federation](https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_federation_enabled` | `false` | Enable/Disable federation capabilities |
+| `gitea_federation_share_user_stats` | `false` | Enable/Disable user statistics for nodeinfo if federation is enabled |
+| `gitea_federation_extra` | | you can use this variable to pass additional config parameters in the `[federation]` section of the config. |
+
+### Packages ([packages](https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_packages_enabled` | `true` | Enable/Disable package registry capabilities |
+| `gitea_packages_extra` | |you can use this variable to pass additional config parameters in the `[packages]` section of the config. |
+
+### LFS ([lfs](https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_lfs_storage_type` | `local` | Storage type for lfs |
+| `gitea_lfs_serve_direct` | `false` | Allows the storage driver to redirect to authenticated URLs to serve files directly. *(only Minio/S3)* |
+| `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files |
+| `gitea_lfs_extra` ||you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
+
+### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_other_show_footer_branding` | `false` | Show Gitea branding in the footer. |
+| `gitea_other_show_footer_version` | `true` | Show Gitea and Go version information in the footer. |
+| `gitea_other_show_footer_template_load_time` | `true` | Show time of template execution in the footer. |
+| `gitea_other_enable_sitemap` | `true` | Generate sitemap. |
+| `gitea_other_enable_feed` | `true` | Enable/Disable RSS/Atom feed. |
 
 ### additional gitea config
 | variable name | default value | description |
