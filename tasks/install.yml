@@ -51,11 +51,16 @@
       changed_when: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
+    - name: print gpg key staus on verbosity
+      ansible.builtin.debug:
+        msg: "{{ _gitea_gpg_key_status.stdout }}"
+        verbosity: 1
+
     - name: Import gitea gpg key
       ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
       register: _gitea_import_key
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
-      when: _gitea_gpg_key_status.rc != 0
+      when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
 
     - name: Check archive signature
       ansible.builtin.command: "gpg --verify /tmp/{{ gitea_filename }}.xz.asc /tmp/{{ gitea_filename }}.xz"

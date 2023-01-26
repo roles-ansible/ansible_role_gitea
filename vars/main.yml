@@ -8,7 +8,7 @@ gitea_go_arch_map:
   armv5l: 'arm-5'
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
-gitea_filename: "gitea-{{ gitea_version }}.linux-{{ gitea_arch }}"
+gitea_filename: "gitea-{{ gitea_version_target }}.linux-{{ gitea_arch }}"
 
 gitea_variables:
   files:
@@ -56,5 +56,5 @@ transfer_custom_footer:
     - 'files/gitea_footer/extra_links_footer.tmpl'
     - 'files/extra_links_footer.tmpl'
 
-playbook_version_number: 40  # should be int
+playbook_version_number: 41  # should be int
 playbook_version_path: 'do1jlr.gitea.version'
