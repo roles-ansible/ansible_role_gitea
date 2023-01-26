@@ -201,15 +201,14 @@ PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture
 [picture]
 AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
-DISABLE_GRAVATAR   = {{ gitea_disable_gravatar | ternary('true', 'false') }}
-{{ gitea_picture_extra_config }}
+{% if gitea_picture_extra_config != '' %}{{ gitea_picture_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 [attachment]
 ENABLED = {{ gitea_attachment_enabled | ternary('true', 'false') }}
 PATH    = {{ gitea_home }}/data/attachments
-{{ gitea_attachment_extra_config }}
+{% if gitea_attachment_extra_config != '' %}{{ gitea_attachment_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#log-log
@@ -221,20 +220,29 @@ MODE       = console
 MODE       = file
 {% endif %}
 LEVEL      = {{ gitea_log_level }}
-{{ gitea_log_extra_config }}
+{% if gitea_log_extra_config != '' %}{{ gitea_log_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 [metrics]
 ENABLED = {{ gitea_metrics_enabled | ternary('true', 'false') }}
 TOKEN   = {{ gitea_metrics_token }}
+{% if gitea_metrics_extra != '' %}{{ gitea_metrics_extra }}{% else %};{% endif %}
 ;
 ;
 ; https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
 ENABLE     = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
-{{ gitea_oauth2_extra_config }}
+{% if gitea_oauth2_extra_config != '' %}{{ gitea_oauth2_extra_config }}{% else %};{% endif %}
+;
+;
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation
+[federation]
+ENABLED               = {{ gitea_federation_enabled | ternary('true', 'false') }}
+SHARE_USER_STATISTICS = {{ gitea_federation_share_user_stats | ternary('true', 'false') }}
+{% if gitea_federation_extra != '' %}{{ gitea_federation_extra }}{% else %};{% endif %}
+;
 ;
 ;
 ; Optional additional config

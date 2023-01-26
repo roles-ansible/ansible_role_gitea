@@ -178,26 +178,37 @@ gitea_session_provider: 'file'
 gitea_session_extra_config: ''
 
 # Picture (picture)
-gitea_disable_gravatar: true
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture
 gitea_picture_extra_config: ''
 
 # Issue and pull request attachments (attachment)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 gitea_attachment_enabled: true
 gitea_attachment_extra_config: ''
 
 # Log (log)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#log-log
 gitea_log_systemd: false
 gitea_log_level: 'Warn'
 gitea_log_extra_config: ''
 
 # Metrics (metrics)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 gitea_metrics_enabled: false
 gitea_metrics_token: ''
+gitea_metrics_extra: ''
 
 # OAuth2 (oauth2)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 gitea_oauth2_enabled: true
 gitea_oauth2_jwt_secret: ''
 gitea_oauth2_extra_config: ''
+
+# Federation (federation)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation
+gitea_federation_enabled: false
+gitea_federation_share_user_stats: false
+gitea_federation_extra: ''
 
 # additional gitea config
 gitea_extra_config: ""
