@@ -130,6 +130,7 @@ gitea_repo_indexer_exclude: ''
 gitea_repo_exclude_vendored: true
 gitea_repo_indexer_max_file_size: '1048576'
 gitea_indexer_extra_config: ''
+gitea_queue_issue_indexer_extra_config: ''
 
 # Security (security)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security

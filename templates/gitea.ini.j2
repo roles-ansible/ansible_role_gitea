@@ -121,20 +121,26 @@ PASSWD   = {{ gitea_db_password }}
 SSL_MODE = {{ gitea_db_ssl }}
 PATH     = {{ gitea_db_path }}
 LOG_SQL  = {{ gitea_db_log_sql | ternary('true', 'false') }}
-{{ gitea_database_extra_config }}
+{% if gitea_database_extra_config != '' %}{{ gitea_database_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer
 [indexer]
 ISSUE_INDEXER_PATH            = {{ gitea_home }}/indexers/issues.bleve
-ISSUE_INDEXER_QUEUE_DIR       = {{ gitea_home }}/indexers/issues.queue
 REPO_INDEXER_ENABLED          = {{ gitea_repo_indexer_enabled | ternary('true', 'false') }}
 REPO_INDEXER_PATH             = {{ gitea_home }}/indexers/repos.bleve
 REPO_INDEXER_INCLUDE          = {{ gitea_repo_indexer_include }}
 REPO_INDEXER_EXCLUDE          = {{ gitea_repo_indexer_exclude }}
 REPO_INDEXER_EXCLUDE_VENDORED = {{ gitea_repo_exclude_vendored | ternary('true', 'false') }}
 MAX_FILE_SIZE                 = {{ gitea_repo_indexer_max_file_size }}
-{{ gitea_indexer_extra_config }}
+{% if gitea_indexer_extra_config != '' %}{{ gitea_indexer_extra_config }}{% else %};{% endif %}
+;
+;
+; Queue (queue and queue.*)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#queue-queue-and-queue
+[queue.issue_indexer]
+DATADIR = {{ gitea_home }}/indexers/issues.queue
+{% if  gitea_queue_issue_indexer_extra_config != '' %}{{ gitea_queue_issue_indexer_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
