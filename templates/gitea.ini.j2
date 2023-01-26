@@ -147,10 +147,11 @@ DATADIR = {{ gitea_home }}/indexers/issues.queue
 [security]
 INSTALL_LOCK        = true
 SECRET_KEY          = {{ gitea_secret_key }}
-INTERNAL_TOKEN      = {{ gitea_internal_token }}
 DISABLE_GIT_HOOKS   = {{ gitea_disable_git_hooks | ternary('true', 'false') }}
+DISABLE_WEBHOOKS    = { gitea_disable_webhooks | ternary('true', 'false') }
+INTERNAL_TOKEN      = {{ gitea_internal_token }}
 PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
-{{ gitea_security_extra_config }}
+{% if gitea_security_extra_config != '' %}{{ gitea_security_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#service-service
@@ -164,28 +165,37 @@ SHOW_REGISTRATION_BUTTON          = {{ gitea_show_registration_button | ternary(
 ALLOW_ONLY_EXTERNAL_REGISTRATION  = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
 ENABLE_NOTIFY_MAIL                = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
 AUTO_WATCH_NEW_REPOS              = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
-{{ gitea_service_extra_config }}
+{% if gitea_service_extra_config  != '' %}{{ gitea_service_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
 [mailer]
-ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
-HOST               = {{ gitea_mailer_host }}
-SKIP_VERIFY        = {{ gitea_mailer_skip_verify | ternary('true', 'false') }}
-IS_TLS_ENABLED     = {{ gitea_mailer_tls_enabled | ternary('true', 'false') }}
-FROM               = {{ gitea_mailer_from }}
-USER               = {{ gitea_mailer_user }}
-PASSWD             = `{{ gitea_mailer_password }}`
-SUBJECT_PREFIX     = {{ gitea_subject_prefix }}
-MAILER_TYPE        = {{ gitea_mailer_type }}
-{{ gitea_mailer_extra_config }}
+ENABLED                 = {{ gitea_mailer_enabled | ternary('true', 'false') }}
+{%- if gitea_mailer_enabled | bool %}
+PROTOCOL                = {{ gitea_mailer_protocol }}
+SMTP_ADDR               = {{ gitea_mailer_smtp_addr }}
+SMTP_PORT               = {{ gitea_mailer_smtp_port }}
+USE_CLIENT_CERT         = {{ gitea_mailer_use_client_cert | ternary('true', 'false') }}
+{%- if gitea_mailer_use_client_cert | bool %}
+CLIENT_CERT_FILE        = {{ gitea_mailer_client_cert_file }}
+CLIENT_KEY_FILE         = {{ gitea_mailer_client_key_file }}
+{%- endif %}
+FORCE_TRUST_SERVER_CERT = {{ gitea_mailer_force_trust_server_cert | ternary('true', 'false') }}
+USER                    = {{ gitea_mailer_user }}
+PASSWD                  = `{{ gitea_mailer_password }}`
+ENABLE_HELO             = {{ gitea_mailer_enable_helo | ternary('true', 'false') }}
+FROM                    = {{ gitea_mailer_from }}
+SUBJECT_PREFIX          = {{ gitea_subject_prefix }}
+SEND_AS_PLAIN_TEXT      = {{ gitea_mailer_send_as_plaintext | ternary('true', 'false') }}
+{% if gitea_mailer_extra_config != '' %}{{ gitea_mailer_extra_config }}{% else %};{% endif %}
+{%- endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#session-session
 [session]
 PROVIDER        = {{ gitea_session_provider }}
 PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
-{{ gitea_session_extra_config }}
+{% if gitea_session_extra_config != '' %}{{ gitea_session_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture

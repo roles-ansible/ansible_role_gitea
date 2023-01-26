@@ -135,8 +135,9 @@ gitea_queue_issue_indexer_extra_config: ''
 # Security (security)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#security-security
 gitea_secret_key: ''
-gitea_internal_token: ''
 gitea_disable_git_hooks: true
+gitea_disable_webhooks: false
+gitea_internal_token: ''
 gitea_password_check_pwn: false
 gitea_security_extra_config: ''
 
@@ -156,14 +157,19 @@ gitea_service_extra_config: ''
 # Mailer [mailer]
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
 gitea_mailer_enabled: false
-gitea_mailer_host: 'localhost:25'
-gitea_mailer_skip_verify: false
-gitea_mailer_tls_enabled: true
-gitea_mailer_from: "noreply@{{ gitea_http_domain }}"
+gitea_mailer_protocol: 'dummy'
+gitea_mailer_smtp_addr: ''
+gitea_mailer_smtp_port: ''
+gitea_mailer_use_client_cert: false
+gitea_mailer_client_cert_file: ''
+gitea_mailer_client_key_file: ''
+gitea_mailer_force_trust_server_cert: false
 gitea_mailer_user: ''
 gitea_mailer_password: ''
+gitea_mailer_enable_helo: true
+gitea_mailer_from: "noreply@{{ gitea_http_domain }}"
 gitea_subject_prefix: ''
-gitea_mailer_type: smtp
+gitea_mailer_send_as_plaintext: false
 gitea_mailer_extra_config: ''
 
 # Session (session)
