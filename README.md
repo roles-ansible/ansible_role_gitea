@@ -267,6 +267,29 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_federation_share_user_stats` | `false` | Enable/Disable user statistics for nodeinfo if federation is enabled |
 | `gitea_federation_extra` | | you can use this variable to pass additional config parameters in the `[federation]` section of the config. |
 
+### Packages ([packages](https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_packages_enabled` | `true` | Enable/Disable package registry capabilities |
+| `gitea_packages_extra` | |you can use this variable to pass additional config parameters in the `[packages]` section of the config. |
+
+### LFS ([lfs](https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_lfs_storage_type` | `local` | Storage type for lfs |
+| `gitea_lfs_serve_direct` | `false` | Allows the storage driver to redirect to authenticated URLs to serve files directly. *(only Minio/S3)* |
+| `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files |
+| `gitea_lfs_extra` ||you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
+
+### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_other_show_footer_branding` | `false` | Show Gitea branding in the footer. |
+| `gitea_other_show_footer_version` | `true` | Show Gitea and Go version information in the footer. |
+| `gitea_other_show_footer_template_load_time` | `true` | Show time of template execution in the footer. |
+| `gitea_other_enable_sitemap` | `true` | Generate sitemap. |
+| `gitea_other_enable_feed` | `true` | Enable/Disable RSS/Atom feed. |
+
 ### additional gitea config
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |

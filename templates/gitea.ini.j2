@@ -230,7 +230,7 @@ TOKEN   = {{ gitea_metrics_token }}
 {% if gitea_metrics_extra != '' %}{{ gitea_metrics_extra }}{% else %};{% endif %}
 ;
 ;
-; https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
 ENABLE     = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
@@ -242,6 +242,36 @@ JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
 ENABLED               = {{ gitea_federation_enabled | ternary('true', 'false') }}
 SHARE_USER_STATISTICS = {{ gitea_federation_share_user_stats | ternary('true', 'false') }}
 {% if gitea_federation_extra != '' %}{{ gitea_federation_extra }}{% else %};{% endif %}
+;
+;
+; Packages (packages)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages
+[packages]
+ENABLED             = {{ gitea_packages_enabled | ternary('true', 'false') }}
+{%- if gitea_packages_enabled | bool %}
+CHUNKED_UPLOAD_PATH = {{ gitea_home }}/data/tmp/package-upload
+{% if gitea_packages_extra != '' %}{{ gitea_packages_extra }}{% else %};{% endif %}
+;{% endif %}
+;
+;
+{%- if gitea_lfs_server_enabled | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs
+[lfs]
+STORAGE_TYPE  = {{ gitea_lfs_storage_type }}
+SERVE_DIRECT  = {{ gitea_lfs_serve_direct | ternary('true', 'false') }}
+PATH          = {{ gitea_lfs_content_path }}
+{% if gitea_lfs_extra != '' %}{{ gitea_lfs_extra }}{% else %};{% endif %}
+{%- endif %}
+;
+;
+; Other (other)
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
+[other]
+SHOW_FOOTER_BRANDING           = {{ gitea_other_show_footer_branding | ternary('true', 'false') }}
+SHOW_FOOTER_VERSION            = {{ gitea_other_show_footer_version | ternary('true', 'false') }}
+SHOW_FOOTER_TEMPLATE_LOAD_TIME = {{ gitea_other_show_footer_template_load_time | ternary('true', 'false') }}
+ENABLE_SITEMAP                 = {{ gitea_other_enable_sitemap | ternary('true', 'false') }}
+ENABLE_FEED                    = {{ gitea_other_enable_feed | ternary('true', 'false') }}
 ;
 ;
 ;
