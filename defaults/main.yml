@@ -89,15 +89,25 @@ gitea_http_domain: "{{ gitea_fqdn }}"
 gitea_root_url: "http://{{ gitea_fqdn }}:3000"
 gitea_http_listen: '127.0.0.1'
 gitea_http_port: '3000'
-# gitea_http_letsencrypt_mail: 'mail@example.com'
 gitea_start_ssh: true
 gitea_ssh_domain: "{{ gitea_fqdn }}"
 gitea_ssh_port: '2222'
 gitea_ssh_listen: '0.0.0.0'
 gitea_offline_mode: true
+gitea_landing_page: 'home'
 gitea_lfs_server_enabled: false
-gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
 gitea_lfs_jwt_secret: ''
+gitea_redirect_other_port: false
+gitea_port_to_redirect: '80'
+gitea_enable_tls_certs: false
+gitea_tls_cert_file: 'https/cert.pem'
+gitea_tls_key_file: 'https/key.pem'
+gitea_enable_acme: false
+gitea_acme_url: ''
+gitea_acme_accepttos: false
+gitea_acme_directory: 'https'
+gitea_acme_email: ''
+gitea_acme_ca_root: ''
 gitea_server_extra_config: ''
 
 # Database (database)

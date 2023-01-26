@@ -81,26 +81,34 @@ DOMAIN                = {{ gitea_http_domain }}
 ROOT_URL              = {{ gitea_root_url }}
 HTTP_ADDR             = {{ gitea_http_listen }}
 HTTP_PORT             = {{ gitea_http_port }}
-{% if gitea_http_port == 443 %}
-PORT_TO_REDIRECT      = 80
-{% endif %}
-{% if gitea_http_letsencrypt_mail is defined %}
-ENABLE_LETSENCRYPT    = true
-LETSENCRYPT_ACCEPTTOS = true
-LETSENCRYPT_EMAIL     = {{ gitea_http_letsencrypt_mail }}
-{% endif %}
 START_SSH_SERVER      = {{ gitea_start_ssh | ternary('true', 'false') }}
 SSH_DOMAIN            = {{ gitea_ssh_domain }}
 SSH_PORT              = {{ gitea_ssh_port }}
 SSH_LISTEN_HOST       = {{ gitea_ssh_listen }}
 OFFLINE_MODE          = {{ gitea_offline_mode | ternary('true', 'false') }}
 APP_DATA_PATH         = {{ gitea_home }}/data
+LANDING_PAGE          = {{ gitea_landing_page }}
 {% if gitea_lfs_server_enabled | bool -%}
 LFS_START_SERVER      = true
-LFS_CONTENT_PATH      = {{ gitea_lfs_content_path }}
 LFS_JWT_SECRET        = {{ gitea_lfs_jwt_secret }}
-{% endif %}
-{{ gitea_server_extra_config }}
+{% endif -%}
+REDIRECT_OTHER_PORT   = {{ gitea_redirect_other_port | ternary('true', 'false') }}
+PORT_TO_REDIRECT      = {{ gitea_port_to_redirect }}
+{%- if gitea_enable_tls_certs | bool %}
+CERT_FILE             = {{ gitea_tls_cert_file }}
+KEY_FILE              = {{ gitea_tls_key_file }}
+{%- endif %}
+ENABLE_ACME           = {{ gitea_enable_acme | ternary('true', 'false') }}
+{%- if gitea_enable_acme | bool %}
+{%- if gitea_acme_url != '' %}
+ACME_URL              = {{ gitea_acme_url }}
+{%- endif %}
+ACME_ACCEPTTOS        = {{ gitea_acme_accepttos | ternary('true', 'false') }}
+ACME_DIRECTORY        = {{ gitea_acme_directory }}
+ACME_EMAIL            = {{ gitea_acme_email }}
+ACME_CA_ROOT          = {{ gitea_acme_ca_root }}
+{%- endif %}
+{% if gitea_server_extra_config != '' %}{{ gitea_server_extra_config }}{% else %};{% endif %}
 ;
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#database-database
