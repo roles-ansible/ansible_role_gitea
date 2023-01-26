@@ -31,6 +31,13 @@ The following code has been tested with the latest Debian Stable, it should work
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
 
+### Chose between gitea and forgejo
+There is a fork of gitea called forgejo. Why? Read the [forgejo FAQ](https://forgejo.org/faq/).
+You have the option to choose between [gitea](https://gitea.io) and [forgejo](https://forgejo.org) by modifying the ``gitea_fork`` variable.
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_fork`  | `gitea`       | optional choose to install forgejo instead of gitea by setting this value to `forgejo`. |
+
 ### gitea update mechanism
 To determine which gitea version to install, you can choose between two variants.
 Either you define exactly which release you install. Or you use the option ``latest`` to always install the latest release from the [gitea releases](https://github.com/go-gitea/gitea/releases/latest).

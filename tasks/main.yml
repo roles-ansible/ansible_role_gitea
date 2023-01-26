@@ -7,6 +7,15 @@
   ansible.builtin.package_facts:
     manager: auto
 
+- name: Prepare gitea/forgejo variable import
+  block:
+    - name: Gather variables for gitea or forgejo
+      ansible.builtin.include_vars: "{{ lookup('first_found', gitea_fork_variables) }}"
+  rescue:
+    - name: Gitea/Forejo import info
+      ansible.builtin.fail:
+        msg: "Currently only {{ gitea_supported_forks }} are supported."
+
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ lookup('first_found', gitea_variables) }}"
 

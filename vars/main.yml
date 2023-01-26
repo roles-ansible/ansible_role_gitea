@@ -9,6 +9,13 @@ gitea_go_arch_map:
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 gitea_filename: "gitea-{{ gitea_version_target }}.linux-{{ gitea_arch }}"
+gitea_supported_forks: 'gitea and forgejo'
+
+gitea_fork_variables:
+  files:
+    - "fork_{{ gitea_fork | lower }}.yml"
+  paths:
+    - 'vars'
 
 gitea_variables:
   files:
