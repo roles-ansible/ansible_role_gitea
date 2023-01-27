@@ -1,0 +1,7 @@
+---
+# set filenames for forgejo
+gitea_full_executable_path: "{{ gitea_forgejo_executable_path }}"
+gitea_filename: "forgejo-{{ gitea_version_target }}-linux-{{ gitea_arch }}"
+gitea_forgejo_query_download: "assets[?name==`{{ gitea_filename }}`].browser_download_url"
+gitea_forgejo_query_checksum: "assets[?name==`{{ gitea_filename }}.sha256`].browser_download_url"
+gitea_forgejo_query_signed: "assets[?name==`{{ gitea_filename }}.asc`].browser_download_url"

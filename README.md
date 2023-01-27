@@ -1,10 +1,11 @@
 [![Ansible Galaxy](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/galaxy.svg?sanitize=true)](https://galaxy.ansible.com/do1jlr/gitea) [![MIT License](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/license.svg?sanitize=true)](https://github.com/roles-ansible/ansible_role_gitea/blob/main/LICENSE)
 
- ansible role gitea
-===================
+ ansible role gitea/forgejo
+============================
 
-This role installs and manages [gitea](https://gitea.io) - Git with a cup of tea. A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go.
+This role installs and manages [gitea](https://gitea.io) or [forgejo](https://forgejo.org). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
 [Source code & screenshots](https://github.com/go-gitea/gitea).
+[Source code forgejo](https://codeberg.org/forgejo/forgejo)
 
 ## Sample example of use in a playbook
 
@@ -20,16 +21,23 @@ The following code has been tested with the latest Debian Stable, it should work
   vars:
     # Here we assume we are behind a reverse proxy that will
     # handle https for us, so we bind on localhost:3000 using HTTP
+    # see https://docs.gitea.io/en-us/reverse-proxies/#nginx
     gitea_fqdn: 'git.example.com'
     gitea_root_url: 'https://git.example.com'
     gitea_protocol: http
-
     gitea_start_ssh: true
 ```
 
  Variables
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
+
+### Chose between gitea and forgejo
+There is a fork of gitea called forgejo. Why? Read the [forgejo FAQ](https://forgejo.org/faq/).
+You have the option to choose between [gitea](https://gitea.io) and [forgejo](https://forgejo.org) by modifying the ``gitea_fork`` variable.
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_fork`  | `gitea`       | optional choose to install forgejo instead of gitea by setting this value to `forgejo`. |
 
 ### gitea update mechanism
 To determine which gitea version to install, you can choose between two variants.
@@ -41,6 +49,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_version` | `latest` | Define either the exact release to install *(eg. `1.16.0`)* or use ``latest`` *(default)* to install the latest release. |
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
+| `gitea_forgejo_gpg_key` | `EB114F5E6C0DC2BCDD183550A4B61A2DC5923710` | the gpg key the forgejo binary is signed with |
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
@@ -54,6 +63,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_home` | `/var/lib/gitea` | Base directory to work |
 | `gitea_user_home` | `{{ gitea_home }}` | home of gitea user |
 | `gitea_executable_path` | `/usr/local/bin/gitea` | Path for gitea executable |
+| `gitea_forgejo_executable_path` | `/usr/local/bin/forgejo` | Path for forgejo executable |
 | `gitea_configuraion_path` | `/etc/gitea` | Where to put the gitea.ini config |
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
@@ -97,6 +107,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_enable_repo_signing_extra` | | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
 
 ### CORS ([cors](https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors))
+| variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_enable_cors` | `false` | enable cors headers (disabled by default) |
 | `gitea_cors_scheme` | `http` | scheme of allowed requests |
@@ -133,7 +144,6 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_root_url` | `http://localhost:3000` | Root URL used to access your web app (full URL) |
 | `gitea_http_listen` | `127.0.0.1` | HTTP listen address |
 | `gitea_http_port` | `3000` | Bind port *(redirect from `80` will be activated if value is `443`)* |
-
 | `gitea_start_ssh` | `true` | When enabled, use the built-in SSH server. |
 | `gitea_ssh_domain` | `{{ gitea_http_domain ` |  Domain name of this server, used for displayed clone URL |
 | `gitea_ssh_port` | `2222` | SSH port displayed in clone URL. |

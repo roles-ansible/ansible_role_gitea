@@ -1,0 +1,4 @@
+---
+# set filenames for gitea
+gitea_full_executable_path: "{{ gitea_executable_path }}"
+gitea_filename: "gitea-{{ gitea_version_target }}.linux-{{ gitea_arch }}"

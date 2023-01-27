@@ -7,11 +7,20 @@
   ansible.builtin.package_facts:
     manager: auto
 
+- name: Prepare gitea/forgejo variable import
+  block:
+    - name: Gather variables for gitea or forgejo
+      ansible.builtin.include_vars: "{{ lookup('first_found', gitea_fork_variables) }}"
+  rescue:
+    - name: Gitea/Forejo import info
+      ansible.builtin.fail:
+        msg: "Currently only {{ gitea_supported_forks }} are supported."
+
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ lookup('first_found', gitea_variables) }}"
 
 - name: Gather versioning information
-  ansible.builtin.include_tasks: set_version.yml
+  ansible.builtin.include_tasks: "set_{{ gitea_fork | lower }}_version.yml"
 
 - name: Backup gitea before update
   ansible.builtin.include_tasks: backup.yml
@@ -20,8 +29,8 @@
 - name: Create gitea user and role
   ansible.builtin.include_tasks: create_user.yml
 
-- name: Install or update gitea
-  ansible.builtin.include_tasks: install.yml
+- name: "Install or update {{ gitea_fork }}"
+  ansible.builtin.include_tasks: "install_{{ gitea_fork | lower }}.yml"
 
 - name: Create directories
   ansible.builtin.include_tasks: directory.yml
