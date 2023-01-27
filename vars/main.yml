@@ -8,7 +8,6 @@ gitea_go_arch_map:
   armv5l: 'arm-5'
 
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
-gitea_filename: "gitea-{{ gitea_version_target }}.linux-{{ gitea_arch }}"
 gitea_supported_forks: 'gitea and forgejo'
 
 gitea_fork_variables:

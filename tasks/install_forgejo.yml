@@ -21,32 +21,32 @@
       retries: 5
       delay: 2
 
-- name: Install block
+- name: Install forgejo block
   when: (not gitea_version_check | bool) or (not ansible_check_mode and (gitea_active_version.stdout != gitea_version_target))
   block:
-    - name: Download gitea archive
+    - name: Download forgejo archive
       ansible.builtin.get_url:
-        url: "{{ gitea_dl_url }}.xz"
-        dest: "/tmp/{{ gitea_filename }}.xz"
-        checksum: "sha256:{{ gitea_dl_url }}.xz.sha256"
+        url: "{{ gitea_forgejo_dl_url | first }}"
+        dest: "/tmp/{{ gitea_filename }}"
+        checksum: "sha256:{{ gitea_forgejo_checksum }}"
         mode: 0640
       register: _download_archive
       until: _download_archive is succeeded
       retries: 5
       delay: 2
 
-    - name: Download gitea asc file
+    - name: Download forgejo asc file
       ansible.builtin.get_url:
-        url: "{{ gitea_dl_url }}.xz.asc"
-        dest: "/tmp/{{ gitea_filename }}.xz.asc"
+        url: "{{ gitea_forgejo_signed_url | first }}"
+        dest: "/tmp/{{ gitea_filename }}.asc"
         mode: 0640
       register: _download_asc
       until: _download_asc is succeeded
       retries: 5
       delay: 2
 
-    - name: Check gitea gpg key
-      ansible.builtin.command: "gpg --list-keys 0x{{ gitea_gpg_key }}"
+    - name: Check forgejo gpg key
+      ansible.builtin.command: "gpg --list-keys 0x{{ gitea_forgejo_gpg_key }}"
       register: _gitea_gpg_key_status
       changed_when: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
@@ -56,27 +56,22 @@
         msg: "{{ _gitea_gpg_key_status.stdout }}"
         verbosity: 1
 
-    - name: Import gitea gpg key
-      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
+    - name: Import forgejo gpg key
+      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_forgejo_gpg_key }}"
       register: _gitea_import_key
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
       when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
 
     - name: Check archive signature
-      ansible.builtin.command: "gpg --verify /tmp/{{ gitea_filename }}.xz.asc /tmp/{{ gitea_filename }}.xz"
+      ansible.builtin.command: "gpg --verify /tmp/{{ gitea_filename }}.asc /tmp/{{ gitea_filename }}"
       changed_when: false
-
-    - name: Unpack gitea binary
-      ansible.builtin.command:
-        cmd: "xz -k -d /tmp/{{ gitea_filename }}.xz"
-        creates: "/tmp/{{ gitea_filename }}"
 
     - name: Propagate gitea binary
       become: true
       ansible.builtin.copy:
         src: "/tmp/{{ gitea_filename }}"
         remote_src: true
-        dest: "{{ gitea_executable_path }}"
+        dest: "{{ gitea_full_executable_path }}"
         mode: 0755
         owner: root
         group: root

@@ -19,6 +19,7 @@ gitea_group: 'gitea'
 gitea_home: '/var/lib/gitea'
 gitea_user_home: '{{ gitea_home }}'
 gitea_executable_path: '/usr/local/bin/gitea'
+gitea_forgejo_executable_path: '/usr/local/bin/forgejo'
 gitea_configuraion_path: '/etc/gitea'
 gitea_shell: '/bin/false'
 gitea_systemd_cap_net_bind_service: false

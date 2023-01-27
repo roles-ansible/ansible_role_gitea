@@ -48,6 +48,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_version` | `latest` | Define either the exact release to install *(eg. `1.16.0`)* or use ``latest`` *(default)* to install the latest release. |
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
+| `gitea_forgejo_gpg_key` | `EB114F5E6C0DC2BCDD183550A4B61A2DC5923710` | the gpg key the forgejo binary is signed with |
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
@@ -61,6 +62,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_home` | `/var/lib/gitea` | Base directory to work |
 | `gitea_user_home` | `{{ gitea_home }}` | home of gitea user |
 | `gitea_executable_path` | `/usr/local/bin/gitea` | Path for gitea executable |
+| `gitea_forgejo_executable_path` | `/usr/local/bin/forgejo` | Path for forgejo executable |
 | `gitea_configuraion_path` | `/etc/gitea` | Where to put the gitea.ini config |
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
