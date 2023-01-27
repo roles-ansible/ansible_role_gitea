@@ -107,6 +107,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_enable_repo_signing_extra` | | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
 
 ### CORS ([cors](https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors))
+| variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_enable_cors` | `false` | enable cors headers (disabled by default) |
 | `gitea_cors_scheme` | `http` | scheme of allowed requests |
@@ -143,7 +144,6 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_root_url` | `http://localhost:3000` | Root URL used to access your web app (full URL) |
 | `gitea_http_listen` | `127.0.0.1` | HTTP listen address |
 | `gitea_http_port` | `3000` | Bind port *(redirect from `80` will be activated if value is `443`)* |
-
 | `gitea_start_ssh` | `true` | When enabled, use the built-in SSH server. |
 | `gitea_ssh_domain` | `{{ gitea_http_domain ` |  Domain name of this server, used for displayed clone URL |
 | `gitea_ssh_port` | `2222` | SSH port displayed in clone URL. |
