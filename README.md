@@ -1,10 +1,11 @@
 [![Ansible Galaxy](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/galaxy.svg?sanitize=true)](https://galaxy.ansible.com/do1jlr/gitea) [![MIT License](https://raw.githubusercontent.com/roles-ansible/ansible_role_gitea/main/.github/license.svg?sanitize=true)](https://github.com/roles-ansible/ansible_role_gitea/blob/main/LICENSE)
 
- ansible role gitea
-===================
+ ansible role gitea/forgejo
+============================
 
-This role installs and manages [gitea](https://gitea.io) - Git with a cup of tea. A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go.
+This role installs and manages [gitea](https://gitea.io) or [forgejo](https://forgejo.org). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
 [Source code & screenshots](https://github.com/go-gitea/gitea).
+[Source code forgejo](https://codeberg.org/forgejo/forgejo)
 
 ## Sample example of use in a playbook
 
