@@ -154,7 +154,7 @@ DATADIR = {{ gitea_home }}/indexers/issues.queue
 INSTALL_LOCK        = true
 SECRET_KEY          = {{ gitea_secret_key }}
 DISABLE_GIT_HOOKS   = {{ gitea_disable_git_hooks | ternary('true', 'false') }}
-DISABLE_WEBHOOKS    = { gitea_disable_webhooks | ternary('true', 'false') }
+DISABLE_WEBHOOKS    = {{ gitea_disable_webhooks | ternary('true', 'false') }}
 INTERNAL_TOKEN      = {{ gitea_internal_token }}
 PASSWORD_CHECK_PWN  = {{ gitea_password_check_pwn | ternary('true', 'false') }}
 {{ gitea_security_extra_config }}
