@@ -74,6 +74,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_app_name` | `Gitea` | Displayed application name |
 | `gitea_user` | `gitea ` | UNIX user used by Gitea |
 | `gitea_run_mode`| `prod`| Application run mode, affects performance and debugging. Either “dev”, “prod” or “test”. |
+| `gitea_fqdn` | `localhost` | Base FQDN for the installation, used as default for other variables. Set it to the FQDN where you can reach your gitea server |
 
 ### Repository ([repository](https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository))
 | variable name | default value | description |
@@ -140,12 +141,12 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_protocol`| `http` | Listening protocol [http, https, fcgi, unix, fcgi+unix] |
-| `gitea_http_domain` | `localhost` | Domain name of this server. Set it to the FQDN where you can reach your gitea server |
-| `gitea_root_url` | `http://localhost:3000` | Root URL used to access your web app (full URL) |
+| `gitea_http_domain` | `{{ gitea_fqdn }}` which is `localhost` | Domain name of this server. |
+| `gitea_root_url` | `http://{{ gitea_fqdn }}:3000` | Root URL used to access your web app (full URL) |
 | `gitea_http_listen` | `127.0.0.1` | HTTP listen address |
 | `gitea_http_port` | `3000` | Bind port *(redirect from `80` will be activated if value is `443`)* |
 | `gitea_start_ssh` | `true` | When enabled, use the built-in SSH server. |
-| `gitea_ssh_domain` | `{{ gitea_http_domain ` |  Domain name of this server, used for displayed clone URL |
+| `gitea_ssh_domain` | `{{ gitea_fqdn }} ` |  Domain name of this server, used for displayed clone URL |
 | `gitea_ssh_port` | `2222` | SSH port displayed in clone URL. |
 | `gitea_ssh_listen` | `0.0.0.0` | Listen address for the built-in SSH server. |
 | `gitea_offline_mode` | `true` | Disables use of CDN for static files and Gravatar for profile pictures. (true/false) |
