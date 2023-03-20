@@ -15,6 +15,7 @@
         url: 'https://codeberg.org/api/v1/repos/forgejo/forgejo/releases?limit=1'
         return_content: true
       register: gitea_forgejo_remote_metadata
+      become: false
       when: not ansible_check_mode
 
     - name: "Fail if running in check mode without versions set."
@@ -44,6 +45,7 @@
     url: 'https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}'
     return_content: true
   register: gitea_forgejo_remote_tags_metadata
+  become: false
   when: not ansible_check_mode
 
 - name: "Generate forgejo download url"
@@ -61,6 +63,7 @@
     url: "{{ gitea_forgejo_checksum_url | first }}"
     return_content: true
   register: _gitea_forgejo_dl_checksum
+  become: false
   when: not ansible_check_mode
 
 - name: Set forjeo checksum

@@ -31,6 +31,7 @@
         checksum: "sha256:{{ gitea_forgejo_checksum }}"
         mode: 0640
       register: _download_archive
+      become: false
       until: _download_archive is succeeded
       retries: 5
       delay: 2
@@ -41,6 +42,7 @@
         dest: "/tmp/{{ gitea_filename }}.asc"
         mode: 0640
       register: _download_asc
+      become: false
       until: _download_asc is succeeded
       retries: 5
       delay: 2
