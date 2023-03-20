@@ -31,6 +31,7 @@
         checksum: "sha256:{{ gitea_forgejo_checksum }}"
         mode: 0640
       register: _download_archive
+      become: false
       until: _download_archive is succeeded
       retries: 5
       delay: 2
@@ -41,6 +42,7 @@
         dest: "/tmp/{{ gitea_filename }}.asc"
         mode: 0640
       register: _download_asc
+      become: false
       until: _download_asc is succeeded
       retries: 5
       delay: 2
@@ -59,6 +61,7 @@
     - name: Import forgejo gpg key
       ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_forgejo_gpg_key }}"
       register: _gitea_import_key
+      become: false
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
       when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
 

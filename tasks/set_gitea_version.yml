@@ -15,6 +15,7 @@
         url: https://api.github.com/repos/go-gitea/gitea/releases/latest
         return_content: true
       register: gitea_remote_metadata
+      become: false
       when: not ansible_check_mode
 
     - name: "Fail if running in check mode without versions set."
