@@ -1,6 +1,6 @@
 [![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.gitea.svg)](https://galaxy.ansible.com/l3d/gitea)
 [![BSD-3 Clause](https://ansible.l3d.space/svg/l3d.gitea_license.svg)](LICENSE)
-[![Maintainance](https://ansible.l3d.space/svg/l3d.gitea_maintainance.svg)(https://ansible.l3d.space/#l3d.gitea)
+[![Maintainance](https://ansible.l3d.space/svg/l3d.gitea_maintainance.svg)](https://ansible.l3d.space/#l3d.gitea)
 
  ansible role gitea/forgejo
 ============================
