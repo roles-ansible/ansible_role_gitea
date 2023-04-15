@@ -6,10 +6,11 @@
 ============================
 
 This role installs and manages [gitea](https://gitea.io) or [forgejo](https://forgejo.org). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
-[Source code & screenshots](https://github.com/go-gitea/gitea).
-[Source code forgejo](https://codeberg.org/forgejo/forgejo)
+[Source code & screenshots gitea](https://github.com/go-gitea/gitea).
+[Source code forgejo](https://codeberg.org/forgejo/forgejo).
+This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansible.com/l3d/git). [![l3d.git](https://ansible.l3d.space/svg/l3d.git_ansible-collection_collection.svg)](https://github.com/roles-ansible/ansible_collection_git.git).
 
-## Sample example of use in a playbook
+## Sample Usage in a playbook
 
 The following code has been tested with the latest Debian Stable, it should work on Ubuntu and RedHat as well.
 
@@ -374,4 +375,4 @@ There are some tests that will validate linting. A good testing CI Pipeline that
 | [![Ansible Lint check](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml/badge.svg)](https://github.com/roles-ansible/ansible_role_gitea/actions/workflows/ansible-linting-check.yml) | [ansible-lint action](https://github.com/marketplace/actions/ansible-lint)
 
 ## History of this role
-this ansible role was originally developed on [github.com/thomas-maurice/ansible-role-gitea](https://github.com/thomas-maurice/ansible-role-gitea.git). Since the role there has some problems like default values for the location of the gitea repositories and the merging of pull requests usually takes several months, a fork of the role was created that offers the same. Only tidier and with the claim to react faster to issues and pull requests.
+this ansible role was originally developed on [github.com/thomas-maurice/ansible-role-gitea](https://github.com/thomas-maurice/ansible-role-gitea.git). Since the role there has some problems like default values for the location of the gitea repositories and the merging of pull requests usually takes several months, a fork of the role was created that offers the same. Only tidier and with the claim to react faster to issues and pull requests. It is now Part of the [l3d.git](https://galaxy.ansible.com/l3d/git) Collection too.
