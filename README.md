@@ -353,29 +353,29 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
   - Point ``gitea_customize_files_path`` to this directory. *(Default ``{{ gitea_custom_search }}/gitea_files/``)*
 
 ## Requirements
-This role uses the ``ansible.builtin`` amd ``community.general`` Ansible Collections. Ant to download the latest forgejo/gitea release, we use json_query. This requires ``jmespath`` to be available
+This role uses the ``ansible.builtin`` and ``community.general`` ansible Collections. To download the latest forgejo/gitea release we use json_query. This requires ``jmespath`` to be available.
 
-### Python Packages
+### Python packages
 + jmespath
 
 ### Galaxy Collections
 + community.general
 
 
-### Example Requirements Installation
+### Example requirements Installation
 ```
 ansible-galaxy install community.general
 pip3 install jmespath
 ```
 
-## Contributing
-Don't hesitate to create a pull request, and when in doubt you can reach me on
+## Contribute
+Don't hesitate to create a pull request, and if in doubt you can reach me at
 Mastodon [@l3d@chaos.social](https://chaos.social/@l3d).
 
-I'm happy to fix any issue that's been opened, or even better, review your pull requests :)
+I'll be happy to fix any issues you raise, or even better, review your pull requests :)
 
 ## Testing
-There are some tests that will validate linting. A good testing CI Pipeline that will work withe the used systemd commands is still needed.
+There are some tests that will validate the linting. A good test CI pipeline that works with the systemd commands used is still needed.
 
 | test status | Github Marketplace |
 | :---------  | :----------------  |
