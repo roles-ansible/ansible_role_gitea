@@ -353,11 +353,20 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
   - Point ``gitea_customize_files_path`` to this directory. *(Default ``{{ gitea_custom_search }}/gitea_files/``)*
 
 ## Requirements
-This role uses only the ``ansible.builtin`` Modules and does not need any other collections to run. But to download the latest forgejo/gitea release, we use json_query. This requires jmespath to be available
+This role uses the ``ansible.builtin`` amd ``community.general`` Ansible Collections. Ant to download the latest forgejo/gitea release, we use json_query. This requires ``jmespath`` to be available
 
 ### Python Packages
-+ json_query
++ jmespath
 
+### Galaxy Collections
++ community.general
+
+
+### Example Requirements Installation
+```
+ansible-galaxy install community.general
+pip3 install jmespath
+```
 
 ## Contributing
 Don't hesitate to create a pull request, and when in doubt you can reach me on
