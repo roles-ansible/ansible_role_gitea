@@ -66,6 +66,7 @@
       when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
 
     - name: Check archive signature
+      become: false
       ansible.builtin.command: "gpg --verify /tmp/{{ gitea_filename }}.asc /tmp/{{ gitea_filename }}"
       changed_when: false
 
