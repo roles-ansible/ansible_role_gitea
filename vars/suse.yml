@@ -1,0 +1,5 @@
+---
+gitea_dependencies:
+  - git
+  - gpg2
+  - xz
