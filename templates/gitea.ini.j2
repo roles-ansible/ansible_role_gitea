@@ -271,6 +271,15 @@ PATH          = {{ gitea_lfs_content_path }}
 {% endif %}
 ;
 ;
+{% if gitea_actions_enabled | bool %}
+; -> https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions
+[actons]
+ENABLED  = {{ gitea_actions_enabled }}
+DEFAULT_ACTIONS_URL = {{ gitea_actions_default_actions_url }}
+{{ gitea_actions_extra }}
+{% endif %}
+;
+;
 ; Other (other)
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
 [other]
