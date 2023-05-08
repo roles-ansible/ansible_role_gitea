@@ -227,6 +227,10 @@ gitea_lfs_serve_direct: false
 gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
 gitea_lfs_extra: ''
 
+# Actions (actions)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions
+gitea_actions_enabled: false
+gitea_actions_default_actions_url: "https://gitea.com"
 # Other (other)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
 gitea_other_show_footer_branding: false
