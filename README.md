@@ -293,13 +293,14 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_lfs_storage_type` | `local` | Storage type for lfs |
 | `gitea_lfs_serve_direct` | `false` | Allows the storage driver to redirect to authenticated URLs to serve files directly. *(only Minio/S3)* |
 | `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files |
-| `gitea_lfs_extra` ||you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
+| `gitea_lfs_extra` | | you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
 
 ### Actions ([actions](https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globaly. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
 | `gitea_actions_default_actions_url` | `https://gitea.com/` | Default address to get action plugins, e.g. the default value means downloading from `https://gitea.com/actions/checkout` for `uses: actions/checkout@v3` |
+| `gitea_actions_extra` | | you can use this variable to pass additional config parameters in the `[actions]` section of the config. |
 
 ### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
 | variable name | default value | description |
