@@ -35,18 +35,24 @@
         gitea_version_target: "{{ gitea_remote_version }}"
       when: not ansible_check_mode
 
-- name: "Set gitea version target {{ gitea_version }}"
+- name: "Set forgejo version target {{ gitea_version }}"
   ansible.builtin.set_fact:
     gitea_version_target: "{{ gitea_version }}"
   when: gitea_version != "latest"
 
-- name: "Get specific forgejo release metadata"
-  ansible.builtin.uri:
-    url: 'https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}'
-    return_content: true
-  register: gitea_forgejo_remote_tags_metadata
-  become: false
+- name: "Download forgejo version {{ gitea_version_target }}"
   when: not ansible_check_mode
+  block:
+    - name: "Get specific forgejo release metadata"
+      ansible.builtin.uri:
+        url: 'https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}'
+        return_content: true
+      register: gitea_forgejo_remote_tags_metadata
+      become: false
+  rescue:
+    - name: "Error Downloading https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}"
+      ansible.builtin.fail:
+        msg: "We did not find the forgejo version you specified. Are you sure that '{{ gitea_version_target }}' is a valid forgejo version?"
 
 - name: "Generate forgejo download url"
   ansible.builtin.set_fact:
