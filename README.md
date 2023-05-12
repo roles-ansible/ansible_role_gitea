@@ -257,6 +257,8 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
+| `gitea_attachment_types` | see Docs | Comma-separated list of allowed file extensions (`.zip,.txt`), mime types (`text/plain`) or wildcard type (`image/*`, `audio/*`, `video/*`). Empty value or `*/*` allows all types. |
+| `gitea_attachment_max_size` | `4` | Maximum size (MB). |
 | `gitea_attachment_extra_config` | | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
 
 ### Log ([log](https://docs.gitea.io/en-us/config-cheat-sheet/#log-log))

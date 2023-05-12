@@ -216,8 +216,10 @@ AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
 ;
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 [attachment]
-ENABLED = {{ gitea_attachment_enabled | ternary('true', 'false') }}
-PATH    = {{ gitea_home }}/data/attachments
+ENABLED         = {{ gitea_attachment_enabled | ternary('true', 'false') }}
+ALLOWED_TYPES   = {{ gitea_attachment_types }}
+MAX_SIZE        = {{ gitea_attachment_max_size }}
+PATH            = {{ gitea_home }}/data/attachments
 {{ gitea_attachment_extra_config }}
 ;
 ;
