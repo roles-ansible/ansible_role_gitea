@@ -94,6 +94,12 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_user_repo_limit` | `-1` | Limit how many repos a user can have *(`-1` for unlimited)* |
 | `gitea_repository_root` | `{{ gitea_home }}/repos` |  Root path for storing all repository data. It must be an absolute path. |
 | `gitea_repository_extra_config` | | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
+
+### Repository - Upload ([repository.upload](https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload)) 
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_repository_upload_enabled` | `true` | Whether repository file uploads are enabled |
+| `gitea_repository_upload_max_size` | `4` | Max size of each file in megabytes. |
 | `gitea_repository_upload_extra_config` | | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
 
 ### Repository - Signing ([repository.signing](https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning))
@@ -251,6 +257,8 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
+| `gitea_attachment_types` | see Docs | Comma-separated list of allowed file extensions (`.zip,.txt`), mime types (`text/plain`) or wildcard type (`image/*`, `audio/*`, `video/*`). Empty value or `*/*` allows all types. |
+| `gitea_attachment_max_size` | `4` | Maximum size (MB). |
 | `gitea_attachment_extra_config` | | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
 
 ### Log ([log](https://docs.gitea.io/en-us/config-cheat-sheet/#log-log))

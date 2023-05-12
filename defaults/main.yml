@@ -45,6 +45,11 @@ gitea_force_private: false
 gitea_user_repo_limit: '-1'
 gitea_repository_root: "{{ gitea_home }}/repos"
 gitea_repository_extra_config: ''
+
+# Repository - Upload (repository.upload)
+# -> https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload
+gitea_repository_upload_enabled: true
+gitea_repository_upload_max_size: 4
 gitea_repository_upload_extra_config: ''
 
 # Repository - Signing (repository.signing)
@@ -189,6 +194,8 @@ gitea_picture_extra_config: ''
 # Issue and pull request attachments (attachment)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 gitea_attachment_enabled: true
+gitea_attachment_types: '.csv,.docx,.fodg,.fodp,.fods,.fodt,.gif,.gz,.jpeg,.jpg,.log,.md,.mov,.mp4,.odf,.odg,.odp,.ods,.odt,.patch,.pdf,.png,.pptx,.svg,.tgz,.txt,.webm,.xls,.xlsx,.zip'
+gitea_attachment_max_size: 4
 gitea_attachment_extra_config: ''
 
 # Log (log)
