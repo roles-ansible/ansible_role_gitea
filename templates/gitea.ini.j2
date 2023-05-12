@@ -27,8 +27,11 @@ DEFAULT_BRANCH          = {{ gitea_default_branch }}
 {{ gitea_repository_extra_config }}
 ;
 ;
+; -> https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload
 [repository.upload]
+ENABLED             = {{ gitea_repository_upload_enabled | ternary('true', 'false') }}
 TEMP_PATH           = {{ gitea_home }}/data/tmp/uploads
+FILE_MAX_SIZE       = {{ gitea_repository_upload_max_size }}
 {{ gitea_repository_upload_extra_config }}
 ;
 ;

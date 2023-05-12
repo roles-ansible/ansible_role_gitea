@@ -45,6 +45,11 @@ gitea_force_private: false
 gitea_user_repo_limit: '-1'
 gitea_repository_root: "{{ gitea_home }}/repos"
 gitea_repository_extra_config: ''
+
+# Repository - Upload (repository.upload) 
+# -> https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload
+gitea_repository_upload_enabled: true
+gitea_repository_upload_max_size: 4
 gitea_repository_upload_extra_config: ''
 
 # Repository - Signing (repository.signing)
