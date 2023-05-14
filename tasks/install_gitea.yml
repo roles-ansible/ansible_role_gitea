@@ -68,6 +68,7 @@
     - name: Check archive signature
       ansible.builtin.command: "gpg --verify /tmp/{{ gitea_filename }}.xz.asc /tmp/{{ gitea_filename }}.xz"
       changed_when: false
+      become: false
 
     - name: Unpack gitea binary
       ansible.builtin.command:
