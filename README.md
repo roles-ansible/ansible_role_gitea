@@ -313,7 +313,6 @@ Either you define exactly which release you install. Or you use the option ``lat
 ### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_other_show_footer_branding` | `false` | Show Gitea branding in the footer. |
 | `gitea_other_show_footer_version` | `true` | Show Gitea and Go version information in the footer. |
 | `gitea_other_show_footer_template_load_time` | `true` | Show time of template execution in the footer. |
 | `gitea_other_enable_sitemap` | `true` | Generate sitemap. |

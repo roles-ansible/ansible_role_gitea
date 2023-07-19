@@ -288,7 +288,6 @@ DEFAULT_ACTIONS_URL = {{ gitea_actions_default_actions_url }}
 ; Other (other)
 ; -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
 [other]
-SHOW_FOOTER_BRANDING           = {{ gitea_other_show_footer_branding | ternary('true', 'false') }}
 SHOW_FOOTER_VERSION            = {{ gitea_other_show_footer_version | ternary('true', 'false') }}
 SHOW_FOOTER_TEMPLATE_LOAD_TIME = {{ gitea_other_show_footer_template_load_time | ternary('true', 'false') }}
 ENABLE_SITEMAP                 = {{ gitea_other_enable_sitemap | ternary('true', 'false') }}
