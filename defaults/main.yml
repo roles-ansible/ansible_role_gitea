@@ -242,7 +242,6 @@ gitea_actions_extra: ''
 
 # Other (other)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
-gitea_other_show_footer_branding: false
 gitea_other_show_footer_version: true
 gitea_other_show_footer_template_load_time: true
 gitea_other_enable_sitemap: true
