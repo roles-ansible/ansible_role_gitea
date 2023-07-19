@@ -2,22 +2,22 @@
 name: Ansible Lint check
 
 # yamllint disable-line rule:truthy
-on:
-  push:
-    branches: '*'
-  pull_request:
-    branches: '*'
+on: [push, pull_request]
 
 jobs:
   build:
-
+    name: Ansible Lint
     runs-on: ubuntu-latest
 
     steps:
       - name: 'checkout git repo'
         uses: actions/checkout@v3
+        with:
+          lfs: true
+          submodules: false
+          fetch-depth: 0
 
       - name: 'Lint Ansible Playbook'
         uses: ansible/ansible-lint-action@v6
         with:
-          targets: "."
+          path: "."
