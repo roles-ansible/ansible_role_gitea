@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User={{ gitea_user }}
 Group={{ gitea_group }}
-ExecStart={{ gitea_full_executable_path }} web --config {{ gitea_configuraion_path }}/gitea.ini --custom-path {{ gitea_custom }}/
+ExecStart={{ gitea_full_executable_path }} web --config {{ gitea_configuration_path }}/gitea.ini --custom-path {{ gitea_custom }}/
 Restart=on-failure
 WorkingDirectory={{ gitea_home }}
 {% if gitea_systemd_cap_net_bind_service %}
