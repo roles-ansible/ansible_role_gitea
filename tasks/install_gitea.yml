@@ -59,7 +59,7 @@
         verbosity: 1
 
     - name: Import gitea gpg key
-      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_gpg_key }}"
+      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --keyserver-option '{{ gitea_gpg_keyserver_option }}' --recv {{ gitea_gpg_key }}"
       register: _gitea_import_key
       become: false
       changed_when: '"imported: 1" in _gitea_import_key.stderr'
