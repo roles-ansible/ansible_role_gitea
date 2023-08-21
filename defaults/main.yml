@@ -21,7 +21,7 @@ gitea_home: '/var/lib/gitea'
 gitea_user_home: '{{ gitea_home }}'
 gitea_executable_path: '/usr/local/bin/gitea'
 gitea_forgejo_executable_path: '/usr/local/bin/forgejo'
-gitea_configuraion_path: '/etc/gitea'
+gitea_configuration_path: '/etc/gitea'
 gitea_shell: '/bin/false'
 gitea_systemd_cap_net_bind_service: false
 
@@ -46,6 +46,11 @@ gitea_force_private: false
 gitea_user_repo_limit: '-1'
 gitea_repository_root: "{{ gitea_home }}/repos"
 gitea_repository_extra_config: ''
+
+# Repository - Upload (repository.upload)
+# -> https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload
+gitea_repository_upload_enabled: true
+gitea_repository_upload_max_size: 4
 gitea_repository_upload_extra_config: ''
 
 # Repository - Signing (repository.signing)
@@ -190,6 +195,8 @@ gitea_picture_extra_config: ''
 # Issue and pull request attachments (attachment)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment
 gitea_attachment_enabled: true
+gitea_attachment_types: '.csv,.docx,.fodg,.fodp,.fods,.fodt,.gif,.gz,.jpeg,.jpg,.log,.md,.mov,.mp4,.odf,.odg,.odp,.ods,.odt,.patch,.pdf,.png,.pptx,.svg,.tgz,.txt,.webm,.xls,.xlsx,.zip'
+gitea_attachment_max_size: 4
 gitea_attachment_extra_config: ''
 
 # Log (log)
@@ -228,9 +235,14 @@ gitea_lfs_serve_direct: false
 gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
 gitea_lfs_extra: ''
 
+# Actions (actions)
+# -> https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions
+gitea_actions_enabled: false
+gitea_actions_default_actions_url: "https://gitea.com"
+gitea_actions_extra: ''
+
 # Other (other)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other
-gitea_other_show_footer_branding: false
 gitea_other_show_footer_version: true
 gitea_other_show_footer_template_load_time: true
 gitea_other_enable_sitemap: true
