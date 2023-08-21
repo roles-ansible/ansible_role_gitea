@@ -29,7 +29,7 @@
     - name: Backing up gitea before upgrade
       become: true
       ansible.builtin.command:
-        cmd: "sudo -u {{ gitea_user }} {{ gitea_full_executable_path }} dump -c {{ gitea_configuraion_path }}/gitea.ini"
+        cmd: "sudo -u {{ gitea_user }} {{ gitea_full_executable_path }} dump -c {{ gitea_configuration_path }}/gitea.ini"
         chdir: "{{ gitea_backup_location }}"
       changed_when: true
   rescue:

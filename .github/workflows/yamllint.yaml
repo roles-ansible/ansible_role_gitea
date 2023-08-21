@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: 'Yamllint'
-        uses: karancode/yamllint-github-action@v2.0.0
+        uses: karancode/yamllint-github-action@v2.1.1
         with:
           yamllint_file_or_dir: '.'
           yamllint_config_filepath: './.yamllint'

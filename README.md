@@ -67,7 +67,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_user_home` | `{{ gitea_home }}` | home of gitea user |
 | `gitea_executable_path` | `/usr/local/bin/gitea` | Path for gitea executable |
 | `gitea_forgejo_executable_path` | `/usr/local/bin/forgejo` | Path for forgejo executable |
-| `gitea_configuraion_path` | `/etc/gitea` | Where to put the gitea.ini config |
+| `gitea_configuration_path` | `/etc/gitea` | Where to put the gitea.ini config |
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
 
@@ -94,6 +94,12 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_user_repo_limit` | `-1` | Limit how many repos a user can have *(`-1` for unlimited)* |
 | `gitea_repository_root` | `{{ gitea_home }}/repos` |  Root path for storing all repository data. It must be an absolute path. |
 | `gitea_repository_extra_config` | | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
+
+### Repository - Upload ([repository.upload](https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload)) 
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_repository_upload_enabled` | `true` | Whether repository file uploads are enabled |
+| `gitea_repository_upload_max_size` | `4` | Max size of each file in megabytes. |
 | `gitea_repository_upload_extra_config` | | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
 
 ### Repository - Signing ([repository.signing](https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning))
@@ -251,6 +257,8 @@ Either you define exactly which release you install. Or you use the option ``lat
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
+| `gitea_attachment_types` | see Docs | Comma-separated list of allowed file extensions (`.zip,.txt`), mime types (`text/plain`) or wildcard type (`image/*`, `audio/*`, `video/*`). Empty value or `*/*` allows all types. |
+| `gitea_attachment_max_size` | `4` | Maximum size (MB). |
 | `gitea_attachment_extra_config` | | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
 
 ### Log ([log](https://docs.gitea.io/en-us/config-cheat-sheet/#log-log))
@@ -293,12 +301,18 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_lfs_storage_type` | `local` | Storage type for lfs |
 | `gitea_lfs_serve_direct` | `false` | Allows the storage driver to redirect to authenticated URLs to serve files directly. *(only Minio/S3)* |
 | `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files |
-| `gitea_lfs_extra` ||you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
+| `gitea_lfs_extra` | | you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
+
+### Actions ([actions](https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions))
+| variable name | default value | description |
+| ------------- | ------------- | ----------- |
+| `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globaly. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
+| `gitea_actions_default_actions_url` | `https://gitea.com/` | Default address to get action plugins, e.g. the default value means downloading from `https://gitea.com/actions/checkout` for `uses: actions/checkout@v3` |
+| `gitea_actions_extra` | | you can use this variable to pass additional config parameters in the `[actions]` section of the config. |
 
 ### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_other_show_footer_branding` | `false` | Show Gitea branding in the footer. |
 | `gitea_other_show_footer_version` | `true` | Show Gitea and Go version information in the footer. |
 | `gitea_other_show_footer_template_load_time` | `true` | Show time of template execution in the footer. |
 | `gitea_other_enable_sitemap` | `true` | Generate sitemap. |

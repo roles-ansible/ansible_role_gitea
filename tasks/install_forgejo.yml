@@ -51,6 +51,7 @@
       ansible.builtin.command: "gpg --list-keys 0x{{ gitea_forgejo_gpg_key }}"
       register: _gitea_gpg_key_status
       changed_when: false
+      become: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
     - name: Print gpg key staus on verbosity
