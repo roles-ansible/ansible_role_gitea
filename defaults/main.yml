@@ -164,6 +164,19 @@ gitea_only_allow_external_registration: false
 gitea_enable_notify_mail: false
 gitea_auto_watch_new_repos: true
 gitea_service_extra_config: ''
+gitea_autowatch_new_repo: false
+gitea_autowatch_on_change: true
+# make sure, that register_email_confirm is false when register_manual_confirm is set to true
+gitea_register_email_confirm: false
+gitea_register_manual_confirm: true
+gitea_default_allow_create_organization: false
+gitea_default_user_is_restricted: true
+gitea_email_domain_allowlist: ""
+gitea_auto_watch_new_repos: false
+gitea_default_user_visibility: limited
+gitea_default_org_visibility: limited
+gitea_allow_only_internal_registration: true
+# gitea_email_domain_allowlist: ""
 
 # Mailer [mailer]
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer
