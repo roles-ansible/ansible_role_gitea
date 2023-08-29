@@ -175,17 +175,18 @@ DEFAULT_KEEP_EMAIL_PRIVATE = {{ gitea_default_keep_mail_private | ternary('true'
 SHOW_REGISTRATION_BUTTON = {{ gitea_show_registration_button | ternary('true', 'false') }}
 AUTO_WATCH_NEW_REPOS = {{ gitea_auto_watch_new_repos | ternary('true', 'false') }}
 ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
-AUTO_WATCH_ON_CHANGES = {{ gitea_autowatch_on_change }}
-SHOW_MILESTONES_DASHBOARD_PAGE = {{ gitea_show_mailstones_dashboard }}
-REGISTER_MANUAL_CONFIRM = {{ gitea_register_manual_confirm }}
-DEFAULT_ALLOW_CREATE_ORGANIZATION = {{ gitea_default_allow_create_organization }}
-DEFAULT_USER_IS_RESTRICTED = {{ gitea_default_user_is_restricted }}
-{% if gitea_email_domain_allowlist is defined and gitea_email_domain_allowlist|length  %}
+AUTO_WATCH_ON_CHANGES = {{ gitea_autowatch_on_change | ternary('true', 'false') }}
+SHOW_MILESTONES_DASHBOARD_PAGE = {{ gitea_show_milestones_dashboard_page | ternary('true', 'false') }}
+REGISTER_MANUAL_CONFIRM = {{ gitea_register_manual_confirm | ternary('true', 'false') }}
+DEFAULT_ALLOW_CREATE_ORGANIZATION = {{ gitea_default_allow_create_organization | ternary('true', 'false') }}
+DEFAULT_USER_IS_RESTRICTED = {{ gitea_default_user_is_restricted | ternary('true', 'false') }}
+{% if gitea_email_domain_allowlist is defined and gitea_email_domain_allowlist | length  %}
 EMAIL_DOMAIN_ALLOWLIST = {{ gitea_email_domain_allowlist }}
 {% endif %}
-DEFAULT_USER_VISIBILITY = {{ gitea_default_user_visibility }}
-DEFAULT_ORG_VISIBILITY = {{ gitea_default_org_visibility }}
-ALLOW_ONLY_INTERNAL_REGISTRATION = {{ gitea_allow_only_internal_registration }}
+DEFAULT_USER_VISIBILITY = {{ gitea_default_user_visibility | ternary('true', 'false') }}
+DEFAULT_ORG_VISIBILITY = {{ gitea_default_org_visibility | ternary('true', 'false') }}
+ALLOW_ONLY_INTERNAL_REGISTRATION = {{ gitea_allow_only_internal_registration | ternary('true', 'false') }}
+ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_allow_only_external_registration | ternary('true', 'false') }}
 {{ gitea_service_extra_config }}
 ; 
 ; 

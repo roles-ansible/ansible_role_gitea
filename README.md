@@ -221,6 +221,16 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_only_allow_external_registration` | `false` | Set to true to force registration only using third-party services (true/false) |
 | `gitea_enable_notify_mail` | `false` | Enable this to send e-mail to watchers of a repository when something happens, like creating issues (true/false) |
 | `gitea_auto_watch_new_repos` | `true` | Enable this to let all organisation users watch new repos when they are created (true/false) |
+| `gitea_autowatch_on_change` | `true` | Enable this to make users watch a repository after their first commit to it (true/false) |
+| `gitea_register_manual_confirm` | `false` | Enable this to manually confirm new registrations. Requires REGISTER_EMAIL_CONFIRM to be disabled. |
+| `gitea_default_allow_create_organization` | `true` | Allow new users to create organizations by default (true/false) |
+| `gitea_email_domain_allowlist` | | If non-empty, comma separated list of domain names that can only be used to register on this instance, wildcard is supported. |
+| `gitea_default_user_visibility` | `public` | Set default visibility mode for users, either "public", "limited" or "private". |
+| `gitea_default_org_visibility` | `public` | Set default visibility mode for organisations, either "public", "limited" or "private". |
+| `gitea_allow_only_internal_registration` | `false` | Set to true to force registration only via Gitea. |
+| `gitea_allow_only_external_registration` | `false` | Set to true to force registration only using third-party services. |
+| `gitea_show_milestones_dashboard_page` | `true` | Enable this to show the milestones dashboard page - a view of all the user's milestones |
+| `gitea_default_user_is_restricted` | `false` | Give new users restricted permissions by default (true/false) |
 | `gitea_service_extra_config` | | you can use this variable to pass additional config parameters in the `[service]` section of the config. |
 
 ### Mailer ([mailer](https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer))
