@@ -54,7 +54,7 @@
       become: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
-    - name: Print gpg key staus on verbosity
+    - name: Print gpg key status on verbosity
       ansible.builtin.debug:
         msg: "{{ _gitea_gpg_key_status.stdout }}"
         verbosity: 1
