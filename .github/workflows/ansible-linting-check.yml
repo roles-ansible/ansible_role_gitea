@@ -18,6 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run ansible-lint
-        uses: ansible-actions/ansible-lint-action@v0.0.2
+        uses: ansible-actions/ansible-lint-action@v0.0.3
         with:
           target: "./"
+          python_dependency: "jmespath"
