@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: 'checkout git repo'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.0
         with:
           lfs: true
           submodules: false
           fetch-depth: 0
 
-      - name: 'Lint Ansible Playbook'
-        uses: ansible/ansible-lint-action@v6
+      - name: Run ansible-lint
+        uses: ansible-actions/ansible-lint-action@v0.0.2
         with:
-          path: "."
+          target: "./"
