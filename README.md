@@ -33,7 +33,7 @@ The following code has been tested with the latest Debian Stable, it should work
 
  Variables
 -----------
-Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.io/en-us/config-cheat-sheet/).
+Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.com/administration/config-cheat-sheet).
 
 ### Chose between gitea and forgejo
 There is a fork of gitea called forgejo. Why? Read the [forgejo FAQ](https://forgejo.org/faq/).
@@ -71,7 +71,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
 
-### Overall ([DEFAULT](https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default))
+### Overall ([DEFAULT](https://docs.gitea.com/administration/config-cheat-sheet#overall-default))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_app_name` | `Gitea` | Displayed application name |
@@ -79,7 +79,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_run_mode`| `prod`| Application run mode, affects performance and debugging. Either “dev”, “prod” or “test”. |
 | `gitea_fqdn` | `localhost` | Base FQDN for the installation, used as default for other variables. Set it to the FQDN where you can reach your gitea server |
 
-### Repository ([repository](https://docs.gitea.io/en-us/config-cheat-sheet/#repository-repository))
+### Repository ([repository](https://docs.gitea.com/administration/config-cheat-sheet#repository-repository))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_default_branch` | `main` | Default branch name of all repositories. |
@@ -95,14 +95,14 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_repository_root` | `{{ gitea_home }}/repos` |  Root path for storing all repository data. It must be an absolute path. |
 | `gitea_repository_extra_config` | | you can use this variable to pass additional config parameters in the `[repository]` section of the config. |
 
-### Repository - Upload ([repository.upload](https://docs.gitea.io/en-us/administration/config-cheat-sheet/#repository---upload-repositoryupload)) 
+### Repository - Upload ([repository.upload](https://docs.gitea.io/en-us/administration/config-cheat-sheet#repository---upload-repositoryupload))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_repository_upload_enabled` | `true` | Whether repository file uploads are enabled |
 | `gitea_repository_upload_max_size` | `4` | Max size of each file in megabytes. |
 | `gitea_repository_upload_extra_config` | | you can use this variable to pass additional config parameters in the `[repository.upload]` section of the config. |
 
-### Repository - Signing ([repository.signing](https://docs.gitea.io/en-us/config-cheat-sheet/#repository---signing-repositorysigning))
+### Repository - Signing ([repository.signing](https://docs.gitea.com/administration/config-cheat-sheet#repository---signing-repositorysigning))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_enable_repo_signing_options` | `false` | Allow to configure repo signing options |
@@ -116,7 +116,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_repo_merges` | *(see defaults)* | Sign merges. |
 | `gitea_enable_repo_signing_extra` | | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
 
-### CORS ([cors](https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors))
+### CORS ([cors](https://docs.gitea.com/administration/config-cheat-sheet#cors-cors))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_enable_cors` | `false` | enable cors headers (disabled by default) |
@@ -130,7 +130,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_cors_x_frame_options` | `SAMEORIGIN` |  Set the `X-Frame-Options` header value. |
 | `gitea_cors_extra` | | you can use this variable to pass additional config parameters in the `[cors]` section of the config. |
 
-### UI ([ui](https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui))
+### UI ([ui](https://docs.gitea.com/administration/config-cheat-sheet#ui-ui))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
@@ -138,7 +138,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_themes` | `auto,gitea,arc-green` | List of enabled themes |
 | `gitea_ui_extra_config` | | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
 
-### UI - Meta ([ui.meta](https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta))
+### UI - Meta ([ui.meta](https://docs.gitea.com/administration/config-cheat-sheet#ui---metadata-uimeta))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_ui_author` | *(see defaults)* | Author meta tag of the homepage. |
@@ -146,7 +146,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_ui_keywords` | *(see defaults)* | Keywords meta tag of the homepage |
 | `gitea_ui_meta_extra_config` | | you can use this variable to pass additional config parameters in the `[ui.meta]` section of the config. |
 
-### Server ([server](https://docs.gitea.io/en-us/config-cheat-sheet/#server-server))
+### Server ([server](https://docs.gitea.com/administration/config-cheat-sheet#server-server))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_protocol`| `http` | Listening protocol [http, https, fcgi, unix, fcgi+unix] |
@@ -175,7 +175,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_acme_ca_root` | | The CA’s root certificate. If left empty, it defaults to using the system’s trust chain. |
 | `gitea_server_extra_config` |  | you can use this variable to pass additional config parameters in the `[server]` section of the config. |
 
-### Database ([database](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database))
+### Database ([database](https://docs.gitea.com/administration/config-cheat-sheet#database-database))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_db_type` | `sqlite3` | The database type in use `[mysql, postgres, mssql, sqlite3]`. |
@@ -183,12 +183,12 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_db_name` | `root` | Database name |
 | `gitea_db_user` | `gitea` | Database username |
 | `gitea_db_password` | `lel` | Database password. **PLEASE CHANGE** |
-| `gitea_db_ssl` | `disable` | Configure SSL only if your database type supports it. Have a look into the [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/#database-database) for more detailed information |
+| `gitea_db_ssl` | `disable` | Configure SSL only if your database type supports it. Have a look into the [config-cheat-sheet](https://docs.gitea.com/administration/config-cheat-sheet#database-database) for more detailed information |
 | `gitea_db_path` | `{{ gitea_home }}/data/gitea.db` | DB path, if you use `sqlite3`. |
 | `gitea_db_log_sql` | `false` | Log the executed SQL. |
 | `gitea_database_extra_config` | | you can use this variable to pass additional config parameters in the `[database]` section of the config. |
 
-### Indexer ([indexer](https://docs.gitea.io/en-us/config-cheat-sheet/#indexer-indexer))
+### Indexer ([indexer](https://docs.gitea.com/administration/config-cheat-sheet#indexer-indexer))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_repo_indexer_enabled` | `false` | Enables code search *(uses a lot of disk space, about 6 times more than the repository size).* |
@@ -199,7 +199,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_indexer_extra_config` |  | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
 | `gitea_queue_issue_indexer_extra_config` | | | you can use this variable to pass additional config parameters in the `[queue.issue_indexer]` section of the config. |
 
-### Security ([security](https://docs.gitea.io/en-us/config-cheat-sheet/#security-security))
+### Security ([security](https://docs.gitea.com/administration/config-cheat-sheet#security-security))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_secret_key` | | Global secret key. Will be autogenerated if not defined. Should be unique. |
@@ -209,7 +209,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_password_check_pwn` | `false` | Check [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if a password has been exposed. |
 | `gitea_security_extra_config` | | you can use this variable to pass additional config parameters in the `[security]` section of the config. |
 
-### Service ([service](https://docs.gitea.io/en-us/config-cheat-sheet/#service-service))
+### Service ([service](https://docs.gitea.com/administration/config-cheat-sheet#service-service))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_disable_registration` | `false` | Do you want to disable user registration? (true/false) |
@@ -233,7 +233,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_default_user_is_restricted` | `false` | Give new users restricted permissions by default (true/false) |
 | `gitea_service_extra_config` | | you can use this variable to pass additional config parameters in the `[service]` section of the config. |
 
-### Mailer ([mailer](https://docs.gitea.io/en-us/config-cheat-sheet/#mailer-mailer))
+### Mailer ([mailer](https://docs.gitea.com/administration/config-cheat-sheet#mailer-mailer))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_mailer_enabled` | `false` | Whether to enable the mailer. |
@@ -252,18 +252,18 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_mailer_send_as_plaintext` | `false` | Send mails only in plain text, without HTML alternative. |
 | `gitea_mailer_extra_config` | | you can use this variable to pass additional config parameters in the `[mailer]` section of the config. |
 
-### Session ([session](https://docs.gitea.io/en-us/config-cheat-sheet/#session-session))
+### Session ([session](https://docs.gitea.com/administration/config-cheat-sheet#session-session))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_session_provider` | `file` | Session engine provider |
 | `gitea_session_extra_config` | | you can use this variable to pass additional config parameters in the `[session]` section of the config. |
 
-### Picture ([picture](https://docs.gitea.io/en-us/config-cheat-sheet/#picture-picture))
+### Picture ([picture](https://docs.gitea.com/administration/config-cheat-sheet#picture-picture))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_picture_extra_config` | | you can use this variable to pass additional config parameters in the `[picture]` section of the config. |
 
-### Issue and pull request attachments ([attachment](https://docs.gitea.io/en-us/config-cheat-sheet/#issue-and-pull-request-attachments-attachment))
+### Issue and pull request attachments ([attachment](https://docs.gitea.com/administration/config-cheat-sheet#issue-and-pull-request-attachments-attachment))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `attachment_enabled` | `true` | Whether issue and pull request attachments are enabled. |
@@ -271,41 +271,41 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_attachment_max_size` | `4` | Maximum size (MB). |
 | `gitea_attachment_extra_config` | | you can use this variable to pass additional config parameters in the `[attachment]` section of the config. |
 
-### Log ([log](https://docs.gitea.io/en-us/config-cheat-sheet/#log-log))
+### Log ([log](https://docs.gitea.com/administration/config-cheat-sheet#log-log))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_log_systemd` | `false` | Disable logging into `file`, use systemd-journald |
 | `gitea_log_level` | `Warn` | General log level. `[Trace, Debug, Info, Warn, Error, Critical, Fatal, None]` |
 | `gitea_log_extra_config` | | you can use this variable to pass additional config parameters in the `[log]` section of the config. |
 
-### Metrics ([metrics](https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics))
+### Metrics ([metrics](https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_metrics_enabled`| `false` | Enable the metrics endpoint |
 | `gitea_metrics_token`| | Bearer token for the Prometheus scrape job |
 | `gitea_metrics_extra` | | you can use this variable to pass additional config parameters in the `[metrics]` section of the config. |
 
-### OAuth2 ([oauth2](https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2))
+### OAuth2 ([oauth2](https://docs.gitea.com/administration/config-cheat-sheet#oauth2-oauth2))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_oauth2_enabled` | `true` | Enable the Oauth2 provider (true/false) |
 | `gitea_oauth2_jwt_secret` |  | Oauth2 JWT secret. Can be generated with ``gitea generate secret JWT_SECRET``. Will be autogenerated if not defined. |
 | `gitea_oauth2_extra_config` |  | you can use this variable to pass additional config parameters in the `[oauth2]` section of the config. |
 
-### Federation ([federation](https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation))
+### Federation ([federation](https://docs.gitea.com/administration/config-cheat-sheet#federation-federation))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_federation_enabled` | `false` | Enable/Disable federation capabilities |
 | `gitea_federation_share_user_stats` | `false` | Enable/Disable user statistics for nodeinfo if federation is enabled |
 | `gitea_federation_extra` | | you can use this variable to pass additional config parameters in the `[federation]` section of the config. |
 
-### Packages ([packages](https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages))
+### Packages ([packages](https://docs.gitea.com/administration/config-cheat-sheet#packages-packages))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_packages_enabled` | `true` | Enable/Disable package registry capabilities |
 | `gitea_packages_extra` | |you can use this variable to pass additional config parameters in the `[packages]` section of the config. |
 
-### LFS ([lfs](https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs))
+### LFS ([lfs](https://docs.gitea.com/administration/config-cheat-sheet#lfs-lfs))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_lfs_storage_type` | `local` | Storage type for lfs |
@@ -313,14 +313,14 @@ Either you define exactly which release you install. Or you use the option ``lat
 | `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files |
 | `gitea_lfs_extra` | | you can use this variable to pass additional config parameters in the `[lfs]` section of the config. |
 
-### Actions ([actions](https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions))
+### Actions ([actions](https://docs.gitea.com/administration/config-cheat-sheet#actions-actions))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globaly. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
 | `gitea_actions_default_actions_url` | `https://gitea.com/` | Default address to get action plugins, e.g. the default value means downloading from `https://gitea.com/actions/checkout` for `uses: actions/checkout@v3` |
 | `gitea_actions_extra` | | you can use this variable to pass additional config parameters in the `[actions]` section of the config. |
 
-### Other ([other](https://docs.gitea.io/en-us/config-cheat-sheet/#other-other))
+### Other ([other](https://docs.gitea.com/administration/config-cheat-sheet#other-other))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_other_show_footer_version` | `true` | Show Gitea and Go version information in the footer. |
@@ -331,7 +331,7 @@ Either you define exactly which release you install. Or you use the option ``lat
 ### additional gitea config
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_extra_config` | | Additional gitea configuration. Have a look at the [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/) before using it! |
+| `gitea_extra_config` | | Additional gitea configuration. Have a look at the [config-cheat-sheet](https://docs.gitea.com/administration/config-cheat-sheet) before using it! |
 
 ### Fail2Ban configuration
 
