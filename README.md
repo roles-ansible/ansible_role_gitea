@@ -1,4 +1,4 @@
-[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.gitea.svg)](https://galaxy.ansible.com/l3d/gitea)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/l3d/gitea/)
 [![BSD-3 Clause](https://ansible.l3d.space/svg/l3d.gitea_license.svg)](LICENSE)
 [![Maintainance](https://ansible.l3d.space/svg/l3d.gitea_maintainance.svg)](https://ansible.l3d.space/#l3d.gitea)
 
@@ -15,7 +15,7 @@ This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansibl
 The following code has been tested with the latest Debian Stable, it should work on Ubuntu and RedHat as well.
 
 ```yaml
-# ansible-galaxy install l3d.gitea
+# ansible-galaxy role install l3d.gitea
 
 - name: "Install gitea"
   hosts: git.example.com
@@ -385,11 +385,10 @@ This role uses the ``ansible.builtin`` and ``community.general`` ansible Collect
 ### Galaxy Collections
 + community.general
 
-
 ### Example requirements Installation
 ```
-ansible-galaxy install community.general
-pip3 install jmespath
+ansible-galaxy collection install --update --role-file requirements.yml
+pip3 install --update jmespath
 ```
 
 ## Contribute

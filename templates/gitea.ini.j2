@@ -1,8 +1,8 @@
-; this file is the configuration of your local gitea instance
+; this file is the configuration of your local Gitea instance
 ; {{ ansible_managed }}
 ;
-; This file overwrites the default values from gitea.
-; undefined variables will use the default value from gitea.
+; This file overwrites the default values from Gitea.
+; undefined variables will use the default value from Gitea.
 ; Cheat Sheet: https://docs.gitea.com/next/administration/config-cheat-sheet/
 ;
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet#overall-default
@@ -90,7 +90,7 @@ APP_DATA_PATH = {{ gitea_home }}/data
 PROTOCOL = {{ gitea_protocol }}
 DOMAIN = {{ gitea_http_domain }}
 ROOT_URL = {{ gitea_root_url }}
-HTTP_ADDR = {{ gitea_http_listen }}
+HTTP_ADDR = {{ gitea_http_listen }}
 HTTP_PORT = {{ gitea_http_port }}
 START_SSH_SERVER = {{ gitea_start_ssh | ternary('true', 'false') }}
 SSH_DOMAIN = {{ gitea_ssh_domain }}
@@ -102,7 +102,7 @@ CERT_FILE = {{ gitea_tls_cert_file }}
 KEY_FILE = {{ gitea_tls_key_file }}
 {% endif %}
 LANDING_PAGE = {{ gitea_landing_page }}
-{% if gitea_lfs_server_enabled | bool -%}
+{% if gitea_lfs_server_enabled | bool %}
 LFS_START_SERVER = true
 LFS_JWT_SECRET = {{ gitea_lfs_jwt_secret }}
 {% endif %}
@@ -110,9 +110,9 @@ REDIRECT_OTHER_PORT = {{ gitea_redirect_other_port | ternary('true', 'false') }}
 PORT_TO_REDIRECT = {{ gitea_port_to_redirect }}
 ENABLE_ACME = {{ gitea_enable_acme | ternary('true', 'false') }}
 {% if gitea_enable_acme | bool %}
-{% if gitea_acme_url != '' %}
+{%     if gitea_acme_url != '' %}
 ACME_URL = {{ gitea_acme_url }}
-{% endif %}
+{%     endif %}
 ACME_ACCEPTTOS = {{ gitea_acme_accepttos | ternary('true', 'false') }}
 ACME_DIRECTORY = {{ gitea_acme_directory }}
 ACME_EMAIL = {{ gitea_acme_email }}
@@ -194,14 +194,14 @@ ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_allow_only_external_registration | t
 [mailer]
 ENABLED = {{ gitea_mailer_enabled | ternary('true', 'false') }}
 {% if gitea_mailer_enabled | bool %}
+{%     if gitea_mailer_use_client_cert | bool %}
+CLIENT_CERT_FILE = {{ gitea_mailer_client_cert_file }}
+CLIENT_KEY_FILE = {{ gitea_mailer_client_key_file }}
+{%     endif %}
 PROTOCOL = {{ gitea_mailer_protocol }}
 SMTP_ADDR = {{ gitea_mailer_smtp_addr }}
 SMTP_PORT = {{ gitea_mailer_smtp_port }}
 USE_CLIENT_CERT = {{ gitea_mailer_use_client_cert | ternary('true', 'false') }}
-{% if gitea_mailer_use_client_cert | bool %}
-CLIENT_CERT_FILE = {{ gitea_mailer_client_cert_file }}
-CLIENT_KEY_FILE = {{ gitea_mailer_client_key_file }}
-{% endif %}
 FORCE_TRUST_SERVER_CERT = {{ gitea_mailer_force_trust_server_cert | ternary('true', 'false') }}
 USER = {{ gitea_mailer_user }}
 PASSWD = {{ gitea_mailer_password }}
@@ -305,8 +305,8 @@ SHOW_FOOTER_VERSION = {{ gitea_other_show_footer_version | ternary('true', 'fals
 SHOW_FOOTER_TEMPLATE_LOAD_TIME = {{ gitea_other_show_footer_template_load_time | ternary('true', 'false') }}
 ENABLE_SITEMAP = {{ gitea_other_enable_sitemap | ternary('true', 'false') }}
 ENABLE_FEED = {{ gitea_other_enable_feed | ternary('true', 'false') }}
-; 
-; 
-; 
+;
+;
+;
 ; Optional additional config
 {{ gitea_extra_config }}

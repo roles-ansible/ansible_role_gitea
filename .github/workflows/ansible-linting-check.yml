@@ -11,14 +11,15 @@ jobs:
 
     steps:
       - name: 'checkout git repo'
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           lfs: true
-          submodules: false
+          submodules: true
           fetch-depth: 0
 
       - name: Run ansible-lint
-        uses: ansible-actions/ansible-lint-action@v0.0.3
+        uses: ansible-actions/ansible-lint-action@v1.0.1
         with:
           target: "./"
-          python_dependency: "jmespath"
+          collections_yml: 'requirements.yml'
+          python_dependency: 'jmespath'

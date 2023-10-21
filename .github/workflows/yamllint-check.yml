@@ -1,0 +1,22 @@
+---
+name: Yamllint check
+
+# yamllint disable-line rule:truthy
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Yamllint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'checkout git repo'
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Run yamllint
+        uses: ansible-actions/yamllint-action@v0.0.1
+        with:
+          target: "./"
