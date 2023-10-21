@@ -1,0 +1,4 @@
+---
+collections:
+  - name: community.general
+    source: https://galaxy.ansible.com
