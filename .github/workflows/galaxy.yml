@@ -3,8 +3,6 @@ name: Galaxy release
 
 # yamllint disable-line rule:truthy
 on:
-  push:
-    branches: ['main']
   release:
     types: ['created']
 
