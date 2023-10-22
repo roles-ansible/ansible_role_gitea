@@ -13,8 +13,6 @@ jobs:
       - name: 'checkout git repo'
         uses: actions/checkout@v4.1.1
         with:
-          lfs: true
-          submodules: true
           fetch-depth: 0
 
       - name: Run ansible-lint
