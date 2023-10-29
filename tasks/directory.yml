@@ -7,7 +7,7 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     mode: 'u=rwX,g=rX,o='
-  with_items:
+  loop:
     - "{{ gitea_configuration_path }}"
     - "{{ gitea_user_home }}"
     - "{{ gitea_home }}"

@@ -1,4 +1,4 @@
 ---
 collections:
-  - name: community.general
-    source: https://galaxy.ansible.com
+  - name: 'community.general'
+    version: ">=7.5.0,<=8.0.0"

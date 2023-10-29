@@ -7,7 +7,7 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     mode: 'u=rwX,g=rX,o='
-  with_items:
+  loop:
     - "{{ gitea_custom }}/public"
     - "{{ gitea_custom }}/public/img"
 
@@ -20,7 +20,7 @@
     group: "{{ gitea_group }}"
     mode: '0644'
   tags: skip_ansible_lint
-  ignore_errors: true
+  failed_when: false
 
 - name: Transfer custom logo.png
   become: true
@@ -31,7 +31,7 @@
     group: "{{ gitea_group }}"
     mode: '0644'
   tags: skip_ansible_lint
-  ignore_errors: true
+  failed_when: false
 
 - name: Transfer custom favicon.png
   become: true
@@ -42,7 +42,7 @@
     group: "{{ gitea_group }}"
     mode: '0644'
   tags: skip_ansible_lint
-  ignore_errors: true
+  failed_when: false
 
 - name: Transfer custom apple-touch-icon.png
   become: true
@@ -53,4 +53,4 @@
     group: "{{ gitea_group }}"
     mode: '0644'
   tags: skip_ansible_lint
-  ignore_errors: true
+  failed_when: false

@@ -7,7 +7,7 @@
   ansible.builtin.file:
     path: '/etc/.ansible-version'
     state: directory
-    mode: 0755
+    mode: '0755'
   when: submodules_versioncheck | bool
 
 - name: Check playbook version
@@ -16,15 +16,14 @@
     src: "/etc/.ansible-version/{{ playbook_version_path }}"
   register: playbook_version
   when: submodules_versioncheck | bool
-  ignore_errors: true
   failed_when: false
 
-- name: Print remote role version
+- name: Print remote role version  # noqa: H500
   ansible.builtin.debug:
     msg: "Remote role version: {{ playbook_version.content | default('Y3VycmVudGx5IG5vdCBkZXBsb3llZAo=') | b64decode | string }}"
   when: submodules_versioncheck | bool
 
-- name: Print locale role version
+- name: Print locale role version  # noqa: H500
   ansible.builtin.debug:
     msg: "Local role version: '{{ playbook_version_number | string }}'."
   when: submodules_versioncheck | bool
