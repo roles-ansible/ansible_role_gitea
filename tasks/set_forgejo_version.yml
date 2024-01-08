@@ -101,7 +101,7 @@
   ansible.builtin.assert:
     that:
       - gitea_active_version is version(gitea_remote_version, 'lt')
-    fail_msg: ERROR: Remote version is lower then current version!
+    fail_msg: ERROR - Remote version is lower then current version!
 
 - name: Show Download URLs  # noqa: H500
   ansible.builtin.debug:

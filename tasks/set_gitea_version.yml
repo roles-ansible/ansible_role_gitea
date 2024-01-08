@@ -44,7 +44,7 @@
   ansible.builtin.assert:
     that:
       - gitea_active_version is version(gitea_remote_version, 'lt')
-    fail_msg: ERROR: Remote version is lower then current version!
+    fail_msg: ERROR - Remote version is lower then current version!
 
 - name: "Generate gitea download URL"
   ansible.builtin.set_fact:
