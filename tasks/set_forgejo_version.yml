@@ -97,6 +97,12 @@
     gitea_forgejo_signed_url: ['https://codeberg.org/attachments/ae5e50c6-e86e-4202-b95f-f142e8138e2f']
   when: ansible_check_mode
 
+- name: 'Assert that remote version is higher'
+  ansible.builtin.assert:
+    that:
+      - gitea_active_version is version(gitea_remote_version, 'lt')
+    fail_msg: ERROR - Remote version is lower then current version!
+
 - name: Show Download URLs  # noqa: H500
   ansible.builtin.debug:
     msg: "{{ item }}"

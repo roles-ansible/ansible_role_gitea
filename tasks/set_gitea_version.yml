@@ -40,6 +40,12 @@
     gitea_version_target: "{{ gitea_version }}"
   when: gitea_version != "latest"
 
+- name: 'Assert that remote version is higher'
+  ansible.builtin.assert:
+    that:
+      - gitea_active_version is version(gitea_remote_version, 'lt')
+    fail_msg: ERROR - Remote version is lower then current version!
+
 - name: "Generate gitea download URL"
   ansible.builtin.set_fact:
     gitea_dl_url: "https://github.com/go-gitea/gitea/releases/download/v{{ gitea_version_target }}/gitea-{{ gitea_version_target }}-linux-{{ gitea_arch }}"
