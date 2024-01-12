@@ -10,6 +10,12 @@ This role installs and manages [gitea](https://gitea.io) or [forgejo](https://fo
 [Source code forgejo](https://codeberg.org/forgejo/forgejo).
 This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansible.com/l3d/git). [![l3d.git](https://ansible.l3d.space/svg/l3d.git_ansible-collection_collection.svg)](https://github.com/roles-ansible/ansible_collection_git.git).
 
+## Mirrors
+The role is mirrored to:
++ Github: [github.com/roles-ansible/ansible_role_gitea](https://github.com/roles-ansible/ansible_role_gitea.git)
++ Gitea: [git.l3d.ch/ansible/ansible_role_gitea](https://git.l3d.ch/ansible/ansible_role_gitea.git)
+More about it at [ansible.l3d.space](https://ansible.l3d.space/#l3d.gitea)
+
 ## Sample Usage in a playbook
 
 The following code has been tested with the latest Debian Stable, it should work on Ubuntu and RedHat as well.

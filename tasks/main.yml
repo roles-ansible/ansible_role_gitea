@@ -31,7 +31,7 @@
     file: 'backup.yml'
   when: gitea_backup_on_upgrade|bool
 
-- name: Create gitea user and role
+- name: Create gitea user and group
   ansible.builtin.include_tasks:
     file: 'create_user.yml'
 
