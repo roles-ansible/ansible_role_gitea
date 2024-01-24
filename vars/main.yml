@@ -23,6 +23,7 @@ gitea_variables:
     - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
     - "{{ ansible_distribution | lower }}.yml"
     - "{{ ansible_os_family | lower }}.yml"
+    - 'os_fallback_defaults.yml'
   paths:
     - 'vars'
 
@@ -62,5 +63,5 @@ transfer_custom_footer:
     - 'files/gitea_footer/extra_links_footer.tmpl'
     - 'files/extra_links_footer.tmpl'
 
-playbook_version_number: 55
+playbook_version_number: 56
 playbook_version_path: 'do1jlr.gitea.version'
