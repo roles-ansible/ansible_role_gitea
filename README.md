@@ -52,6 +52,11 @@ You have the option to choose between [gitea](https://gitea.io) and [forgejo](ht
 To determine which gitea version to install, you can choose between two variants.
 Either you define exactly which release you install. Or you use the option ``latest`` to always install the latest release from the [gitea releases](https://github.com/go-gitea/gitea/releases/latest).
 
+### Forgejo update mechanism
+It is advisable to define exactly which Forgejo release you want to install. See [Forgejo releases](https://forgejo.org/releases/) for the correct value to use in `gitea_version` eg `v1.21.5`.
+
+This is because the Forgejo project maintains both `stable` and `old stable` releases and the `latest` tag will refer to the *most recent release* regardless of whether it is `stable` or `old stable`. This can lead to a situation where `latest` refers to an *older release* than the version you have installed.
+
 ### gitea update
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
