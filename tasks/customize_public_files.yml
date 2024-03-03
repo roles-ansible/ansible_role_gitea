@@ -38,5 +38,5 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     mode: "u=rwX,g=rX,o="
-    loop: "{{ gitea_custom_themes }}"
+  loop: "{{ gitea_custom_themes }}"
   notify: "Restart gitea"
