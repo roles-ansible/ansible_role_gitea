@@ -54,6 +54,9 @@ gitea_start_ssh: false # to not start the built-in SSH server
 The above configuration works out of the box for new installations.
 When migrating from a running instance with existing SSH keys from the built-in SSH server to the host SSH server, you need to make sure that the host SSH server is running and that the `gitea_user` has the necessary permissions to access the repository data and the keys (stored in `<gitea_home>/.ssh/`)
 
+NB: To use `git@` as described above, `gitea_user` must be `git` and it does not suffice to set `gitea_ssh_user: git`.
+See [this issue](https://github.com/go-gitea/gitea/issues/28563) for more information..
+
  Variables
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.com/administration/config-cheat-sheet).
