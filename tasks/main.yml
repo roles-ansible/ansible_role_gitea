@@ -1,12 +1,12 @@
 ---
 - name: Perform optional versionscheck
   ansible.builtin.include_tasks:
-    file: 'versioncheck.yml'
+    file: "versioncheck.yml"
   when: submodules_versioncheck|bool
 
 - name: Gather installed packages for checks later on
   ansible.builtin.package_facts:
-    manager: 'auto'
+    manager: "auto"
 
 - name: Prepare gitea/forgejo variable import
   block:
@@ -28,12 +28,12 @@
 
 - name: Backup gitea before update
   ansible.builtin.include_tasks:
-    file: 'backup.yml'
+    file: "backup.yml"
   when: gitea_backup_on_upgrade|bool
 
 - name: Create gitea user and group
   ansible.builtin.include_tasks:
-    file: 'create_user.yml'
+    file: "create_user.yml"
 
 - name: "Install or update {{ gitea_fork }}"
   ansible.builtin.include_tasks:
@@ -41,41 +41,41 @@
 
 - name: Create directories
   ansible.builtin.include_tasks:
-    file: 'directory.yml'
+    file: "directory.yml"
 
 - name: Setup gitea systemd service
   ansible.builtin.include_tasks:
-    file: 'install_systemd.yml'
+    file: "install_systemd.yml"
   when: ansible_service_mgr == "systemd"
 
 - name: Generate JWT Secrets if undefined
   ansible.builtin.include_tasks:
-    file: 'jwt_secrets.yml'
+    file: "jwt_secrets.yml"
 
 - name: Generate gitea secrets if undefined
   ansible.builtin.include_tasks:
-    file: 'gitea_secrets.yml'
+    file: "gitea_secrets.yml"
 
 - name: Configure gitea
   ansible.builtin.include_tasks:
-    file: 'configure.yml'
+    file: "configure.yml"
 
 - name: Deploy optional fail2ban rules
   ansible.builtin.include_tasks:
-    file: 'fail2ban.yml'
+    file: "fail2ban.yml"
   when: gitea_fail2ban_enabled | bool
 
 - name: Optionally customize gitea
   ansible.builtin.include_tasks:
-    file: 'customize_logo.yml'
+    file: "customize_logo.yml"
   when: gitea_customize_logo | bool
 
 - name: Optionally customize footer
   ansible.builtin.include_tasks:
-    file: 'customize_footer.yml'
+    file: "customize_footer.yml"
   when: gitea_customize_footer | bool
 
 - name: Optionally deploy public files
   ansible.builtin.include_tasks:
-    file: 'customize_public_files.yml'
-  when: gitea_customize_files | bool
+    file: "customize_public_files.yml"
+  when: gitea_customize_files | bool or gitea_custom_themes is defined
