@@ -36,5 +36,6 @@
     url: "{{ item.name }}"
     dest: "{{ gitea_custom }}/css/{{ item.name | basename }}"
     owner: git
+    mode: "u=rwX,g=rX,o="
     loop: "{{ gitea_custom_themes }}"
   notify: "Restart gitea"
