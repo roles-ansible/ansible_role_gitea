@@ -35,7 +35,8 @@
   ansible.builtin.get_url:
     url: "{{ item.name }}"
     dest: "{{ gitea_custom }}/css/{{ item.name | basename }}"
-    owner: git
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
     mode: "u=rwX,g=rX,o="
     loop: "{{ gitea_custom_themes }}"
   notify: "Restart gitea"
