@@ -29,6 +29,8 @@
     path: "{{ gitea_custom }}/public/css"
     state: directory
     owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: "u=rwX,g=rX,o="
 
 - name: Get custom themes
   when: gitea_custom_themes is defined
