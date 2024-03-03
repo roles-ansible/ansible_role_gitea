@@ -2,7 +2,7 @@
 - name: "Check forgejo installed version"
   ansible.builtin.shell: "set -eo pipefail; {{ gitea_full_executable_path }} -v | cut -d' ' -f 3"
   args:
-    executable: /bin/bash
+    executable: '/bin/bash'
   register: gitea_active_version
   changed_when: false
   failed_when: false
@@ -97,11 +97,18 @@
     gitea_forgejo_signed_url: ['https://codeberg.org/attachments/ae5e50c6-e86e-4202-b95f-f142e8138e2f']
   when: ansible_check_mode
 
-- name: Show Download URLs
+- name: 'Assert that remote version is higher'
+  ansible.builtin.assert:
+    that:
+      - gitea_active_version is version(gitea_remote_version, 'lt')
+    fail_msg: ERROR - Remote version is lower then current version!
+  when: gitea_version == "latest" and gitea_active_version.stderr == "" | bool
+
+- name: Show Download URLs  # noqa: H500
   ansible.builtin.debug:
     msg: "{{ item }}"
     verbosity: 1
-  with_items:
+  loop:
     - "gitea_forgejo_dl_url: {{ gitea_forgejo_dl_url | first }}"
     - "gitea_forgejo_checksum: {{ gitea_forgejo_checksum }}"
     - "gitea_forgejo_signed_url: {{ gitea_forgejo_signed_url | first }}"

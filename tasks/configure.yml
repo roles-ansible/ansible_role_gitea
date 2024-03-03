@@ -1,4 +1,12 @@
 ---
+- name: Make sure gitea_register_email_confirm is false when gitea_register_manual_confirm is true
+  ansible.builtin.fail:
+    msg: |
+      To manually confirm registrations,
+      gitea_register_email_confirm needs to be false
+      and gitea_register_manual_confirm should be true.
+  when: gitea_register_manual_confirm | bool and gitea_register_email_confirm | bool
+
 - name: "Configure gitea"
   become: true
   ansible.builtin.template:

@@ -156,6 +156,7 @@ gitea_security_extra_config: ''
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#service-service
 gitea_disable_registration: false
 gitea_register_email_confirm: false
+gitea_register_manual_confirm: false
 gitea_require_signin: true
 gitea_default_keep_mail_private: true
 gitea_enable_captcha: true
@@ -163,6 +164,15 @@ gitea_show_registration_button: true
 gitea_only_allow_external_registration: false
 gitea_enable_notify_mail: false
 gitea_auto_watch_new_repos: true
+gitea_autowatch_on_change: false
+gitea_default_allow_create_organization: false
+gitea_default_user_is_restricted: false
+gitea_email_domain_allowlist: ""
+gitea_default_user_visibility: public
+gitea_default_org_visibility: public
+gitea_allow_only_internal_registration: false
+gitea_allow_only_external_registration: false
+gitea_show_milestones_dashboard_page: true
 gitea_service_extra_config: ''
 
 # Mailer [mailer]
@@ -264,4 +274,4 @@ gitea_customize_logo: false
 gitea_custom: "{{ gitea_home }}/custom"
 gitea_customize_footer: false
 gitea_customize_files: false
-gitea_customize_files_path: "{{ gitea_custom_search }}/gitea_files"
+gitea_customize_files_path: "{{ gitea_custom_search }}/gitea_files/"
