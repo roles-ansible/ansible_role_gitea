@@ -6,19 +6,19 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: 'u=rwX,g=rX,o='
+    mode: "u=rwX,g=rX,o="
   loop:
-    - "{{ gitea_custom }}/public"
+    - "{{ gitea_custom }}/public/assets/"
 
 - name: Transfer custom public web data
   become: true
   ansible.builtin.copy:
     src: "{{ gitea_customize_files_path }}"
-    dest: "{{ gitea_custom }}/public/"
+    dest: "{{ gitea_custom }}/public/assets/"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     directory_mode: true
-    mode: 'u=rwX,g=rX,o='
+    mode: "u=rwX,g=rX,o="
   failed_when: false
   tags: skip_ansible_lint
   notify: "Restart gitea"
