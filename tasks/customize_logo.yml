@@ -6,19 +6,20 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: 'u=rwX,g=rX,o='
+    mode: "u=rwX,g=rX,o="
   loop:
     - "{{ gitea_custom }}/public"
-    - "{{ gitea_custom }}/public/img"
+    - "{{ gitea_custom }}/public/assets"
+    - "{{ gitea_custom }}/public/assets/img"
 
 - name: Transfer custom logo.svg
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_logosvg) }}"
-    dest: "{{ gitea_custom }}/public/img/logo.svg"
+    dest: "{{ gitea_custom }}/public/assets/img/logo.svg"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0644'
+    mode: "0644"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -26,10 +27,10 @@
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_logopng) }}"
-    dest: "{{ gitea_custom }}/public/img/logo.png"
+    dest: "{{ gitea_custom }}/public/assets/img/logo.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0644'
+    mode: "0644"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -37,10 +38,10 @@
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_faviconpng) }}"
-    dest: "{{ gitea_custom }}/public/img/favicon.png"
+    dest: "{{ gitea_custom }}/public/assets/img/favicon.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0644'
+    mode: "0644"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -48,9 +49,9 @@
   become: true
   ansible.builtin.copy:
     src: "{{ lookup('first_found', transfer_custom_logo_appletouchiconpng) }}"
-    dest: "{{ gitea_custom }}/public/img/apple-touch-icon.png"
+    dest: "{{ gitea_custom }}/public/assets/img/apple-touch-icon.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0644'
+    mode: "0644"
   tags: skip_ansible_lint
   failed_when: false
