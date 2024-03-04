@@ -406,6 +406,15 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
   - Set ``gitea_customize_files`` to ``true``
   - Create a directory with the files you want to deploy.
   - Point ``gitea_customize_files_path`` to this directory. *(Default ``{{ gitea_custom_search }}/gitea_files/``)*
++ **CUSTOM THEMES**:
+  - Set `gitea_custom_themes` to a list with URLs for custom theme CSS files. You usually want three individual files per theme. Example:
+    ```yaml
+    gitea_custom_themes:
+      - https://example.com/theme-custom-auto.css
+      - https://example.com/theme-custom-dark.css
+      - https://example.com/theme-custom-light.css
+    ```
+  - Set `gitea_themes` variable and include the names of the new themes. To keep the existing ones, you need to pass all themes names, e.g. `auto,gitea,arc-green,<custom-auto>,<custom-light>,<custom-dark>`
 
 ## Requirements
 This role uses the ``ansible.builtin`` and ``community.general`` ansible Collections. To download the latest forgejo/gitea release we use json_query. This requires ``jmespath`` to be available.

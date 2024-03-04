@@ -22,3 +22,23 @@
   failed_when: false
   tags: skip_ansible_lint
   notify: "Restart gitea"
+
+- name: Create css directory for custom themes
+  when: gitea_custom_themes is defined
+  ansible.builtin.file:
+    path: "{{ gitea_custom }}/public/css"
+    state: directory
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: "u=rwX,g=rX,o="
+
+- name: Get custom themes
+  when: gitea_custom_themes is defined
+  ansible.builtin.get_url:
+    url: "{{ item.name }}"
+    dest: "{{ gitea_custom }}/css/{{ item.name | basename }}"
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: "u=rwX,g=rX,o="
+  loop: "{{ gitea_custom_themes }}"
+  notify: "Restart gitea"
