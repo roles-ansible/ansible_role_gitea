@@ -37,6 +37,26 @@ The following code has been tested with the latest Debian Stable, it should work
     gitea_start_ssh: true
 ```
 
+## Choosing between Gitea's built-in SSH and host SSH Server
+
+Gitea has a built-in SSH server which is running on port 2222 (to not conflict with the host SSH server which usually running on port 22).
+This one is used by default in this role and results in a SSH clone URL of `gitea@<fqdn>:2222:<user>/<repo>.git` because `gitea` is the default `RUN_AS` user.
+
+Often enough, one wants to have a "clean" SSH URL like `git@<fqdn>:<user>/<repo>.git`.
+This is possible by using the host SSH server with the following variable configuration:
+
+```yaml
+gitea_ssh_port: 22 # assuming the host SSH server is running on port 22
+gitea_user: git # otherwise there will be permission issues
+gitea_start_ssh: false # to not start the built-in SSH server
+```
+
+The above configuration works out of the box for new installations.
+When migrating from a running instance with existing SSH keys from the built-in SSH server to the host SSH server, you need to make sure that the host SSH server is running and that the `gitea_user` has the necessary permissions to access the repository data and the keys (stored in `<gitea_home>/.ssh/`)
+
+NB: To use `git@` as described above, `gitea_user` must be `git` and it does not suffice to set `gitea_ssh_user: git`.
+See [this issue](https://github.com/go-gitea/gitea/issues/28563) for more information..
+
  Variables
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.com/administration/config-cheat-sheet).
