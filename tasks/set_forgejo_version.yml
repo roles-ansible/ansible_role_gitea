@@ -50,9 +50,12 @@
       register: gitea_forgejo_remote_tags_metadata
       become: false
   rescue:
-    - name: "Error Downloading https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}"
+    - name: "Error Downloading v{{ gitea_version_target }}"
       ansible.builtin.fail:
-        msg: "We did not find the forgejo version you specified. Are you sure that '{{ gitea_version_target }}' is a valid forgejo version?"
+        msg: |
+          We did not find the forgejo version you specified.
+          Are you sure that '{{ gitea_version_target }}' is a valid forgejo version?
+          Please verify 'https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}' is a valid URL!
 
 - name: "Generate forgejo download url"
   ansible.builtin.set_fact:
