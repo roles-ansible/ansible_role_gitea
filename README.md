@@ -7,7 +7,7 @@
 
 This role installs and manages [gitea](https://gitea.io) or [forgejo](https://forgejo.org). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
 [Source code & screenshots gitea](https://github.com/go-gitea/gitea).
-[Source code forgejo](https://codeberg.org/forgejo/forgejo).
+[Source code forgejo](https://code.forgejo.org/forgejo/forgejo).
 This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansible.com/l3d/git). [![l3d.git](https://ansible.l3d.space/svg/l3d.git_ansible-collection_collection.svg)](https://github.com/roles-ansible/ansible_collection_git.git).
 
 ## Mirrors
