@@ -79,3 +79,8 @@
   ansible.builtin.include_tasks:
     file: "customize_public_files.yml"
   when: gitea_customize_files | bool or gitea_custom_themes is defined
+
+- name: Optionally create local Users on git instance
+  ansible.builtin.include_tasks:
+    file: 'local_git_users.yml'
+  when: gitea_users | length > 0

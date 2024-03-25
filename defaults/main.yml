@@ -25,6 +25,15 @@ gitea_configuration_path: '/etc/gitea'
 gitea_shell: '/bin/false'
 gitea_systemd_cap_net_bind_service: false
 
+# optional users on gitea instance
+gitea_users: []
+# example of entry
+#  - name: johndoe
+#    password: verysecret
+#    email: "johndoe@example.com"
+#    admin: false
+#    must_change_password: true
+
 # Overall (DEFAULT)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default
 gitea_app_name: 'Gitea'

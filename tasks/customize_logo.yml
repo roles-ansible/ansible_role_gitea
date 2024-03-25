@@ -19,7 +19,7 @@
     dest: "{{ gitea_custom }}/public/assets/img/logo.svg"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "0644"
+    mode: "0640"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -30,7 +30,7 @@
     dest: "{{ gitea_custom }}/public/assets/img/logo.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "0644"
+    mode: "0640"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -41,7 +41,7 @@
     dest: "{{ gitea_custom }}/public/assets/img/favicon.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "0644"
+    mode: "0640"
   tags: skip_ansible_lint
   failed_when: false
 
@@ -52,6 +52,6 @@
     dest: "{{ gitea_custom }}/public/assets/img/apple-touch-icon.png"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "0644"
+    mode: "0640"
   tags: skip_ansible_lint
   failed_when: false
