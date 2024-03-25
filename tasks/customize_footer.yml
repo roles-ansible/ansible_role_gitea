@@ -18,7 +18,7 @@
     dest: "{{ gitea_custom }}/templates/custom/extra_links_footer.tmpl"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0644'
+    mode: '0640'
   failed_when: false
   tags: skip_ansible_lint
   notify: "Restart gitea"

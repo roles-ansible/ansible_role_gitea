@@ -14,7 +14,7 @@
     dest: "{{ gitea_configuration_path }}/gitea.ini"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: 0600
+    mode: '0640'
   notify: "Restart gitea"
 
 - name: "Service gitea"
