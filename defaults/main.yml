@@ -257,7 +257,7 @@ gitea_lfs_extra: ''
 # Actions (actions)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions
 gitea_actions_enabled: false
-gitea_actions_default_actions_url: "https://gitea.com"
+gitea_actions_default_actions_url: github
 gitea_actions_extra: ''
 
 # Other (other)

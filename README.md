@@ -348,7 +348,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globaly. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
-| `gitea_actions_default_actions_url` | `https://gitea.com/` | Default address to get action plugins, e.g. the default value means downloading from `https://gitea.com/actions/checkout` for `uses: actions/checkout@v3` |
+| `gitea_actions_default_actions_url` | `github` | Default address to get action plugins, e.g. the default value means downloading from `https://github.com/actions/checkout` for `uses: actions/checkout@v3` |
 | `gitea_actions_extra` | | you can use this variable to pass additional config parameters in the `[actions]` section of the config. |
 
 ### Other ([other](https://docs.gitea.com/administration/config-cheat-sheet#other-other))
