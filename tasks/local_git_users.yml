@@ -2,7 +2,7 @@
 - name: Identify gitea users
   ansible.builtin.command: su - {{ gitea_user }} -c '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini admin user list'
   become: true
-  register: _giteusers
+  register: _giteausers
   changed_when: false
 
 - name: Use gitea cli to create user
@@ -18,5 +18,5 @@
     - '"successfully created" not in gitearesult.stdout'
   changed_when:
     - '"successfully created!" in gitearesult.stdout'
-  when: "_giteusers is defined and item.name in _giteusers"
+  when: "_giteausers is defined and item.name not in _giteausers"
   loop: "{{ gitea_users }}"
