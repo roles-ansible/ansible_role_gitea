@@ -8,10 +8,10 @@
 - name: Use gitea cli to create user
   become: true
   ansible.builtin.command: |
-    su - {{ gitea_user }} -c
-    '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini
-    admin user create --username "{{ item.name }}"
-    --password "{{ item.password }}" --email "{{ item.email }}"
+    su - {{ gitea_user }} -c \
+    '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
+    admin user create --username "{{ item.name }}" \
+    --password "{{ item.password }}" --email "{{ item.email }}" \
     --must-change-password={{ item.must_change_password }} --admin={{ item.admin }}'
   register: _gitearesult
   failed_when:
