@@ -378,6 +378,17 @@ As this will only deploy config files, fail2ban already has to be installed or o
 | `gitea_fail2ban_jail_bantime` | `900` | fail2ban jail `bantime` setting. |
 | `gitea_fail2ban_jail_action` | `iptables-allports` | fail2ban jail `action` setting. |
 
+### local gitea Users
+| variable | option | description |
+| -------- | ------ | ----------- |
+| ``gitea_users`` | | dict to create local gitea or forgejo users |
+| | ``name`` | name for local gitea/forgejo user |
+| | ``password`` | user for local git user |
+| | ``email`` | email for local git user |
+| | ``admin`` | give user admin permissions |
+| | ``must_change_password`` | user should change password after first login |
+| | ``state`` | set to ``absent`` to delete user |
+
 ### optional customisation
 You can optionally customize your gitea using this ansible role. We got our information about customisation from [docs.gitea.io/en-us/customizing-gitea](https://docs.gitea.io/en-us/customizing-gitea/).
 To deploy multiple files we created the ``gitea_custom_search`` variable, that can point to the path where you put the custom gitea files *( default ``"files/host_files/{{ inventory_hostname }}/gitea"``)*.
