@@ -18,5 +18,19 @@
     - '"successfully created" not in _gitearesult.stdout'
   changed_when:
     - '"successfully created!" in _gitearesult.stdout'
-  when: "_giteausers is defined and item.name not in _giteausers.stdout"
+  when: "_giteausers is defined and item.name not in _giteausers.stdout and item.state | default('present') == 'present'"
+  loop: "{{ gitea_users }}"
+
+- name: Use gitea cli to delete user
+  become: true
+  ansible.builtin.command: |
+    su - {{ gitea_user }} -c \
+    '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
+    admin user delete --username "{{ item.name }}"'
+  register: _giteadelresult
+  failed_when:
+    - '"error" in _giteadelresult.stdout'
+  changed_when:
+    "_giteausers is defined and item.name in _giteausers.stdout"
+  when: "_giteausers is defined and item.name in _giteausers.stdout and item.state | default('present') == 'absent'"
   loop: "{{ gitea_users }}"

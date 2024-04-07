@@ -33,6 +33,7 @@ gitea_users: []
 #    email: "johndoe@example.com"
 #    admin: false
 #    must_change_password: true
+#    state: present
 
 # Overall (DEFAULT)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#overall-default

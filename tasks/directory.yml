@@ -6,10 +6,9 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX,o="
+    mode: "u=rwX,g=rX"
     recurse: true
   loop:
-    - "{{ gitea_configuration_path }}"
     - "{{ gitea_user_home }}"
     - "{{ gitea_home }}"
     - "{{ gitea_home }}/data"
@@ -19,3 +18,15 @@
     - "{{ gitea_home }}/indexers"
     - "{{ gitea_home }}/log"
     - "{{ gitea_repository_root }}"
+
+- name: "Create config and data directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: "u=rwX,g=rX,o="
+    recurse: true
+  loop:
+    - "{{ gitea_configuration_path }}"
