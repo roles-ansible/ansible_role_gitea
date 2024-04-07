@@ -15,8 +15,8 @@
     --must-change-password={{ item.must_change_password }} --admin={{ item.admin }}'
   register: _gitearesult
   failed_when:
-    - '"successfully created" not in gitearesult.stdout'
+    - '"successfully created" not in _gitearesult.stdout'
   changed_when:
-    - '"successfully created!" in gitearesult.stdout'
+    - '"successfully created!" in _gitearesult.stdout'
   when: "_giteausers is defined and item.name not in _giteausers"
   loop: "{{ gitea_users }}"
