@@ -18,5 +18,5 @@
     - '"successfully created" not in _gitearesult.stdout'
   changed_when:
     - '"successfully created!" in _gitearesult.stdout'
-  when: "_giteausers is defined and item.name not in _giteausers"
+  when: "_giteausers is defined and item.name not in _giteausers.stdout"
   loop: "{{ gitea_users }}"
