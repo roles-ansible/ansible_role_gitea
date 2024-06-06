@@ -257,7 +257,7 @@ TOKEN = {{ gitea_metrics_token }}
 ;
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
-ENABLE = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
+ENABLED = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
 JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
 {{ gitea_oauth2_extra_config }}
 ;
