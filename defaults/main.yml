@@ -92,8 +92,6 @@ gitea_cors_extra: ''
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
 gitea_show_user_email: false
-gitea_theme_default: 'auto'
-gitea_themes: 'auto,gitea,arc-green'
 gitea_ui_extra_config: ''
 
 # UI - Metadata (ui.meta)
