@@ -165,8 +165,8 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
-| `gitea_theme_default` | `auto` | Default theme |
-| `gitea_themes` | `auto,gitea,arc-green` | List of enabled themes |
+| `gitea_theme_default` | `gitea-auto` or `forgejo-auto` | Default theme |
+| `gitea_themes` | (See `defaults/gitea.yml` or `defaults/forgejo.yml`)| List of enabled themes |
 | `gitea_ui_extra_config` | | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
 
 ### UI - Meta ([ui.meta](https://docs.gitea.com/administration/config-cheat-sheet#ui---metadata-uimeta))
