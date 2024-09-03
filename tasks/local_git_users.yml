@@ -10,27 +10,33 @@
   ansible.builtin.command: |
     su - {{ gitea_user }} -c \
     '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
-    admin user create --username "{{ item.name }}" \
-    --password "{{ item.password }}" --email "{{ item.email }}" \
-    --must-change-password={{ item.must_change_password }} --admin={{ item.admin }}'
+    admin user create --username "{{ user.name }}" \
+    --password "{{ user.password }}" --email "{{ user.email }}" \
+    --must-change-password={{ user.must_change_password }} --admin={{ user.admin }}'
   register: _gitearesult
   failed_when:
     - '"successfully created" not in _gitearesult.stdout'
   changed_when:
     - '"successfully created!" in _gitearesult.stdout'
-  when: "_giteausers is defined and item.name not in _giteausers.stdout and item.state | default('present') == 'present'"
+  when: "_giteausers is defined and user.name not in _giteausers.stdout and user.state | default('present') == 'present'"
   loop: "{{ gitea_users }}"
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
 
 - name: Use gitea cli to delete user
   become: true
   ansible.builtin.command: |
     su - {{ gitea_user }} -c \
     '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
-    admin user delete --username "{{ item.name }}"'
+    admin user delete --username "{{ user.name }}"'
   register: _giteadelresult
   failed_when:
     - '"error" in _giteadelresult.stdout'
   changed_when:
-    "_giteausers is defined and item.name in _giteausers.stdout"
-  when: "_giteausers is defined and item.name in _giteausers.stdout and item.state | default('present') == 'absent'"
+    "_giteausers is defined and user.name in _giteausers.stdout"
+  when: "_giteausers is defined and user.name in _giteausers.stdout and user.state | default('present') == 'absent'"
   loop: "{{ gitea_users }}"
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
