@@ -63,5 +63,5 @@ transfer_custom_footer:
     - 'files/gitea_footer/extra_links_footer.tmpl'
     - 'files/extra_links_footer.tmpl'
 
-playbook_version_number: 60
+playbook_version_number: 61
 playbook_version_path: 'do1jlr.gitea.version'
