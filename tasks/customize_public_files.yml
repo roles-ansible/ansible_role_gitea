@@ -21,7 +21,7 @@
     mode: "u=rwX,g=rX,o="
   failed_when: false
   tags: skip_ansible_lint
-  notify: "Restart gitea"
+  notify: "systemctl restart gitea"
 
 - name: Create css directory for custom themes
   when: gitea_custom_themes is defined
@@ -41,4 +41,4 @@
     group: "{{ gitea_group }}"
     mode: "u=rwX,g=rX,o="
   loop: "{{ gitea_custom_themes }}"
-  notify: "Restart gitea"
+  notify: "systemctl restart gitea"
