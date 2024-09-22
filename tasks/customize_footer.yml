@@ -21,4 +21,4 @@
     mode: '0640'
   failed_when: false
   tags: skip_ansible_lint
-  notify: "Restart gitea"
+  notify: "systemctl restart gitea"

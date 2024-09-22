@@ -2,7 +2,7 @@
 - name: Perform optional versionscheck
   ansible.builtin.include_tasks:
     file: "versioncheck.yml"
-  when: submodules_versioncheck|bool
+  when: submodules_versioncheck | bool
 
 - name: Gather installed packages for checks later on
   ansible.builtin.package_facts:
@@ -10,16 +10,18 @@
 
 - name: Prepare gitea/forgejo variable import
   block:
-    - name: Gather variables for gitea or forgejo
+    - name: Gather vars for gitea or forgejo
       ansible.builtin.include_vars:
-        file: "{{ lookup('ansible.builtin.first_found', gitea_fork_variables) }}"
+        file: "{{ lookup('ansible.builtin.first_found',
+                 gitea_fork_variables) }}"
   rescue:
-    - name: Gitea/Forejo import info
+    - name: Gitea/Forgejo import info
       ansible.builtin.fail:
-        msg: "Currently only {{ gitea_supported_forks }} are supported."
+        msg: "Only {{ gitea_supported_forks }} are supported."
 
 - name: Gather Gitea/Forgejo UI Theme variables
-  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  ansible.builtin.include_vars:
+    file: "{{ lookup('ansible.builtin.first_found', params) }}"
   vars:
     params:
       files:

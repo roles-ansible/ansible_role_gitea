@@ -1,6 +1,8 @@
 ---
 - name: "Check forgejo installed version"
-  ansible.builtin.shell: "set -eo pipefail; {{ gitea_full_executable_path }} -v | cut -d' ' -f 3"
+  ansible.builtin.shell: |
+    set -eo pipefail
+    {{ gitea_full_executable_path }} -v | cut -d' ' -f 3
   args:
     executable: '/bin/bash'
   register: gitea_active_version

@@ -1,20 +1,21 @@
 ---
 - name: "Restart gitea"
   become: true
-  ansible.builtin.service:
+  listen: "systemctl restart gitea"
+  ansible.builtin.systemd_service:
     name: gitea
     state: restarted
   when: ansible_service_mgr == "systemd"
 
 - name: "Reload systemd"
   become: true
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     daemon_reload: true
   when: ansible_service_mgr == "systemd"
 
 - name: "Systemctl restart fail2ban"
   become: true
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: fail2ban
     state: restarted
   when: ansible_service_mgr == "systemd"
