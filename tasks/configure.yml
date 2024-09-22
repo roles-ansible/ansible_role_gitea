@@ -19,7 +19,7 @@
 
 - name: "Service gitea"
   become: true
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: gitea
     state: started
     enabled: true

@@ -10,7 +10,7 @@
   block:
     - name: Stopping gitea before upgrade
       become: true
-      ansible.builtin.systemd:
+      ansible.builtin.systemd_service:
         name: 'gitea.service'
         state: 'stopped'
       when: ansible_service_mgr == "systemd"
@@ -33,7 +33,7 @@
   rescue:
     - name: Starting gitea because backup failed
       become: true
-      ansible.builtin.systemd:
+      ansible.builtin.systemd_service:
         name: 'gitea.service'
         state: 'started'
       when: ansible_service_mgr == "systemd"
