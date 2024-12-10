@@ -216,7 +216,7 @@ SEND_AS_PLAIN_TEXT = {{ gitea_mailer_send_as_plaintext | ternary('true', 'false'
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#session-session
 [session]
 PROVIDER = {{ gitea_session_provider }}
-PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
+PROVIDER_CONFIG = {{ gitea_session_provider_config }}
 {{ gitea_session_extra_config }}
 ;
 ;
