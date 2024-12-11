@@ -1,6 +1,6 @@
-[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/gitea/)
-[![BSD-3 Clause](https://ansible.l3d.space/svg/l3d.gitea_license.svg)](LICENSE)
-[![Maintainance](https://ansible.l3d.space/svg/l3d.gitea_maintainance.svg)](https://ansible.l3d.space/#l3d.gitea)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/roles-ansible.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/gitea/)
+[![BSD-3 Clause](https://ansible.l3d.space/svg/roles-ansible.gitea_license.svg)](LICENSE)
+[![Maintainance](https://ansible.l3d.space/svg/roles-ansible.gitea_maintainance.svg)](https://ansible.l3d.space/#roles-ansible.gitea)
 
  ansible role gitea/forgejo
 ============================
@@ -14,19 +14,19 @@ This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansibl
 The role is mirrored to:
 + Github: [github.com/roles-ansible/ansible_role_gitea](https://github.com/roles-ansible/ansible_role_gitea.git)
 + Gitea: [git.l3d.ch/ansible/ansible_role_gitea](https://git.l3d.ch/ansible/ansible_role_gitea.git)
-More about it at [ansible.l3d.space](https://ansible.l3d.space/#l3d.gitea)
+More about it at [ansible.l3d.space](https://ansible.l3d.space/#roles-ansible.gitea)
 
 ## Sample Usage in a playbook
 
 The following code has been tested with the latest Debian Stable, it should work on Ubuntu and RedHat as well.
 
 ```yaml
-# ansible-galaxy role install l3d.gitea
+# ansible-galaxy role install roles-ansible.gitea
 
 - name: "Install gitea"
   hosts: git.example.com
   roles:
-    - {role: l3d.gitea, tags: gitea}
+    - {role: roles-ansible.gitea, tags: gitea}
   vars:
     # Here we assume we are behind a reverse proxy that will
     # handle https for us, so we bind on localhost:3000 using HTTP
