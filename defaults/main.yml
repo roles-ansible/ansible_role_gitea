@@ -204,6 +204,7 @@ gitea_mailer_extra_config: ''
 # Session (session)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#session-session
 gitea_session_provider: 'file'
+gitea_session_provider_config: "{{ gitea_home }}/data/sessions"
 gitea_session_extra_config: ''
 
 # Picture (picture)
