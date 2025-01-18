@@ -1,6 +1,6 @@
 [![Ansible Galaxy](https://ansible.l3d.space/svg/roles-ansible.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/gitea/)
 [![BSD-3 Clause](https://ansible.l3d.space/svg/roles-ansible.gitea_license.svg)](LICENSE)
-[![Maintainance](https://ansible.l3d.space/svg/roles-ansible.gitea_maintainance.svg)](https://ansible.l3d.space/#roles-ansible.gitea)
+[![Maintenance](https://ansible.l3d.space/svg/roles-ansible.gitea_maintainance.svg)](https://ansible.l3d.space/#roles-ansible.gitea)
 
  ansible role gitea/forgejo
 ============================
@@ -87,7 +87,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
-| `submodules_versioncheck` | `false` | a simple version check that can prevent you from accidentally running an older version of this role. *(recomended)* |
+| `submodules_versioncheck` | `false` | a simple version check that can prevent you from accidentally running an older version of this role. *(recommended)* |
 
 ### gitea in the linux world
 | variable name | default value | description |
@@ -347,7 +347,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 ### Actions ([actions](https://docs.gitea.com/administration/config-cheat-sheet#actions-actions))
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
-| `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globaly. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
+| `gitea_actions_enabled` | `false` | Enable/Disable actions capabilities globally. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories |
 | `gitea_actions_default_actions_url` | `github` | Default address to get action plugins, e.g. the default value means downloading from `https://github.com/actions/checkout` for `uses: actions/checkout@v3` |
 | `gitea_actions_extra` | | you can use this variable to pass additional config parameters in the `[actions]` section of the config. |
 
