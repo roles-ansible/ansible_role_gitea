@@ -9,9 +9,106 @@ Group={{ gitea_group }}
 ExecStart={{ gitea_full_executable_path }} web --config {{ gitea_configuration_path }}/gitea.ini --custom-path {{ gitea_custom }}/ --work-path {{ gitea_home }}
 Restart=on-failure
 WorkingDirectory={{ gitea_home }}
-{% if gitea_systemd_cap_net_bind_service %}
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-{% endif %}
 
+{% if gitea_systemd_hardening_enable | bool %}
+# Reduce Attack Surface
+# Exposure level 9.2 -> 2.0
+NoNewPrivileges=yes
+PrivateTmp=true
+ProtectHome=yes
+ProtectSystem=yes
+# ProtectSystem=strict
+{%     if ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int >= 21 %}
+# ProtectProc=noaccess
+{%     endif %}
+
+PrivateDevices=yes
+DeviceAllow=
+
+# PrivateUsers=yes
+
+UMask=077
+
+# ERROR: /proc not mounted - LibreOffice is unlikely to work well if at all
+# InaccessiblePaths=/proc
+
+ProtectKernelTunables=true
+ProtectKernelModules=yes
+{%     if (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int >= 20) or
+          (ansible_os_family == 'RedHat' and ansible_distribution_major_version | int > 8 )
+%}
+ProtectKernelLogs=yes
+ProtectHostname=yes
+ProtectClock=yes
+{%     endif %}
+
+ProtectControlGroups=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictNamespaces=yes
+# RestrictNamespaces=~CLONE_NEWCGROUP CLONE_NEWIPC CLONE_NEWNET CLONE_NEWPID
+RestrictSUIDSGID=yes
+MemoryDenyWriteExecute=yes
+RemoveIPC=Yes
+
+# PrivateNetwork=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictAddressFamilies=~AF_UNIX
+
+IPAccounting=yes
+# IPAddressAllow=localhost link-local multicast 10.0.0.0/8 192.168.0.0/16
+# IPAddressDeny=
+
+{%     if gitea_systemd_cap_net_bind_service %}
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+{%     endif %}
+CapabilityBoundingSet=~CAP_AUDIT_CONTROL CAP_AUDIT_READ CAP_DAC_READ_SEARCH
+CapabilityBoundingSet=~CAP_SYS_RAWIO
+CapabilityBoundingSet=~CAP_SYS_PTRACE
+CapabilityBoundingSet=~CAP_DAC_* CAP_FOWNER CAP_IPC_OWNER
+CapabilityBoundingSet=~CAP_BPF
+CapabilityBoundingSet=~CAP_NET_ADMIN
+CapabilityBoundingSet=~CAP_KILL
+CapabilityBoundingSet=~CAP_NET_BROADCAST
+CapabilityBoundingSet=~CAP_SYS_NICE CAP_SYS_RESOURCE
+CapabilityBoundingSet=~CAP_SYS_BOOT
+CapabilityBoundingSet=~CAP_LINUX_IMMUTABLE
+CapabilityBoundingSet=~CAP_SYS_CHROOT
+CapabilityBoundingSet=~CAP_BLOCK_SUSPEND
+CapabilityBoundingSet=~CAP_LEASE
+CapabilityBoundingSet=~CAP_SYS_PACCT
+CapabilityBoundingSet=~CAP_SYS_TTY_CONFIG
+CapabilityBoundingSet=~CAP_SYS_ADMIN
+CapabilityBoundingSet=~CAP_SETUID CAP_SETGID
+CapabilityBoundingSet=~CAP_SETPCAP
+CapabilityBoundingSet=~CAP_CHOWN
+CapabilityBoundingSet=~CAP_FSETID CAP_SETFCAP
+CapabilityBoundingSet=~CAP_NET_RAW
+CapabilityBoundingSet=~CAP_IPC_LOCK
+
+{%     if not (ansible_virtualization_type is defined and
+               ansible_virtualization_type == "docker"
+              )
+%}
+{%         if (ansible_os_family == 'RedHat' and ansible_distribution_major_version|int >= 8) or
+              (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int > 18)
+%}
+SystemCallFilter=@system-service
+{%         endif %}
+# SystemCallFilter=~@debug @mount @cpu-emulation @obsolete @privileged @resources @reboot @swap @raw-io @module
+SystemCallFilter=~@debug @mount @cpu-emulation @obsolete @resources @reboot @swap @raw-io @module
+# When system call is disallowed, return error code instead of killing process
+SystemCallErrorNumber=EPERM
+{%     endif %}
+SystemCallArchitectures=native
+
+{%     if gitea_cgroups_restriction_enable | bool %}
+CPUWeight={{ gitea_cgroups_cpushares | default('1024') }}
+CPUQuota={{ gitea_cgroups_cpuquota | default('80%') }}
+MemoryMax={{ gitea_cgroups_memorylimit | default('4G') }}
+IOWeight={{ gitea_cgroups_ioweight | default('80') }}
+{%     endif %}
+
+{% endif %}
 [Install]
 WantedBy=multi-user.target

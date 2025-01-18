@@ -38,6 +38,6 @@
         state: 'started'
       when: ansible_service_mgr == "systemd"
 
-    - name: Print updateing error and cancel
+    - name: Print updating error and cancel
       ansible.builtin.fail:
         msg: "failed to backup gitea"

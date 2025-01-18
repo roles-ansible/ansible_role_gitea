@@ -284,3 +284,7 @@ gitea_custom: "{{ gitea_home }}/custom"
 gitea_customize_footer: false
 gitea_customize_files: false
 gitea_customize_files_path: "{{ gitea_custom_search }}/gitea_files/"
+
+# systemd hardening
+gitea_systemd_hardening_enable: true
+gitea_cgroups_restriction_enable: true
