@@ -1,18 +1,21 @@
 ---
 - name: Identify gitea users
-  ansible.builtin.command: su - {{ gitea_user }} -c '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini admin user list'
+  ansible.builtin.command:
+    cmd: "{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini admin user list"
   become: true
+  become_user: "{{ gitea_user }}"
   register: _giteausers
   changed_when: false
 
 - name: Use gitea cli to create user
   become: true
-  ansible.builtin.command: |
-    su - {{ gitea_user }} -c \
-    '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
-    admin user create --username "{{ user.name }}" \
-    --password "{{ user.password }}" --email "{{ user.email }}" \
-    --must-change-password={{ user.must_change_password }} --admin={{ user.admin }}'
+  become_user: "{{ gitea_user }}"
+  ansible.builtin.command:
+    cmd: >
+      {{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini
+        admin user create --username "{{ user.name }}"
+        --password "{{ user.password }}" --email "{{ user.email }}"
+        --must-change-password={{ user.must_change_password }} --admin={{ user.admin }}
   register: _gitearesult
   failed_when:
     - '"successfully created" not in _gitearesult.stdout'
@@ -26,10 +29,11 @@
 
 - name: Use gitea cli to delete user
   become: true
-  ansible.builtin.command: |
-    su - {{ gitea_user }} -c \
-    '{{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini \
-    admin user delete --username "{{ user.name }}"'
+  become_user: "{{ gitea_user }}"
+  ansible.builtin.command:
+    cmd: >
+      {{ gitea_full_executable_path }} -c {{ gitea_configuration_path }}/gitea.ini
+      admin user delete --username "{{ user.name }}"
   register: _giteadelresult
   failed_when:
     - '"error" in _giteadelresult.stdout'
