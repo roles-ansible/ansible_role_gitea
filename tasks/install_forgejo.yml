@@ -59,12 +59,24 @@
         msg: "{{ _gitea_gpg_key_status.stdout }}"
         verbosity: 1
 
-    - name: Import forgejo gpg key
-      ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_forgejo_gpg_key }}"
-      register: _gitea_import_key
-      become: false
-      changed_when: '"imported: 1" in _gitea_import_key.stderr'
-      # when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
+    - name: Gpg key
+      block:
+        - name: Import forgejo gpg key
+          ansible.builtin.command: "gpg --keyserver {{ gitea_gpg_server }} --recv {{ gitea_forgejo_gpg_key }}"
+          register: _gitea_import_key
+          become: false
+          changed_when: '"imported: 1" in _gitea_import_key.stderr'
+          # when: '_gitea_gpg_key_status.rc != 0 or "expired" in _gitea_gpg_key_status.stdout'
+      rescue:
+        - name: Load local forgejo gpg key
+          ansible.builtin.copy:
+            src: dj3498u4hyyarh35rkjfnghbjxug6b19.asc
+            dest: /tmp/
+            mode: '0400'
+        - name: Import local forgejo gpg key
+          ansible.builtin.command: "gpg --import /tmp/dj3498u4hyyarh35rkjfnghbjxug6b19.asc"
+          register: import0
+          changed_when: "'imported: [1-9]+' in import0.stdout"
 
     - name: Check archive signature
       become: false
