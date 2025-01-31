@@ -1,4 +1,9 @@
 ---
+- name: Announce ansible role changed
+  ansible.builtin.fail:
+    msg: 'This role changed and now only support gitea. Please use the l3d.git.forgejo role for forgejo.'
+  when: gitea_fork == 'forgejo'
+
 - name: Perform optional versionscheck
   ansible.builtin.include_tasks:
     file: "versioncheck.yml"
@@ -8,34 +13,13 @@
   ansible.builtin.package_facts:
     manager: "auto"
 
-- name: Prepare gitea/forgejo variable import
-  block:
-    - name: Gather vars for gitea or forgejo
-      ansible.builtin.include_vars:
-        file: "{{ lookup('ansible.builtin.first_found',
-                 gitea_fork_variables) }}"
-  rescue:
-    - name: Gitea/Forgejo import info
-      ansible.builtin.fail:
-        msg: "Only {{ gitea_supported_forks }} are supported."
-
-- name: Gather Gitea/Forgejo UI Theme variables
-  ansible.builtin.include_vars:
-    file: "{{ lookup('ansible.builtin.first_found', params) }}"
-  vars:
-    params:
-      files:
-        - "{{ gitea_fork }}.yml"
-      paths:
-        - "defaults"
-
 - name: Gather variables for each operating system
   ansible.builtin.include_vars:
     file: "{{ lookup('ansible.builtin.first_found', gitea_variables) }}"
 
 - name: Gather versioning information
   ansible.builtin.include_tasks:
-    file: "set_{{ gitea_fork | lower }}_version.yml"
+    file: "set_gitea_version.yml"
 
 - name: Backup gitea before update
   ansible.builtin.include_tasks:
@@ -46,9 +30,9 @@
   ansible.builtin.include_tasks:
     file: "create_user.yml"
 
-- name: "Install or update {{ gitea_fork }}"
+- name: "Install or update gitea"
   ansible.builtin.include_tasks:
-    file: "install_{{ gitea_fork | lower }}.yml"
+    file: "install_gitea.yml"
 
 - name: Create directories
   ansible.builtin.include_tasks:

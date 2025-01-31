@@ -1,14 +1,17 @@
-[![Ansible Galaxy](https://ansible.l3d.space/svg/roles-ansible.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/gitea/)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/roles-ansible.gitea.svg)](https://galaxy.ansible.com/ui/standalone/roles/l3d/gitea/)
 [![BSD-3 Clause](https://ansible.l3d.space/svg/roles-ansible.gitea_license.svg)](LICENSE)
 [![Maintenance](https://ansible.l3d.space/svg/roles-ansible.gitea_maintainance.svg)](https://ansible.l3d.space/#roles-ansible.gitea)
 
- ansible role gitea/forgejo
-============================
+ ansible role gitea
+====================
 
-This role installs and manages [gitea](https://gitea.io) or [forgejo](https://forgejo.org). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
+This role installs and manages [gitea](https://gitea.io). A painless self-hosted Git service. Gitea is a community managed lightweight code hosting solution written in Go. Forgejo is a fork of it.
 [Source code & screenshots gitea](https://github.com/go-gitea/gitea).
-[Source code forgejo](https://code.forgejo.org/forgejo/forgejo).
 This role is also Part of the Ansible-Collection [l3d.git](https://galaxy.ansible.com/l3d/git). [![l3d.git](https://ansible.l3d.space/svg/l3d.git_ansible-collection_collection.svg)](https://github.com/roles-ansible/ansible_collection_git.git).
+
+## Do you look for a forgejo ansible role?
+
+Have a look at [l3d.git.forgejo](https://galaxy.ansible.com/ui/repo/published/l3d/git/content/role/forgejo/) Collection or the [l3d.forgejo](https://github.com/roles-ansible/ansible_role_forgejo.git) Ansible role.
 
 ## Mirrors
 The role is mirrored to:
@@ -61,21 +64,9 @@ See [this issue](https://github.com/go-gitea/gitea/issues/28563) for more inform
 -----------
 Here is a deeper insight into the variables of this gitea role. For the exact function of some variables and the possibility to add more options we recommend a look at this [config cheat sheet](https://docs.gitea.com/administration/config-cheat-sheet).
 
-### Chose between gitea and forgejo
-There is a fork of gitea called forgejo. Why? Read the [forgejo FAQ](https://forgejo.org/faq/).
-You have the option to choose between [gitea](https://gitea.io) and [forgejo](https://forgejo.org) by modifying the ``gitea_fork`` variable.
-| variable name | default value | description |
-| ------------- | ------------- | ----------- |
-| `gitea_fork`  | `gitea`       | optional choose to install forgejo instead of gitea by setting this value to `forgejo`. |
-
 ### gitea update mechanism
 To determine which gitea version to install, you can choose between two variants.
 Either you define exactly which release you install. Or you use the option ``latest`` to always install the latest release from the [gitea releases](https://github.com/go-gitea/gitea/releases/latest).
-
-### Forgejo update mechanism
-It is advisable to define exactly which Forgejo release you want to install. See [Forgejo releases](https://forgejo.org/releases/) for the correct value to use in `gitea_version` eg `v1.21.5`.
-
-This is because the Forgejo project maintains both `stable` and `old stable` releases and the `latest` tag will refer to the *most recent release* regardless of whether it is `stable` or `old stable`. This can lead to a situation where `latest` refers to an *older release* than the version you have installed.
 
 ### gitea update
 | variable name | default value | description |
@@ -83,7 +74,6 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_version` | `latest` | Define either the exact release to install *(eg. `1.16.0`)* or use ``latest`` *(default)* to install the latest release. |
 | `gitea_version_check` | `true` | Check if installed version != `gitea_version` before initiating binary download |
 | `gitea_gpg_key` | `7C9E68152594688862D62AF62D9AE806EC1592E2` | the gpg key the gitea binary is signed with |
-| `gitea_forgejo_gpg_key` | `EB114F5E6C0DC2BCDD183550A4B61A2DC5923710` | the gpg key the forgejo binary is signed with |
 | `gitea_gpg_server` | `hkps://keys.openpgp.org` | A gpg key server where this role can download the gpg key |
 | `gitea_backup_on_upgrade` | `false` | Optionally a backup can be created with every update of gitea. |
 | `gitea_backup_location` | `{{ gitea_home }}/backups/` | Where to store the gitea backup if one is created with this role. |
@@ -97,7 +87,6 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_home` | `/var/lib/gitea` | Base directory to work |
 | `gitea_user_home` | `{{ gitea_home }}` | home of gitea user |
 | `gitea_executable_path` | `/usr/local/bin/gitea` | Path for gitea executable |
-| `gitea_forgejo_executable_path` | `/usr/local/bin/forgejo` | Path for forgejo executable |
 | `gitea_configuration_path` | `/etc/gitea` | Where to put the gitea.ini config |
 | `gitea_shell` | `/bin/false` | UNIX shell used by gitea. Set it to `/bin/bash` if you don't use the gitea built-in ssh server. |
 | `gitea_systemd_cap_net_bind_service` | `false` | Adds `AmbientCapabilities=CAP_NET_BIND_SERVICE` to systemd service file |
@@ -165,8 +154,8 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | variable name | default value | description |
 | ------------- | ------------- | ----------- |
 | `gitea_show_user_email` | `false` | Do you want to display email addresses ? (true/false) |
-| `gitea_theme_default` | `gitea-auto` or `forgejo-auto` | Default theme |
-| `gitea_themes` | (See `defaults/gitea.yml` or `defaults/forgejo.yml`)| List of enabled themes |
+| `gitea_theme_default` | `gitea-auto` | Default theme |
+| `gitea_themes` | (See `defaults/main.yml`)| List of enabled themes |
 | `gitea_ui_extra_config` | | you can use this variable to pass additional config parameters in the `[ui]` section of the config. |
 
 ### UI - Meta ([ui.meta](https://docs.gitea.com/administration/config-cheat-sheet#ui---metadata-uimeta))
@@ -381,8 +370,8 @@ As this will only deploy config files, fail2ban already has to be installed or o
 ### local gitea Users
 | variable | option | description |
 | -------- | ------ | ----------- |
-| ``gitea_users`` | | dict to create local gitea or forgejo users |
-| | ``name`` | name for local gitea/forgejo user |
+| ``gitea_users`` | | dict to create local gitea users |
+| | ``name`` | name for local gitea user |
 | | ``password`` | user for local git user |
 | | ``email`` | email for local git user |
 | | ``admin`` | give user admin permissions |
@@ -428,7 +417,7 @@ To deploy multiple files we created the ``gitea_custom_search`` variable, that c
   - Set `gitea_themes` variable and include the names of the new themes. To keep the existing ones, you need to pass all themes names, e.g. `auto,gitea,arc-green,<custom-auto>,<custom-light>,<custom-dark>`
 
 ## Requirements
-This role uses the ``ansible.builtin`` and ``community.general`` ansible Collections. To download the latest forgejo/gitea release we use json_query. This requires ``jmespath`` to be available.
+This role uses the ``ansible.builtin`` and ``community.general`` ansible Collections. To download the latest gitea release we use json_query. This requires ``jmespath`` to be available.
 
 ### Python packages
 + jmespath
