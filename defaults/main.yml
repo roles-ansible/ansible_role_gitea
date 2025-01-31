@@ -1,18 +1,20 @@
 ---
-# Choose between https://forgejo.org/ and https://gitea.io/
-gitea_fork: 'gitea'  # 'gitea' and 'forgejo' are valid options
+gitea_fork: 'gitea'  # legacy option for forgejo/gitea
 
 # gitea version
 # Use 'latest' to auto-update; upgrading past role version may lead to errors.
 gitea_version: 'latest'
 gitea_version_check: true
 gitea_gpg_key: '7C9E68152594688862D62AF62D9AE806EC1592E2'
-gitea_forgejo_gpg_key: 'EB114F5E6C0DC2BCDD183550A4B61A2DC5923710'
 gitea_gpg_server: 'hkps://keys.openpgp.org'
 gitea_gpg_keyserver_option: ''
 gitea_backup_on_upgrade: false
 gitea_backup_location: "{{ gitea_home }}/backups/"
 submodules_versioncheck: false
+
+# gitea branding
+gitea_theme_default: "gitea-auto"
+gitea_themes: "gitea-auto,gitea-light,gitea-dark"
 
 # gitea in the linux world
 gitea_group: 'gitea'
@@ -20,7 +22,6 @@ gitea_group: 'gitea'
 gitea_home: '/var/lib/gitea'
 gitea_user_home: '{{ gitea_home }}'
 gitea_executable_path: '/usr/local/bin/gitea'
-gitea_forgejo_executable_path: '/usr/local/bin/forgejo'
 gitea_configuration_path: '/etc/gitea'
 gitea_shell: '/bin/false'
 gitea_systemd_cap_net_bind_service: false
@@ -98,7 +99,7 @@ gitea_ui_extra_config: ''
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui---metadata-uimeta
 gitea_ui_author: 'Gitea - Git with a cup of tea'
 gitea_ui_description: 'Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go:'
-gitea_ui_keywords: 'go,git,self-hosted,gitea,forgejo'
+gitea_ui_keywords: 'go,git,self-hosted,gitea'
 gitea_ui_meta_extra_config: ''
 
 # Server (server)

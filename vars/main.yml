@@ -10,11 +10,8 @@ gitea_go_arch_map:
 gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 gitea_supported_forks: 'gitea and forgejo'
 
-gitea_fork_variables:
-  files:
-    - "fork_{{ gitea_fork | lower }}.yml"
-  paths:
-    - 'vars'
+gitea_full_executable_path: "{{ gitea_executable_path }}"
+gitea_filename: "gitea-{{ gitea_version_target }}.linux-{{ gitea_arch }}"
 
 gitea_variables:
   files:
@@ -63,5 +60,5 @@ transfer_custom_footer:
     - 'files/gitea_footer/extra_links_footer.tmpl'
     - 'files/extra_links_footer.tmpl'
 
-playbook_version_number: 65
+playbook_version_number: 66
 playbook_version_path: 'do1jlr.gitea.version'
