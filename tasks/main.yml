@@ -95,3 +95,8 @@
   ansible.builtin.include_tasks:
     file: 'local_git_users.yml'
   when: gitea_users | length > 0
+
+- name: Optionally scheduled backup
+  ansible.builtin.import_tasks:
+    file: 'backup-scheduled.yml'
+  when: gitea_backup_scheduled | bool

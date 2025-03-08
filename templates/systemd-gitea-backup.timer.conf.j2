@@ -1,0 +1,14 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description={{ gitea_fork }} backup timer
+
+[Timer]
+Persistent=true
+OnCalendar={{ gitea_backup_scheduled_calendar }}
+
+; Add jitter
+RandomizedDelaySec=5m
+
+[Install]
+WantedBy=timers.target
