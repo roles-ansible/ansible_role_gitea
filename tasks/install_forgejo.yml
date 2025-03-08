@@ -70,13 +70,17 @@
       rescue:
         - name: Load local forgejo gpg key
           ansible.builtin.copy:
-            src: dj3498u4hyyarh35rkjfnghbjxug6b19.asc
+            src: "{{ gitea_gpg_local_key }}"
             dest: /tmp/
-            mode: '0400'
+            mode: '0644'
+          become: false
+          when: gitea_gpg_local_key | length > 0
         - name: Import local forgejo gpg key
-          ansible.builtin.command: "gpg --import /tmp/dj3498u4hyyarh35rkjfnghbjxug6b19.asc"
+          ansible.builtin.command: "gpg --import /tmp/{{ gitea_gpg_local_key | basename }}"
           register: import0
           changed_when: "'imported: [1-9]+' in import0.stdout"
+          become: false
+          when: gitea_gpg_local_key | length > 0
 
     - name: Check archive signature
       become: false
