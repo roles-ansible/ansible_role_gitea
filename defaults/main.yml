@@ -1,6 +1,7 @@
 ---
 # Choose between https://forgejo.org/ and https://gitea.io/
-gitea_fork: "gitea" # 'gitea' and 'forgejo' are valid options
+# 'gitea' and 'forgejo' are valid options
+gitea_fork: "gitea"
 
 # gitea version
 # Use 'latest' to auto-update; upgrading past role version may lead to errors.
