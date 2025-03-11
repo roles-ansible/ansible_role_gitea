@@ -116,8 +116,6 @@ LOG_SQL = {{ gitea_db_log_sql | ternary('true', 'false') }}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#indexer-indexer
 [indexer]
 ISSUE_INDEXER_PATH = {{ gitea_home }}/indexers/issues.bleve
-ISSUE_INDEXER_TYPE = {{ gitea_issue_indexer_type }}
-ISSUE_INDEXER_CONN_STR = {{ gitea_issue_indexer_conn_str }}
 REPO_INDEXER_ENABLED = {{ gitea_repo_indexer_enabled | ternary('true', 'false') }}
 REPO_INDEXER_PATH = {{ gitea_home }}/indexers/repos.bleve
 REPO_INDEXER_INCLUDE = {{ gitea_repo_indexer_include }}
