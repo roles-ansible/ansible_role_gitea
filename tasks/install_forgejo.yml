@@ -72,7 +72,7 @@
           ansible.builtin.copy:
             src: dj3498u4hyyarh35rkjfnghbjxug6b19.asc
             dest: /tmp/
-            mode: '0400'
+            mode: "0400"
         - name: Import local forgejo gpg key
           ansible.builtin.command: "gpg --import /tmp/dj3498u4hyyarh35rkjfnghbjxug6b19.asc"
           register: import0

@@ -13,7 +13,7 @@
     - name: Gather vars for gitea or forgejo
       ansible.builtin.include_vars:
         file: "{{ lookup('ansible.builtin.first_found',
-                 gitea_fork_variables) }}"
+          gitea_fork_variables) }}"
   rescue:
     - name: Gitea/Forgejo import info
       ansible.builtin.fail:
@@ -93,5 +93,5 @@
 
 - name: Optionally create local Users on git instance
   ansible.builtin.include_tasks:
-    file: 'local_git_users.yml'
+    file: "local_git_users.yml"
   when: gitea_users | length > 0

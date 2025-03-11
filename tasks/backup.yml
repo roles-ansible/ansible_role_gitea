@@ -11,18 +11,18 @@
     - name: Stopping gitea before upgrade
       become: true
       ansible.builtin.systemd_service:
-        name: 'gitea.service'
-        state: 'stopped'
+        name: "gitea.service"
+        state: "stopped"
       when: ansible_service_mgr == "systemd"
 
     - name: "Create backup directory"
       become: true
       ansible.builtin.file:
         path: "{{ gitea_backup_location }}"
-        state: 'directory'
+        state: "directory"
         owner: "{{ gitea_user }}"
         group: "{{ gitea_group }}"
-        mode: 'u=rwx,g=rx,o='
+        mode: "u=rwx,g=rx,o="
 
     - name: Backing up gitea before upgrade
       become: true
@@ -34,8 +34,8 @@
     - name: Starting gitea because backup failed
       become: true
       ansible.builtin.systemd_service:
-        name: 'gitea.service'
-        state: 'started'
+        name: "gitea.service"
+        state: "started"
       when: ansible_service_mgr == "systemd"
 
     - name: Print updating error and cancel
