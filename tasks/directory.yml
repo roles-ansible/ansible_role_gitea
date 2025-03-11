@@ -6,8 +6,7 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX"
-    recurse: true
+    mode: "0755"
   loop:
     - "{{ gitea_user_home }}"
     - "{{ gitea_home }}"
@@ -26,7 +25,6 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX,o="
-    recurse: true
+    mode: "0755"
   loop:
     - "{{ gitea_configuration_path }}"
