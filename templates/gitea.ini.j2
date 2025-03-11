@@ -216,7 +216,7 @@ LEVEL = {{ gitea_log_level }}
 [metrics]
 ENABLED = {{ gitea_metrics_enabled | ternary('true', 'false') }}
 TOKEN = {{ gitea_metrics_token }}
-{{ gitea_metrics_extra }}
+{{ gitea_metrics_extra_config }}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
 ENABLED = {{ gitea_oauth2_enabled | ternary('true', 'false') }}

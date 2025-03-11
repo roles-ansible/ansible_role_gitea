@@ -231,7 +231,7 @@ gitea_log_extra_config: ""
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 gitea_metrics_enabled: false
 gitea_metrics_token: ""
-gitea_metrics_extra: ""
+gitea_metrics_extra_config: ""
 
 # OAuth2 (oauth2)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
