@@ -2,7 +2,7 @@
 - name: "Setup systemd service"
   become: true
   ansible.builtin.template:
-    src: 'templates/gitea.service.j2'
+    src: "templates/gitea.service.j2"
     dest: "{{ gitea_systemd_path }}/gitea.service"
     owner: root
     group: root

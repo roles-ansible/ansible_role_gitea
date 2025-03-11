@@ -4,7 +4,7 @@
     set -eo pipefail
     {{ gitea_full_executable_path }} -v | cut -d' ' -f 3
   args:
-    executable: '/bin/bash'
+    executable: "/bin/bash"
   register: gitea_active_version
   changed_when: false
   failed_when: false
@@ -14,7 +14,7 @@
   block:
     - name: "Get latest forgejo release metadata"
       ansible.builtin.uri:
-        url: 'https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases?limit=1'
+        url: "https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases?limit=1"
         return_content: true
       register: gitea_forgejo_remote_metadata
       become: false
@@ -47,7 +47,7 @@
   block:
     - name: "Get specific forgejo release metadata"
       ansible.builtin.uri:
-        url: 'https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}'
+        url: "https://{{ gitea_forgejo_repo }}/api/v1/repos/forgejo/forgejo/releases/tags/v{{ gitea_version_target }}"
         return_content: true
       register: gitea_forgejo_remote_tags_metadata
       become: false
@@ -89,27 +89,27 @@
 
 - name: "Set a example forgejo download link if in check mode"
   ansible.builtin.set_fact:
-    gitea_forgejo_dl_url: ['https://{{ gitea_forgejo_repo }}/attachments/a00333ad-250a-4d30-a764-9a37fb24f419']
+    gitea_forgejo_dl_url: ["https://{{ gitea_forgejo_repo }}/attachments/a00333ad-250a-4d30-a764-9a37fb24f419"]
   when: ansible_check_mode
 
 - name: "Set a example forgejo checksum link if in check mode"
   ansible.builtin.set_fact:
-    gitea_forgejo_checksum: 'f8c71464d1b250bf022eaa3df270c810950904ceb71da5cefc7ec24a034a4c87'
+    gitea_forgejo_checksum: "f8c71464d1b250bf022eaa3df270c810950904ceb71da5cefc7ec24a034a4c87"
   when: ansible_check_mode
 
 - name: "Set a example forgejo checksum link if in check mode"
   ansible.builtin.set_fact:
-    gitea_forgejo_signed_url: ['https://{{ gitea_forgejo_repo }}/attachments/ae5e50c6-e86e-4202-b95f-f142e8138e2f']
+    gitea_forgejo_signed_url: ["https://{{ gitea_forgejo_repo }}/attachments/ae5e50c6-e86e-4202-b95f-f142e8138e2f"]
   when: ansible_check_mode
 
-- name: 'Assert that remote version is higher'
+- name: "Assert that remote version is higher"
   ansible.builtin.assert:
     that:
       - gitea_active_version is version(gitea_remote_version, 'lt')
     fail_msg: ERROR - Remote version is lower then current version!
   when: gitea_version == "latest" and gitea_active_version.stderr == "" | bool
 
-- name: Show Download URLs  # noqa: H500
+- name: Show Download URLs # noqa: H500
   ansible.builtin.debug:
     msg: "{{ item }}"
     verbosity: 1

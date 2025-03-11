@@ -37,8 +37,7 @@
   register: _giteadelresult
   failed_when:
     - '"error" in _giteadelresult.stdout'
-  changed_when:
-    "_giteausers is defined and user.name in _giteausers.stdout"
+  changed_when: "_giteausers is defined and user.name in _giteausers.stdout"
   when: "_giteausers is defined and user.name in _giteausers.stdout and user.state | default('present') == 'absent'"
   loop: "{{ gitea_users }}"
   loop_control:
