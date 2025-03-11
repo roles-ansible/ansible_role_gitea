@@ -228,6 +228,8 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_repo_exclude_vendored` | `true` | Exclude vendored files from index. |
 | `gitea_repo_indexer_max_file_size` | `1048576` | Maximum size in bytes of files to be indexed. |
 | `gitea_indexer_extra_config` |  | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
+| `gitea_issue_indexer_type` | `bleve` | Code search engine type, could be bleve or elasticsearch |
+| `gitea_issue_indexer_conn_str` | | Issue indexer connection string, available when gitea_issue_indexer_type is elasticsearch |
 | `gitea_queue_issue_indexer_extra_config` | | | you can use this variable to pass additional config parameters in the `[queue.issue_indexer]` section of the config. |
 
 ### Security ([security](https://docs.gitea.com/administration/config-cheat-sheet#security-security))
