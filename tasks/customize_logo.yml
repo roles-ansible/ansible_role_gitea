@@ -45,6 +45,17 @@
   tags: skip_ansible_lint
   failed_when: false
 
+- name: Transfer custom favicon.svg
+  become: true
+  ansible.builtin.copy:
+    src: "{{ lookup('first_found', transfer_custom_logo_faviconsvg) }}"
+    dest: "{{ gitea_custom }}/public/assets/img/favicon.svg"
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: "0640"
+  tags: skip_ansible_lint
+  failed_when: false
+
 - name: Transfer custom apple-touch-icon.png
   become: true
   ansible.builtin.copy:

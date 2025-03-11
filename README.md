@@ -235,17 +235,18 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_database_extra_config` |                                  | you can use this variable to pass additional config parameters in the `[database]` section of the config.                                                                                                 |
 
 ### Indexer ([indexer](https://docs.gitea.com/administration/config-cheat-sheet#indexer-indexer))
-| variable name                            | default value | description |
-| ---------------------------------------- | ------------- | ----------- |
-| `gitea_repo_indexer_enabled`             | `false` | Enables code search *(uses a lot of disk space, about 6 times more than the repository size).* |
-| `gitea_repo_indexer_include`             |         | Glob patterns to include in the index *(comma-separated list)*. An empty list means include all files. |
-| `gitea_repo_indexer_exclude`             |         | Glob patterns to exclude from the index (comma-separated list). |
-| `gitea_repo_exclude_vendored`            | `true`  | Exclude vendored files from index. |
-| `gitea_repo_indexer_max_file_size`       | `1048576` | Maximum size in bytes of files to be indexed. |
-| `gitea_indexer_extra_config`             |         | you can use this variable to pass additional config parameters in the `[indexer]` section of the config. |
-| `gitea_issue_indexer_type`               | `bleve` | Code search engine type, could be bleve or elasticsearch |
-| `gitea_issue_indexer_conn_str`           |         | Issue indexer connection string, available when gitea_issue_indexer_type is elasticsearch |
-| `gitea_queue_issue_indexer_extra_config` |         | you can use this variable to pass additional config parameters in the `[queue.issue_indexer]` section of the config. |
+
+| variable name                            | default value | description                                                                                                          |
+| ---------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `gitea_repo_indexer_enabled`             | `false`       | Enables code search _(uses a lot of disk space, about 6 times more than the repository size)._                       |
+| `gitea_repo_indexer_include`             |               | Glob patterns to include in the index _(comma-separated list)_. An empty list means include all files.               |
+| `gitea_repo_indexer_exclude`             |               | Glob patterns to exclude from the index (comma-separated list).                                                      |
+| `gitea_repo_exclude_vendored`            | `true`        | Exclude vendored files from index.                                                                                   |
+| `gitea_repo_indexer_max_file_size`       | `1048576`     | Maximum size in bytes of files to be indexed.                                                                        |
+| `gitea_indexer_extra_config`             |               | you can use this variable to pass additional config parameters in the `[indexer]` section of the config.             |
+| `gitea_issue_indexer_type`               | `bleve`       | Code search engine type, could be bleve or elasticsearch                                                             |
+| `gitea_issue_indexer_conn_str`           |               | Issue indexer connection string, available when gitea_issue_indexer_type is elasticsearch                            |
+| `gitea_queue_issue_indexer_extra_config` |               | you can use this variable to pass additional config parameters in the `[queue.issue_indexer]` section of the config. |
 
 ### Security ([security](https://docs.gitea.com/administration/config-cheat-sheet#security-security))
 
@@ -433,6 +434,7 @@ To deploy multiple files we created the `gitea_custom_search` variable, that can
     - `logo.svg` - Used for favicon, site icon, app icon
     - `logo.png` - Used for Open Graph
     - `favicon.png` - Used as fallback for browsers that don’t support SVG favicons
+    - `favicon.svg` - Primary (SVG) favicon
     - `apple-touch-icon.png` - Used on iOS devices for bookmarks
   - We search in _(using [first_found](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/first_found_lookup.html))_:
     - `{{ gitea_custom_search }}/gitea_logo/`

@@ -48,6 +48,13 @@ transfer_custom_logo_faviconpng:
     - "files/{{ gitea_http_domain }}/gitea_logo/favicon.png"
     - "files/gitea_logo/favicon.png"
 
+transfer_custom_logo_faviconsvg:
+  files:
+    - "{{ gitea_custom_search }}/gitea_logo/favicon.svg"
+    - "files/{{ inventory_hostname }}/gitea_logo/favicon.svg"
+    - "files/{{ gitea_http_domain }}/gitea_logo/favicon.svg"
+    - "files/gitea_logo/favicon.svg"
+
 transfer_custom_logo_appletouchiconpng:
   files:
     - "{{ gitea_custom_search }}/gitea_logo/apple-touch-icon.png"
@@ -64,4 +71,4 @@ transfer_custom_footer:
     - "files/extra_links_footer.tmpl"
 
 playbook_version_number: 67
-playbook_version_path: 'do1jlr.gitea.version'
+playbook_version_path: "do1jlr.gitea.version"
