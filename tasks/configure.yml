@@ -10,11 +10,11 @@
 - name: "Configure gitea"
   become: true
   ansible.builtin.template:
-    src: 'templates/gitea.ini.j2'
+    src: "templates/gitea.ini.j2"
     dest: "{{ gitea_configuration_path }}/gitea.ini"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: '0640'
+    mode: "0640"
   notify: "systemctl restart gitea"
 
 - name: "Service gitea"
