@@ -40,7 +40,7 @@ DEFAULT_TRUST_MODEL = {{ gitea_repo_default_trust_model }}
 WIKI = {{ gitea_repo_wiki }}
 CRUD_ACTIONS = {{ gitea_repo_crud_actions }}
 MERGES = {{ gitea_repo_merges }}
-{{ gitea_enable_repo_signing_extra }}
+{{ gitea_enable_repo_signing_extra_config }}
 {% endif %}
 {% if gitea_enable_cors | bool %}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#cors-cors
@@ -54,7 +54,7 @@ MAX_AGE = {{ gitea_cors_max_age }}
 ALLOW_CREDENTIALS = {{ gitea_cors_allow_credentials | ternary('true', 'false') }}
 HEADERS = {{ gitea_cors_headers }}
 X_FRAME_OPTIONS = {{ gitea_cors_x_frame_options }}
-{{ gitea_cors_extra }}
+{{ gitea_cors_extra_config }}
 {% endif %}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#ui-ui
 [ui]
@@ -216,7 +216,7 @@ LEVEL = {{ gitea_log_level }}
 [metrics]
 ENABLED = {{ gitea_metrics_enabled | ternary('true', 'false') }}
 TOKEN = {{ gitea_metrics_token }}
-{{ gitea_metrics_extra }}
+{{ gitea_metrics_extra_config }}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#oauth2-oauth2
 [oauth2]
 ENABLED = {{ gitea_oauth2_enabled | ternary('true', 'false') }}
@@ -226,14 +226,14 @@ JWT_SECRET = {{ gitea_oauth2_jwt_secret }}
 [federation]
 ENABLED = {{ gitea_federation_enabled | ternary('true', 'false') }}
 SHARE_USER_STATISTICS = {{ gitea_federation_share_user_stats | ternary('true', 'false') }}
-{{ gitea_federation_extra }}
+{{ gitea_federation_extra_config }}
 ; Packages (packages)
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#packages-packages
 [packages]
 ENABLED = {{ gitea_packages_enabled | ternary('true', 'false') }}
 {% if gitea_packages_enabled | bool %}
 CHUNKED_UPLOAD_PATH = {{ gitea_home }}/data/tmp/package-upload
-{{ gitea_packages_extra }}
+{{ gitea_packages_extra_config }}
 {% endif %}
 {% if gitea_lfs_server_enabled | bool %}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#lfs-lfs
@@ -241,14 +241,14 @@ CHUNKED_UPLOAD_PATH = {{ gitea_home }}/data/tmp/package-upload
 STORAGE_TYPE = {{ gitea_lfs_storage_type }}
 SERVE_DIRECT = {{ gitea_lfs_serve_direct | ternary('true', 'false') }}
 PATH = {{ gitea_lfs_content_path }}
-{{ gitea_lfs_extra }}
+{{ gitea_lfs_extra_config }}
 {% endif %}
 {% if gitea_actions_enabled | bool %}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#actions-actions
 [actions]
 ENABLED = {{ gitea_actions_enabled }}
 DEFAULT_ACTIONS_URL = {{ gitea_actions_default_actions_url }}
-{{ gitea_actions_extra }}
+{{ gitea_actions_extra_config }}
 {% endif %}
 ; Other (other)
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#other-other

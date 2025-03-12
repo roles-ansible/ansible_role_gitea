@@ -75,7 +75,7 @@ gitea_repo_default_trust_model: "collaborator"
 gitea_repo_wiki: "never"
 gitea_repo_crud_actions: "pubkey, twofa, parentsigned"
 gitea_repo_merges: " pubkey, twofa, basesigned, commitssigned"
-gitea_enable_repo_signing_extra: ""
+gitea_enable_repo_signing_extra_config: ""
 
 # CORS (cors)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#cors-cors
@@ -88,7 +88,7 @@ gitea_cors_max_age: "10m"
 gitea_cors_allow_credentials: false
 gitea_cors_headers: "Content-Type,User-Agent"
 gitea_cors_x_frame_options: "SAMEORIGIN"
-gitea_cors_extra: ""
+gitea_cors_extra_config: ""
 
 # UI (ui)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#ui-ui
@@ -231,7 +231,7 @@ gitea_log_extra_config: ""
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#metrics-metrics
 gitea_metrics_enabled: false
 gitea_metrics_token: ""
-gitea_metrics_extra: ""
+gitea_metrics_extra_config: ""
 
 # OAuth2 (oauth2)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2
@@ -243,25 +243,25 @@ gitea_oauth2_extra_config: ""
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#federation-federation
 gitea_federation_enabled: false
 gitea_federation_share_user_stats: false
-gitea_federation_extra: ""
+gitea_federation_extra_config: ""
 
 # Packages (packages)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#packages-packages
 gitea_packages_enabled: true
-gitea_packages_extra: ""
+gitea_packages_extra_config: ""
 
 # LFS (lfs)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs
 gitea_lfs_storage_type: "local"
 gitea_lfs_serve_direct: false
 gitea_lfs_content_path: "{{ gitea_home }}/data/lfs"
-gitea_lfs_extra: ""
+gitea_lfs_extra_config: ""
 
 # Actions (actions)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#actions-actions
 gitea_actions_enabled: false
 gitea_actions_default_actions_url: github
-gitea_actions_extra: ""
+gitea_actions_extra_config: ""
 
 # Other (other)
 # -> https://docs.gitea.io/en-us/config-cheat-sheet/#other-other

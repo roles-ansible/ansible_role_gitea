@@ -144,18 +144,18 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 
 ### Repository - Signing ([repository.signing](https://docs.gitea.com/administration/config-cheat-sheet#repository---signing-repositorysigning))
 
-| variable name                       | default value    | description                                                                                                         |
-| ----------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `gitea_enable_repo_signing_options` | `false`          | Allow to configure repo signing options                                                                             |
-| `gitea_repo_signing_key`            | `default`        | Key to sign with.                                                                                                   |
-| `gitea_repo_signing_name`           |                  | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer.      |
-| `gitea_repo_signing_email`          |                  | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer.      |
-| `gitea_repo_initial_commit`         | `always`         | Sign initial commit.                                                                                                |
-| `gitea_repo_default_trust_model`    | `collaborator`   | The default trust model used for verifying commits.                                                                 |
-| `gitea_repo_wiki`                   | `never`          | Sign commits to wiki.                                                                                               |
-| `gitea_repo_crud_actions`           | _(see defaults)_ | Sign CRUD actions.                                                                                                  |
-| `gitea_repo_merges`                 | _(see defaults)_ | Sign merges.                                                                                                        |
-| `gitea_enable_repo_signing_extra`   |                  | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
+| variable name                            | default value    | description                                                                                                         |
+| ---------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `gitea_enable_repo_signing_options`      | `false`          | Allow to configure repo signing options                                                                             |
+| `gitea_repo_signing_key`                 | `default`        | Key to sign with.                                                                                                   |
+| `gitea_repo_signing_name`                |                  | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer.      |
+| `gitea_repo_signing_email`               |                  | if a KEYID is provided as the `gitea_repo_signing_key`, use these as the Name and Email address of the signer.      |
+| `gitea_repo_initial_commit`              | `always`         | Sign initial commit.                                                                                                |
+| `gitea_repo_default_trust_model`         | `collaborator`   | The default trust model used for verifying commits.                                                                 |
+| `gitea_repo_wiki`                        | `never`          | Sign commits to wiki.                                                                                               |
+| `gitea_repo_crud_actions`                | _(see defaults)_ | Sign CRUD actions.                                                                                                  |
+| `gitea_repo_merges`                      | _(see defaults)_ | Sign merges.                                                                                                        |
+| `gitea_enable_repo_signing_extra_config` |                  | you can use this variable to pass additional config parameters in the `[repository.signing]` section of the config. |
 
 ### CORS ([cors](https://docs.gitea.com/administration/config-cheat-sheet#cors-cors))
 
@@ -170,7 +170,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_cors_allow_credentials` | `false`                   | allow request with credentials                                                                        |
 | `gitea_cors_headers`           | `Content-Type,User-Agent` | additional headers that are permitted in requests                                                     |
 | `gitea_cors_x_frame_options`   | `SAMEORIGIN`              | Set the `X-Frame-Options` header value.                                                               |
-| `gitea_cors_extra`             |                           | you can use this variable to pass additional config parameters in the `[cors]` section of the config. |
+| `gitea_cors_extra_config`      |                           | you can use this variable to pass additional config parameters in the `[cors]` section of the config. |
 
 ### UI ([ui](https://docs.gitea.com/administration/config-cheat-sheet#ui-ui))
 
@@ -336,11 +336,11 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 
 ### Metrics ([metrics](https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics))
 
-| variable name           | default value | description                                                                                              |
-| ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
-| `gitea_metrics_enabled` | `false`       | Enable the metrics endpoint                                                                              |
-| `gitea_metrics_token`   |               | Bearer token for the Prometheus scrape job                                                               |
-| `gitea_metrics_extra`   |               | you can use this variable to pass additional config parameters in the `[metrics]` section of the config. |
+| variable name                | default value | description                                                                                              |
+| ---------------------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
+| `gitea_metrics_enabled`      | `false`       | Enable the metrics endpoint                                                                              |
+| `gitea_metrics_token`        |               | Bearer token for the Prometheus scrape job                                                               |
+| `gitea_metrics_extra_config` |               | you can use this variable to pass additional config parameters in the `[metrics]` section of the config. |
 
 ### OAuth2 ([oauth2](https://docs.gitea.com/administration/config-cheat-sheet#oauth2-oauth2))
 
@@ -356,14 +356,14 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | ----------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------- |
 | `gitea_federation_enabled`          | `false`       | Enable/Disable federation capabilities                                                                      |
 | `gitea_federation_share_user_stats` | `false`       | Enable/Disable user statistics for nodeinfo if federation is enabled                                        |
-| `gitea_federation_extra`            |               | you can use this variable to pass additional config parameters in the `[federation]` section of the config. |
+| `gitea_federation_extra_config`     |               | you can use this variable to pass additional config parameters in the `[federation]` section of the config. |
 
 ### Packages ([packages](https://docs.gitea.com/administration/config-cheat-sheet#packages-packages))
 
-| variable name            | default value | description                                                                                               |
-| ------------------------ | ------------- | --------------------------------------------------------------------------------------------------------- |
-| `gitea_packages_enabled` | `true`        | Enable/Disable package registry capabilities                                                              |
-| `gitea_packages_extra`   |               | you can use this variable to pass additional config parameters in the `[packages]` section of the config. |
+| variable name                 | default value | description                                                                                               |
+| ----------------------------- | ------------- | --------------------------------------------------------------------------------------------------------- |
+| `gitea_packages_enabled`      | `true`        | Enable/Disable package registry capabilities                                                              |
+| `gitea_packages_extra_config` |               | you can use this variable to pass additional config parameters in the `[packages]` section of the config. |
 
 ### LFS ([lfs](https://docs.gitea.com/administration/config-cheat-sheet#lfs-lfs))
 
@@ -372,7 +372,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_lfs_storage_type` | `local`                     | Storage type for lfs                                                                                   |
 | `gitea_lfs_serve_direct` | `false`                     | Allows the storage driver to redirect to authenticated URLs to serve files directly. _(only Minio/S3)_ |
 | `gitea_lfs_content_path` | `{{ gitea_home }}/data/lfs` | Where to store LFS files                                                                               |
-| `gitea_lfs_extra`        |                             | you can use this variable to pass additional config parameters in the `[lfs]` section of the config.   |
+| `gitea_lfs_extra_config` |                             | you can use this variable to pass additional config parameters in the `[lfs]` section of the config.   |
 
 ### Actions ([actions](https://docs.gitea.com/administration/config-cheat-sheet#actions-actions))
 
@@ -380,7 +380,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | ----------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `gitea_actions_enabled`             | `false`       | Enable/Disable actions capabilities globally. You may want to add `repo.actions` to `gitea_default_repo_units` to enable actions on all new repositories   |
 | `gitea_actions_default_actions_url` | `github`      | Default address to get action plugins, e.g. the default value means downloading from `https://github.com/actions/checkout` for `uses: actions/checkout@v3` |
-| `gitea_actions_extra`               |               | you can use this variable to pass additional config parameters in the `[actions]` section of the config.                                                   |
+| `gitea_actions_extra_config`        |               | you can use this variable to pass additional config parameters in the `[actions]` section of the config.                                                   |
 
 ### Other ([other](https://docs.gitea.com/administration/config-cheat-sheet#other-other))
 
