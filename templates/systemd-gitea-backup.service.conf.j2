@@ -10,7 +10,7 @@ Documentation=https://forgejo.org/docs/latest/admin/upgrade/#backup
 Type=oneshot
 User=gitea
 ExecStart=/usr/local/bin/{{ gitea_fork }} dump --config /etc/gitea/gitea.ini
-WorkingDirectory={{ backupdir }}
+WorkingDirectory={{ gitea_backup_location }}
 
 [Install]
 WantedBy=multi-user.target

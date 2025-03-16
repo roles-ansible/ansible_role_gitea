@@ -75,8 +75,9 @@
             mode: '0644'
           become: false
           when: gitea_gpg_local_key | length > 0
+
         - name: Import local forgejo gpg key
-          ansible.builtin.command: "gpg --import /tmp/{{ gitea_gpg_local_key | basename }}"
+          ansible.builtin.command: "gpg --import /tmp/{{ gitea_gpg_local_key | ansible.builtin.basename }}"
           register: import0
           changed_when: "'imported: [1-9]+' in import0.stdout"
           become: false
