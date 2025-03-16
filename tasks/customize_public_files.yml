@@ -6,7 +6,7 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX,o="
+    mode: "0755"
   loop:
     - "{{ gitea_custom }}/public/assets/"
 
@@ -18,7 +18,7 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     directory_mode: true
-    mode: "u=rwX,g=rX,o="
+    mode: "0755"
   failed_when: false
   tags: skip_ansible_lint
   notify: "systemctl restart gitea"
@@ -30,7 +30,7 @@
     state: directory
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX,o="
+    mode: "0755"
 
 - name: Get custom themes
   when: gitea_custom_themes is defined
@@ -39,6 +39,6 @@
     dest: "{{ gitea_custom }}/css/{{ item.name | basename }}"
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
-    mode: "u=rwX,g=rX,o="
+    mode: "0755"
   loop: "{{ gitea_custom_themes }}"
   notify: "systemctl restart gitea"
