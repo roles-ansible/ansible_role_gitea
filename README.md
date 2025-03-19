@@ -272,7 +272,7 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_only_allow_external_registration`  | `false`       | Set to true to force registration only using third-party services (true/false)                                                |
 | `gitea_enable_notify_mail`                | `false`       | Enable this to send e-mail to watchers of a repository when something happens, like creating issues (true/false)              |
 | `gitea_auto_watch_new_repos`              | `true`        | Enable this to let all organisation users watch new repos when they are created (true/false)                                  |
-| `gitea_autowatch_on_change`               | `true`        | Enable this to make users watch a repository after their first commit to it (true/false)                                      |
+| `gitea_auto_watch_on_changes`             | `true`        | Enable this to make users watch a repository after their first commit to it (true/false)                                      |
 | `gitea_register_manual_confirm`           | `false`       | Enable this to manually confirm new registrations. Requires REGISTER_EMAIL_CONFIRM to be disabled.                            |
 | `gitea_default_allow_create_organization` | `false`       | Allow new users to create organizations by default (true/false)                                                               |
 | `gitea_email_domain_allowlist`            |               | If non-empty, comma separated list of domain names that can only be used to register on this instance, wildcard is supported. |
