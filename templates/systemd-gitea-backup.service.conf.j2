@@ -1,0 +1,16 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description={{ gitea_fork }} backup
+StartLimitIntervalSec=0
+Documentation=https://docs.gitea.com/administration/backup-and-restore
+Documentation=https://forgejo.org/docs/latest/admin/upgrade/#backup
+
+[Service]
+Type=oneshot
+User=gitea
+ExecStart=/usr/local/bin/{{ gitea_fork }} dump --config /etc/gitea/gitea.ini
+WorkingDirectory={{ gitea_backup_location }}
+
+[Install]
+WantedBy=multi-user.target

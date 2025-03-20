@@ -1,0 +1,32 @@
+---
+
+- name: "Create backup directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ gitea_backup_location }}"
+    state: 'directory'
+    owner: "{{ gitea_user }}"
+    group: "{{ gitea_group }}"
+    mode: 'u=rwx,g=rx,o='
+
+- name: Ensure service gitea-backup.service exists
+  ansible.builtin.template:
+    src: systemd-gitea-backup.service.conf.j2
+    dest: "/etc/systemd/system/{{ gitea_fork }}-backup.service"
+    mode: '0644'
+  notify:
+    - Reload systemd
+
+- name: Ensure service gitea-backup.timer exists
+  ansible.builtin.template:
+    src: "systemd-gitea-backup.timer.conf.j2"
+    dest: "/etc/systemd/system/{{ gitea_fork }}-backup.timer"
+    mode: '0644'
+  notify:
+    - Reload systemd
+
+- name: Ensure service gitea-backup is enabled
+  ansible.builtin.service:
+    name: "{{ gitea_fork }}-backup.timer"
+    enabled: true
+    state: started
