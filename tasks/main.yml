@@ -36,6 +36,7 @@
 - name: Gather versioning information
   ansible.builtin.include_tasks:
     file: "set_{{ gitea_fork | lower }}_version.yml"
+  when: gitea_version != "source"
 
 - name: Backup gitea before update
   ansible.builtin.include_tasks:
@@ -46,9 +47,15 @@
   ansible.builtin.include_tasks:
     file: "create_user.yml"
 
+- name: "Build and install {{ gitea_fork }} from source"
+  ansible.builtin.include_tasks:
+    file: "install_source.yml"
+  when: gitea_version == "source"
+
 - name: "Install or update {{ gitea_fork }}"
   ansible.builtin.include_tasks:
     file: "install_{{ gitea_fork | lower }}.yml"
+  when: gitea_version != "source"
 
 - name: Create directories
   ansible.builtin.include_tasks:

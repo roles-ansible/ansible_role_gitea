@@ -291,3 +291,23 @@ gitea_customize_files_path: "{{ gitea_custom_search }}/gitea_files/"
 # systemd hardening
 gitea_systemd_hardening_enable: true
 gitea_cgroups_restriction_enable: true
+
+# source installation
+# https://github.com/go-gitea/gitea.git or https://codeberg.org/forgejo/forgejo.git
+gitea_install_source_source_url: https://github.com/go-gitea/gitea.git
+gitea_install_source_binary_name: "{{ gitea_fork }}"
+gitea_install_source_binary_install_path: /usr/local/bin/
+gitea_install_source_build_dir: "/tmp/{{ gitea_fork }}"
+gitea_install_source_cleanup_build_dir: true
+gitea_install_source_apt_build_deps:
+  - sed
+  - make
+  - nodejs
+  - golang
+  - git
+gitea_install_source_dnf_build_deps:
+  - sed
+  - make
+  - nodejs
+  - go
+  - git

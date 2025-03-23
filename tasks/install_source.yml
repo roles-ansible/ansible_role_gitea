@@ -1,0 +1,193 @@
+---
+- name: Source build dependencies
+  block:
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Ensure curl is installed
+      ansible.builtin.package:
+        name: "curl"
+        state: present
+      when: '"curl" not in ansible_facts.packages'
+
+    - name: Source build dependencies - node
+      block:
+        - name: Query required node version from source
+          ansible.builtin.get_url:
+            url: >-
+              {% if gitea_fork == 'forgejo' %}
+              https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/.forgejo/workflows/build-release.yml
+              {% else %}
+              https://raw.githubusercontent.com/go-gitea/gitea/main/.github/workflows/release-tag-rc.yml
+              {% endif %}
+            dest: "/tmp/{{ gitea_fork }}-build-release.yml"
+            mode: "0644"
+          register: build_file_download
+
+        - name: Extract Node.js version from build file
+          ansible.builtin.shell: |
+            grep -E "node-version:" "/tmp/{{ gitea_fork }}-build-release.yml" | head -n 1 | sed -E 's/.*node-version:\s*([0-9]+).*/\1/'
+          register: node_version_result
+          changed_when: false
+
+        - name: Set node version fact
+          ansible.builtin.set_fact:
+            node_version: "{{ node_version_result.stdout | trim }}"
+
+    - name: "Enable nodejs module stream - v{{ node_version }}"
+      when: ansible_os_family == "RedHat"
+      ansible.builtin.dnf:
+        name: "@nodejs:{{ node_version }}"
+        state: present
+      become: true
+
+    - name: "Configure node v{{ node_version }}"
+      when: ansible_os_family == 'Debian'
+      ansible.builtin.shell: |
+        curl -sL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
+
+    - name: Install apt build dependencies
+      become: true
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      register: _install_build_deps
+      until: _install_build_deps is succeeded
+      retries: 5
+      delay: 2
+      loop: "{{ gitea_install_source_apt_build_deps }}"
+      when: 'item not in ansible_facts.packages and ansible_os_family == "Debian"'
+
+    - name: Install dnf build dependencies
+      become: true
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      register: _install_build_deps
+      until: _install_build_deps is succeeded
+      retries: 5
+      delay: 2
+      loop: "{{ gitea_install_source_dnf_build_deps }}"
+      when: 'item not in ansible_facts.packages and ansible_os_family == "RedHat"'
+
+    - name: Source build dependencies - go
+      block:
+        - name: Extract required go version for source build
+          ansible.builtin.get_url:
+            url: >-
+              {% if gitea_fork == 'forgejo' %}
+              https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/go.mod
+              {% else %}
+              https://raw.githubusercontent.com/go-gitea/gitea/main/go.mod
+              {% endif %}
+            dest: "/tmp/{{ gitea_fork }}-go.mod"
+            mode: "0644"
+          register: build_go_mod_file_download
+
+        - name: Extract go version from go.mod file
+          ansible.builtin.shell: |
+            grep -E "^go [0-9]+\.[0-9]+(\.[0-9]+)?" "/tmp/{{ gitea_fork }}-go.mod" | head -n 1 | sed -E 's/go ([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/'
+          args:
+            executable: /bin/bash
+          register: go_version_result
+          changed_when: false
+
+        - name: Set go version fact
+          ansible.builtin.set_fact:
+            node_version: "{{ go_version_result.stdout | trim }}"
+          register: go_minor
+
+        - name: Query latest patch version for minor
+          ansible.builtin.shell: |
+            curl -s https://go.dev/dl/?mode=json |
+            jq -r '.[] | select(.version | startswith("go{{ go_version_result.stdout }}")) | .version' |
+            head -1 | sed 's/go//'
+          args:
+            executable: /bin/bash
+          register: go_version_query
+          changed_when: false
+
+        - name: Set Go version fact
+          ansible.builtin.set_fact:
+            go_version_source_build: "{{ go_version_query.stdout | trim }}"
+
+        - name: "Install required go version - v{{ go_version_source_build }}"
+          ansible.builtin.shell: |
+            # Check if Go version is already installed
+            export GOBIN_PATH="${GOPATH:-$HOME/go}/bin"
+            GO_ROOT="${HOME}/.go/go{{ go_version_source_build }}"
+
+            if [ -x "$GO_ROOT/bin/go" ]; then
+              echo "Go {{ go_version_source_build }} is already installed"
+            else
+              echo "Installing Go {{ go_version_source_build }}"
+              go install golang.org/dl/go{{ go_version_source_build }}@latest
+              $GOBIN_PATH/go{{ go_version_source_build }} download
+            fi
+          args:
+            executable: /bin/bash
+            creates: "{{ ansible_env.HOME }}/.go/go{{ go_version_source_build }}/bin/go"
+          register: go_install_result
+          changed_when: "'Installing Go' in go_install_result.stdout"
+
+- name: Build and install binary
+  block:
+    - name: Create build directory
+      ansible.builtin.file:
+        path: "{{ gitea_install_source_build_dir }}"
+        state: directory
+        mode: 0755
+      register: _build_dir
+      become: false
+
+    # full clone is necessary to properly determine local version string
+    - name: Clone git repository
+      ansible.builtin.git:
+        repo: "{{ gitea_install_source_source_url }}"
+        dest: "{{ gitea_install_source_build_dir }}"
+        version: "{{ gitea_install_source_source_ref }}"
+        # depth: 1
+      register: _git_clone
+      become: false
+      until: _git_clone is succeeded
+      retries: 3
+      delay: 5
+
+    - name: Build the binary
+      ansible.builtin.shell: |
+        export GOBIN_PATH="${GOPATH:-$HOME/go}/bin"
+        export GO="$GOBIN_PATH/go{{ go_version_source_build }}"
+        export TAGS="bindata"
+        $GO version
+        make build
+      args:
+        chdir: "{{ gitea_install_source_build_dir }}"
+        executable: /bin/bash
+      register: _build_result
+      become: false
+      changed_when: _build_result.rc == 0
+      failed_when: _build_result.rc != 0
+
+    - name: Propagate built binary
+      become: true
+      ansible.builtin.copy:
+        src: "{{ gitea_install_source_build_dir }}/gitea"
+        remote_src: true
+        dest: "{{ gitea_install_source_binary_install_path }}/{{ gitea_install_source_binary_name }}"
+        mode: 0755
+        owner: root
+        group: root
+      notify: systemctl restart gitea
+
+    - name: Remove binary after move
+      ansible.builtin.file:
+        path: "{{ gitea_install_source_binary_install_path }}{{ gitea_install_source_binary_name }}"
+        state: absent
+
+    - name: Clean up build directory
+      ansible.builtin.file:
+        path: "{{ gitea_install_source_build_dir }}"
+        state: absent
+      become: false
+      when: gitea_install_source_cleanup_build_dir | bool
