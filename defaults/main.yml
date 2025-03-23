@@ -305,9 +305,11 @@ gitea_install_source_apt_build_deps:
   - nodejs
   - golang
   - git
+  - jq
 gitea_install_source_dnf_build_deps:
   - sed
   - make
   - nodejs
   - go
   - git
+  - jq
