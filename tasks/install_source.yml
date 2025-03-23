@@ -27,6 +27,7 @@
 
         - name: Extract Node.js version from build file
           ansible.builtin.shell: |
+            set -o pipefail
             grep -E "node-version:" "/tmp/{{ gitea_fork }}-build-release.yml" | head -n 1 | sed -E 's/.*node-version:\s*([0-9]+).*/\1/'
           register: node_version_result
           changed_when: false
@@ -42,10 +43,18 @@
         state: present
       become: true
 
-    - name: "Configure node v{{ node_version }}"
+    - name: Download NodeSource setup script
+      ansible.builtin.get_url:
+        url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
+        dest: "/tmp/nodesource_setup.sh"
+        mode: "0755"
       when: ansible_os_family == 'Debian'
-      ansible.builtin.shell: |
-        curl -sL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
+
+    - name: Execute NodeSource setup script
+      ansible.builtin.command: bash /tmp/nodesource_setup.sh
+      register: nodesource_result
+      changed_when: nodesource_result.rc == 0 and "is already installed" not in nodesource_result.stdout
+      when: ansible_os_family == 'Debian'
 
     - name: Install apt build dependencies
       become: true
@@ -87,6 +96,7 @@
 
         - name: Extract go version from go.mod file
           ansible.builtin.shell: |
+            set -o pipefail
             grep -E "^go [0-9]+\.[0-9]+(\.[0-9]+)?" "/tmp/{{ gitea_fork }}-go.mod" | head -n 1 | sed -E 's/go ([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/'
           args:
             executable: /bin/bash
@@ -98,8 +108,10 @@
             node_version: "{{ go_version_result.stdout | trim }}"
           register: go_minor
 
+        # noqa: command-instead-of-module
         - name: Query latest patch version for minor
           ansible.builtin.shell: |
+            set -o pipefail
             curl -s https://go.dev/dl/?mode=json |
             jq -r '.[] | select(.version | startswith("go{{ go_version_result.stdout }}")) | .version' |
             head -1 | sed 's/go//'

@@ -47,7 +47,7 @@
   ansible.builtin.include_tasks:
     file: "create_user.yml"
 
-- name: "Build and install {{ gitea_fork }} from source"
+- name: "Build and install from source [{{ gitea_fork }}]"
   ansible.builtin.include_tasks:
     file: "install_source.yml"
   when: gitea_version == "source"
