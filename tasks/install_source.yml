@@ -193,7 +193,7 @@
 
     - name: Remove binary after move
       ansible.builtin.file:
-        path: "{{ gitea_install_source_binary_install_path }}{{ gitea_install_source_binary_name }}"
+        path: "{{ gitea_install_source_build_dir }}{{ gitea_install_source_binary_name }}"
         state: absent
 
     - name: Clean up build directory
