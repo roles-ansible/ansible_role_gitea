@@ -147,7 +147,6 @@
         repo: "{{ gitea_install_source_source_url }}"
         dest: "{{ gitea_install_source_build_dir }}"
         version: "{{ gitea_install_source_source_ref }}"
-        # depth: 1
       register: _git_clone
       become: false
       until: _git_clone is succeeded
