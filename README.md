@@ -81,6 +81,15 @@ It is advisable to define exactly which Forgejo release you want to install. See
 
 This is because the Forgejo project maintains both `stable` and `old stable` releases and the `latest` tag will refer to the _most recent release_ regardless of whether it is `stable` or `old stable`. This can lead to a situation where `latest` refers to an _older release_ than the version you have installed.
 
+### Installing from source
+
+Source installations should only be done if custom files changes should be incorporated during the binary build process or a (unreleased) bug fix is urgently needed.
+For repeated source installation builds, it is recommended to set `gitea_install_source_cleanup_build_dir: false` to persist a static clone.
+The installation logic dynamically installs the pinned versions of nodejs and go for the current develop branch, which are usually never than the versions provided by the system package managers.
+
+> [!WARNING]
+> Note that when installing from HEAD/non-tagged version, the database schema version will likely be bumped, preventing an easy downgrade to a tagged version afterwards.
+
 ### gitea update
 
 | variable name             | default value                              | description                                                                                                            |
@@ -93,6 +102,18 @@ This is because the Forgejo project maintains both `stable` and `old stable` rel
 | `gitea_backup_on_upgrade` | `false`                                    | Optionally a backup can be created with every update of gitea.                                                         |
 | `gitea_backup_location`   | `{{ gitea_home }}/backups/`                | Where to store the gitea backup if one is created with this role.                                                      |
 | `submodules_versioncheck` | `false`                                    | a simple version check that can prevent you from accidentally running an older version of this role. _(recommended)_   |
+
+### gitea installation
+
+| variable name                              | default value                                | description                                    |
+| ------------------------------------------ | -------------------------------------------- | ---------------------------------------------- |
+| `gitea_install_source_source_url`          | `https://github.com/go-gitea/gitea.git`      | Clone URL for Forge source                     |
+| `gitea_install_source_binary_name`         | `{{ gitea_fork }}`                           | Output binary name                             |
+| `gitea_install_source_binary_install_path` | `/usr/local/bin/`                            | Binary installation path                       |
+| `gitea_install_source_build_dir`           | `/tmp/{{ gitea_fork }}`                      | Build directory                                |
+| `gitea_install_source_cleanup_build_dir`   | `true`                                       | Whether to remove the build dir after building |
+| `gitea_install_source_apt_build_deps`      | `["sed", "make", "nodejs", "golang", "git"]` | APT Build dependencies                         |
+| `gitea_install_source_dnf_build_deps`      | `["sed", "make", "nodejs", "go", "git"]`     | DNF Build dependencies                         |
 
 ### gitea in the linux world
 
