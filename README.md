@@ -101,6 +101,7 @@ The installation logic dynamically installs the pinned versions of nodejs and go
 | `gitea_gpg_server`        | `hkps://keys.openpgp.org`                  | A gpg key server where this role can download the gpg key                                                              |
 | `gitea_backup_on_upgrade` | `false`                                    | Optionally a backup can be created with every update of gitea.                                                         |
 | `gitea_backup_location`   | `{{ gitea_home }}/backups/`                | Where to store the gitea backup if one is created with this role.                                                      |
+| `gitea_backup_scheduled`  | `false`                                    | Set systemd service and timer units to do gitea backup.                                                                |
 | `submodules_versioncheck` | `false`                                    | a simple version check that can prevent you from accidentally running an older version of this role. _(recommended)_   |
 
 ### gitea installation

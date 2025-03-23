@@ -13,6 +13,10 @@ gitea_gpg_server: "hkps://keys.openpgp.org"
 gitea_gpg_keyserver_option: ""
 gitea_backup_on_upgrade: false
 gitea_backup_location: "{{ gitea_home }}/backups/"
+# with systemd timer
+gitea_backup_scheduled: false
+gitea_backup_scheduled_calendar: daily
+# gitea_backup_scheduled_calendar: weekly
 submodules_versioncheck: false
 
 # gitea in the linux world
