@@ -19,8 +19,6 @@
       ansible.builtin.fail:
         msg: "Only {{ gitea_supported_forks }} are supported."
 
-
-
 - name: Gather Gitea/Forgejo UI Theme variables
   ansible.builtin.include_vars:
     file: "{{ lookup('ansible.builtin.first_found', params) }}"
