@@ -7,6 +7,10 @@
       and gitea_register_manual_confirm should be true.
   when: gitea_register_manual_confirm | bool and gitea_register_email_confirm | bool
 
+- name: DEBUG
+  ansible.builtin.debug:
+    msg: "gitea_themes: {{ gitea_themes }}"
+
 - name: "Configure gitea"
   become: true
   ansible.builtin.template:

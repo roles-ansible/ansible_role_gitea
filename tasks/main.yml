@@ -19,15 +19,24 @@
       ansible.builtin.fail:
         msg: "Only {{ gitea_supported_forks }} are supported."
 
+
+
 - name: Gather Gitea/Forgejo UI Theme variables
   ansible.builtin.include_vars:
     file: "{{ lookup('ansible.builtin.first_found', params) }}"
+    name: _gitea_temp_theme_vars
   vars:
     params:
       files:
         - "{{ gitea_fork }}.yml"
       paths:
         - "defaults"
+
+- name: Set Gitea/Forgejo UI Theme variables as facts
+  ansible.builtin.set_fact:
+    "{{ item.key }}": "{{ item.value }}"
+  when: item.key not in vars
+  loop: "{{ _gitea_temp_theme_vars | dict2items }}"
 
 - name: Gather variables for each operating system
   ansible.builtin.include_vars:
