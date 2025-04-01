@@ -22,7 +22,7 @@
       delay: 2
 
 - name: Install forgejo block
-  when: (not gitea_version_check | bool) or (not ansible_check_mode and (gitea_active_version.stdout != gitea_version_target))
+  when: not ansible_check_mode and (gitea_active_version.stdout != gitea_version_target)
   block:
     - name: Download forgejo archive
       ansible.builtin.get_url:
@@ -54,7 +54,7 @@
       become: false
       failed_when: _gitea_gpg_key_status.rc not in (0, 2)
 
-    - name: Print gpg key status on verbosity  # noqa: H500
+    - name: Print gpg key status on verbosity # noqa: H500
       ansible.builtin.debug:
         msg: "{{ _gitea_gpg_key_status.stdout }}"
         verbosity: 1
@@ -72,7 +72,7 @@
           ansible.builtin.copy:
             src: "{{ gitea_gpg_local_key }}"
             dest: /tmp/
-            mode: '0644'
+            mode: "0644"
           become: false
           when: gitea_gpg_local_key | length > 0
 
