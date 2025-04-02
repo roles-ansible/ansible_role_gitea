@@ -94,7 +94,7 @@
     fail_msg: ERROR - Remote version is lower then current version!
   when: gitea_version == "latest" and gitea_active_version.stderr == "" | bool
 
-- name: Show Download URLs # noqa: H500
+- name: Show Download URLs  # noqa: H500
   when: not ansible_check_mode
   ansible.builtin.debug:
     msg: "{{ item }}"
