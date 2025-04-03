@@ -1,5 +1,5 @@
 ---
-- name: "Create config and data directory"
+- name: "Check {{ item }}"
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -7,18 +7,12 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     mode: "0755"
-  loop:
-    - "{{ gitea_user_home }}"
-    - "{{ gitea_home }}"
-    - "{{ gitea_home }}/data"
-    - "{{ gitea_custom }}"
-    - "{{ gitea_custom }}/https"
-    - "{{ gitea_custom }}/mailer"
-    - "{{ gitea_home }}/indexers"
-    - "{{ gitea_home }}/log"
-    - "{{ gitea_repository_root }}"
+  check_mode: true
+  diff: true
+  register: _gitea_dir_check
 
-- name: "Create config and data directory"
+- name: "Create {{ item }}"  # noqa no-handler execute immediately.
+  when: _gitea_dir_check.changed
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -26,5 +20,3 @@
     owner: "{{ gitea_user }}"
     group: "{{ gitea_group }}"
     mode: "0755"
-  loop:
-    - "{{ gitea_configuration_path }}"
