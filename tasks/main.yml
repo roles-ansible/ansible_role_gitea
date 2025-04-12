@@ -67,6 +67,17 @@
 - name: Create directories
   ansible.builtin.include_tasks:
     file: "directory.yml"
+  loop:
+    - "{{ gitea_user_home }}"
+    - "{{ gitea_home }}"
+    - "{{ gitea_home }}/data"
+    - "{{ gitea_custom }}"
+    - "{{ gitea_custom }}/https"
+    - "{{ gitea_custom }}/mailer"
+    - "{{ gitea_home }}/indexers"
+    - "{{ gitea_home }}/log"
+    - "{{ gitea_repository_root }}"
+    - "{{ gitea_configuration_path }}"
 
 - name: Setup gitea systemd service
   ansible.builtin.include_tasks:
