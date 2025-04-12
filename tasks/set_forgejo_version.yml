@@ -87,21 +87,6 @@
     gitea_forgejo_signed_url: "{{ gitea_forgejo_remote_tags_metadata.json | community.general.json_query(gitea_forgejo_query_signed) }}"
   when: not ansible_check_mode
 
-- name: "Set a example forgejo download link if in check mode"
-  ansible.builtin.set_fact:
-    gitea_forgejo_dl_url: ["https://{{ gitea_forgejo_repo }}/attachments/a00333ad-250a-4d30-a764-9a37fb24f419"]
-  when: ansible_check_mode
-
-- name: "Set a example forgejo checksum link if in check mode"
-  ansible.builtin.set_fact:
-    gitea_forgejo_checksum: "f8c71464d1b250bf022eaa3df270c810950904ceb71da5cefc7ec24a034a4c87"
-  when: ansible_check_mode
-
-- name: "Set a example forgejo checksum link if in check mode"
-  ansible.builtin.set_fact:
-    gitea_forgejo_signed_url: ["https://{{ gitea_forgejo_repo }}/attachments/ae5e50c6-e86e-4202-b95f-f142e8138e2f"]
-  when: ansible_check_mode
-
 - name: "Assert that remote version is higher"
   ansible.builtin.assert:
     that:
@@ -110,6 +95,7 @@
   when: gitea_version == "latest" and gitea_active_version.stderr == "" | bool
 
 - name: Show Download URLs  # noqa: H500
+  when: not ansible_check_mode
   ansible.builtin.debug:
     msg: "{{ item }}"
     verbosity: 1
