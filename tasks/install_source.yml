@@ -31,6 +31,7 @@
             grep -E "node-version:" "/tmp/{{ gitea_fork }}-build-release.yml" | head -n 1 | sed -E 's/.*node-version:\s*([0-9]+).*/\1/'
           register: node_version_result
           changed_when: false
+          check_mode: false
 
         - name: Set node version fact
           ansible.builtin.set_fact:
@@ -179,6 +180,7 @@
       become: false
       changed_when: _build_result.rc == 0
       failed_when: _build_result.rc != 0
+      when: not ansible_check_mode
 
     - name: Propagate built binary
       become: true
@@ -190,15 +192,17 @@
         owner: root
         group: root
       notify: systemctl restart gitea
+      when: not ansible_check_mode
 
     - name: Remove binary after move
       ansible.builtin.file:
         path: "{{ gitea_install_source_build_dir }}{{ gitea_install_source_binary_name }}"
         state: absent
+      when: not ansible_check_mode
 
     - name: Clean up build directory
       ansible.builtin.file:
         path: "{{ gitea_install_source_build_dir }}"
         state: absent
       become: false
-      when: gitea_install_source_cleanup_build_dir | bool
+      when: gitea_install_source_cleanup_build_dir | bool and not ansible_check_mode
