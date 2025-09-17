@@ -243,10 +243,10 @@ SERVE_DIRECT = {{ gitea_lfs_serve_direct | ternary('true', 'false') }}
 PATH = {{ gitea_lfs_content_path }}
 {{ gitea_lfs_extra_config }}
 {% endif %}
-{% if gitea_actions_enabled | bool %}
 ; -> https://docs.gitea.com/next/administration/config-cheat-sheet/#actions-actions
 [actions]
 ENABLED = {{ gitea_actions_enabled }}
+{% if gitea_actions_enabled | bool %}
 DEFAULT_ACTIONS_URL = {{ gitea_actions_default_actions_url }}
 {{ gitea_actions_extra_config }}
 {% endif %}
