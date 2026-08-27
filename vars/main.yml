@@ -7,7 +7,7 @@ gitea_go_arch_map:
   armv6l: "arm-6"
   armv5l: "arm-5"
 
-gitea_arch: "{{ gitea_go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+gitea_arch: "{{ gitea_go_arch_map[ansible_facts['architecture']] | default(ansible_facts['architecture']) }}"
 gitea_supported_forks: "gitea and forgejo"
 
 gitea_fork_variables:
@@ -18,11 +18,11 @@ gitea_fork_variables:
 
 gitea_variables:
   files:
-    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "{{ ansible_distribution | lower }}.yml"
-    - "{{ ansible_os_family | lower }}.yml"
+    - "{{ ansible_facts['distribution'] | lower }}-{{ ansible_facts['distribution_version'] | lower }}.yml"
+    - "{{ ansible_facts['distribution'] | lower }}-{{ ansible_facts['distribution_major_version'] | lower }}.yml"
+    - "{{ ansible_facts['os_family'] | lower }}-{{ ansible_facts['distribution_major_version'] | lower }}.yml"
+    - "{{ ansible_facts['distribution'] | lower }}.yml"
+    - "{{ ansible_facts['os_family'] | lower }}.yml"
     - "os_fallback_defaults.yml"
   paths:
     - "vars"

@@ -18,7 +18,7 @@ PrivateTmp=true
 ProtectHome=yes
 ProtectSystem=yes
 # ProtectSystem=strict
-{%     if ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int >= 21 %}
+{%     if ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_major_version'] | int >= 21 %}
 # ProtectProc=noaccess
 {%     endif %}
 
@@ -34,8 +34,8 @@ UMask=077
 
 ProtectKernelTunables=true
 ProtectKernelModules=yes
-{%     if (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int >= 20) or
-          (ansible_os_family == 'RedHat' and ansible_distribution_major_version | int > 8 )
+{%     if (ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_major_version'] | int >= 20) or
+          (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] | int > 8 )
 %}
 ProtectKernelLogs=yes
 ProtectHostname=yes
@@ -86,12 +86,12 @@ CapabilityBoundingSet=~CAP_FSETID CAP_SETFCAP
 CapabilityBoundingSet=~CAP_NET_RAW
 CapabilityBoundingSet=~CAP_IPC_LOCK
 
-{%     if not (ansible_virtualization_type is defined and
-               ansible_virtualization_type == "docker"
+{%     if not (ansible_facts['virtualization_type'] is defined and
+               ansible_facts['virtualization_type'] == "docker"
               )
 %}
-{%         if (ansible_os_family == 'RedHat' and ansible_distribution_major_version|int >= 8) or
-              (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int > 18)
+{%         if (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] | int >= 8) or
+              (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] | int > 18)
 %}
 SystemCallFilter=@system-service
 {%         endif %}
