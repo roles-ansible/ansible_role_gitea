@@ -33,7 +33,7 @@
 - name: Set Gitea/Forgejo UI Theme variables as facts
   ansible.builtin.set_fact:
     "{{ item.key }}": "{{ item.value }}"
-  when: item.key not in vars
+  when: lookup('vars', item.key, default=none) is none
   loop: "{{ _gitea_temp_theme_vars | dict2items }}"
 
 - name: Gather variables for each operating system
