@@ -28,12 +28,12 @@
       files:
         - "{{ gitea_fork }}.yml"
       paths:
-        - "defaults"
+        - "{{ role_path }}/defaults"
 
 - name: Set Gitea/Forgejo UI Theme variables as facts
   ansible.builtin.set_fact:
     "{{ item.key }}": "{{ item.value }}"
-  when: lookup('vars', item.key, default=none) is none
+  when: lookup('ansible.builtin.varnames', '^' + item.key + '$') | length == 0
   loop: "{{ _gitea_temp_theme_vars | dict2items }}"
 
 - name: Gather variables for each operating system
